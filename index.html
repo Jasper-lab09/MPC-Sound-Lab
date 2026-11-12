@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MPC Sound Lab</title>
+  <link rel="stylesheet" href="src/css/main.css" />
+  <script type="module" src="src/js/core/app.js"></script>
+  <style>
+    .lab-hero {
+      padding: 48px 0 40px;
+      border-bottom: 1px solid var(--border-1);
+      margin-bottom: 36px;
+    }
+    .lab-hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .lab-hero-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .lab-hero-desc {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+    .lab-domains {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .lab-domain {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 3px 10px;
+      border-radius: 3px;
+      background: var(--bg-2);
+      border: 1px solid var(--border-1);
+      color: var(--text-3);
+      letter-spacing: 0.02em;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .mod-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border-1);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mod-card:hover {
+      border-color: var(--border-3);
+      background: var(--bg-3);
+    }
+    .mod-card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mod-glyph {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+    .mod-glyph-a { background: rgba(79, 195, 247, 0.1); color: var(--cyan); }
+    .mod-glyph-b { background: rgba(233, 30, 99, 0.1); color: var(--magenta); }
+    .mod-glyph-c { background: rgba(255, 183, 77, 0.1); color: var(--amber); }
+    .mod-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .mod-card-tag { margin-left: auto; }
+    .mod-desc {
+      font-size: 0.8rem;
+      color: var(--text-2);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .mod-features {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-3);
+      line-height: 1.8;
+    }
+    .mod-arrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-3);
+      transition: color 0.15s;
+    }
+    .mod-card:hover .mod-arrow { color: var(--text-1); }
+    .mod-card-a:hover .mod-arrow { color: var(--cyan); }
+    .mod-card-b:hover .mod-arrow { color: var(--magenta); }
+    .mod-card-c:hover .mod-arrow { color: var(--amber); }
+
+    .roadmap-bar {
+      display: flex;
+      gap: 0;
+      margin-bottom: 40px;
+    }
+    .rm-phase {
+      flex: 1;
+      padding: 12px 10px;
+      border-right: 1px solid var(--border-1);
+      text-align: center;
+    }
+    .rm-phase:last-child { border-right: none; }
+    .rm-phase-id {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-3);
+    }
+    .rm-phase-name {
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin: 3px 0;
+    }
+    .rm-phase-status {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+    }
+    .rm-done .rm-phase-name { color: var(--green); }
+    .rm-done .rm-phase-status { color: var(--green); }
+    .rm-current .rm-phase-name { color: var(--cyan); }
+    .rm-current .rm-phase-status { color: var(--cyan); }
+    .rm-planned .rm-phase-name { color: var(--text-2); }
+    .rm-planned .rm-phase-status { color: var(--text-4); }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <a href="index.html" class="topbar-brand">
+      <span class="topbar-brand-mark">M</span>
+      <span class="topbar-brand-text">MPC Sound Lab</span>
+    </a>
+    <nav class="topbar-nav">
+      <a href="index.html" class="topbar-link active">Lab</a>
+      <a href="visualizer.html" class="topbar-link">Sound Visualizer</a>
+      <a href="generator.html" class="topbar-link">Music Generator</a>
+      <a href="accessibility.html" class="topbar-link">Accessibility</a>
+    </nav>
+  </nav>
+
+  <div class="page">
+    <div class="lab-hero">
+      <div class="lab-hero-eyebrow">Interactive Scientific Laboratory</div>
+      <h1 class="lab-hero-title">Where sound becomes data,<br />data becomes music,<br />and music becomes accessible.</h1>
+      <p class="lab-hero-desc">
+        MPC Sound Lab is a browser-based platform for exploring the intersection of physics, mathematics,
+        and audio engineering. Analyze live sound, generate music from mathematical structures,
+        and experience audio through visual translation — all in real time, right here in your browser.
+      </p>
+      <div class="lab-domains">
+        <span class="lab-domain">Mathematics</span>
+        <span class="lab-domain">Physics</span>
+        <span class="lab-domain">Music Technology</span>
+        <span class="lab-domain">Audio Engineering</span>
+        <span class="lab-domain">Accessibility</span>
+      </div>
+    </div>
+
+    <!-- Modules -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">01</span>
+        <span class="section-title">Modules</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="modules-grid">
+        <a href="visualizer.html" class="mod-card mod-card-a">
+          <div class="mod-card-head">
+            <div class="mod-glyph mod-glyph-a">&#8767;</div>
+            <div class="mod-name">Sound Visualizer</div>
+            <span class="mod-card-tag tag-live">Live</span>
+          </div>
+          <div class="mod-desc">Real-time audio analysis from your microphone: waveform, FFT spectrum, spectrogram waterfall, pitch and beat detection.</div>
+          <div class="mod-features">Waveform &middot; FFT &middot; Spectrogram &middot; Pitch &middot; Beat</div>
+          <div class="mod-arrow">Open module &rarr;</div>
+        </a>
+        <a href="generator.html" class="mod-card mod-card-b">
+          <div class="mod-card-head">
+            <div class="mod-glyph mod-glyph-b">&#8719;</div>
+            <div class="mod-name">Mathematical Music Generator</div>
+            <span class="mod-card-tag tag-dev">Phase 3</span>
+          </div>
+          <div class="mod-desc">Generate musical patterns from mathematical rules: Fibonacci sequences, Euclidean rhythms, harmonic series, and probability.</div>
+          <div class="mod-features">Fibonacci &middot; Euclidean &middot; Harmonic &middot; Piano Roll &middot; MIDI</div>
+          <div class="mod-arrow">Open module &rarr;</div>
+        </a>
+        <a href="accessibility.html" class="mod-card mod-card-c">
+          <div class="mod-card-head">
+            <div class="mod-glyph mod-glyph-c">&#9673;</div>
+            <div class="mod-name">Accessible Sound Experience</div>
+            <span class="mod-card-tag tag-planned">Phase 4</span>
+          </div>
+          <div class="mod-desc">Translating audio into visual patterns for Deaf and hard-of-hearing users. Distinct visual feedback for different sound categories.</div>
+          <div class="mod-features">Translation &middot; Detection &middot; Customizable &middot; Notifications</div>
+          <div class="mod-arrow">Open module &rarr;</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Roadmap -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">02</span>
+        <span class="section-title">Development Roadmap</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="roadmap-bar">
+        <div class="rm-phase rm-done">
+          <div class="rm-phase-id">P1</div>
+          <div class="rm-phase-name">Foundation</div>
+          <div class="rm-phase-status">Complete</div>
+        </div>
+        <div class="rm-phase rm-done">
+          <div class="rm-phase-id">P2</div>
+          <div class="rm-phase-name">Visualizer</div>
+          <div class="rm-phase-status">Complete</div>
+        </div>
+        <div class="rm-phase rm-current">
+          <div class="rm-phase-id">P3</div>
+          <div class="rm-phase-name">Generator</div>
+          <div class="rm-phase-status">In Progress</div>
+        </div>
+        <div class="rm-phase rm-planned">
+          <div class="rm-phase-id">P4</div>
+          <div class="rm-phase-name">Accessibility</div>
+          <div class="rm-phase-status">Planned</div>
+        </div>
+        <div class="rm-phase rm-planned">
+          <div class="rm-phase-id">P5</div>
+          <div class="rm-phase-name">Polish</div>
+          <div class="rm-phase-status">Planned</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

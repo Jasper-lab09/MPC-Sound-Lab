@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accessible Sound Experience — MPC Sound Lab</title>
+  <link rel="stylesheet" href="src/css/main.css" />
+  <link rel="stylesheet" href="src/css/accessibility.css" />
+</head>
+<body>
+  <nav class="topbar">
+    <a href="index.html" class="topbar-brand">
+      <span class="topbar-brand-mark">M</span>
+      <span class="topbar-brand-text">MPC Sound Lab</span>
+    </a>
+    <nav class="topbar-nav">
+      <a href="index.html" class="topbar-link">Lab</a>
+      <a href="visualizer.html" class="topbar-link">Sound Visualizer</a>
+      <a href="generator.html" class="topbar-link">Music Generator</a>
+      <a href="accessibility.html" class="topbar-link active">Accessibility</a>
+    </nav>
+  </nav>
+
+  <div class="page">
+    <div class="page-head">
+      <div class="page-head-row">
+        <h1 class="page-h1">Accessible Sound Experience</h1>
+        <span class="page-tag tag-planned">Phase 4</span>
+      </div>
+      <p class="page-desc">
+        Translating audio information into visual patterns for Deaf and hard-of-hearing users.
+        Different sound categories produce distinct, customizable visual feedback.
+      </p>
+    </div>
+
+    <div class="access-disclaimer">
+      <strong>Important:</strong> This module is an experimental exploration of sound-to-visual translation.
+      It is <strong>not</strong> a replacement for hearing, does <strong>not</strong> provide reliable safety-critical alerts,
+      and should not be relied upon in situations where missing a sound could cause harm.
+      It is an educational and experiential tool, not a certified assistive device.
+    </div>
+
+    <!-- ===== Section 1: Interactive Tool ===== -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">01</span>
+        <span class="section-title">Interactive Tool</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="access-placeholder">
+            <div class="access-placeholder-icon">&#9673;</div>
+            <div class="access-placeholder-title">Tool Under Development</div>
+            <p class="access-placeholder-desc">
+              The interactive accessibility tool will be built in Phase 4. It will classify incoming
+              audio into categories (speech, music, noise, beat, silence) and render distinct visual
+              patterns for each category in real time.
+            </p>
+            <a href="visualizer.html" class="btn btn-primary">Try the Visualizer &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Section 2: Mathematical Foundation ===== -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">02</span>
+        <span class="section-title">Mathematical Foundation</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="cols-2">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Sound Classification Features</span></div>
+          <div class="panel-body">
+            <div class="content-block">
+              <p>Classifying sound into categories requires extracting numerical features from the audio signal:</p>
+              <div class="eq-label">Spectral centroid (brightness)</div>
+              <div class="eq">SC = &Sigma; f<sub>k</sub>&middot;|X[k]| / &Sigma;|X[k]|</div>
+              <div class="eq-label">Zero-crossing rate (noisiness)</div>
+              <div class="eq">ZCR = (1/N) &middot; #{sign changes in x[n]}</div>
+              <div class="eq-label">Spectral flux (onset detection)</div>
+              <div class="eq">SF = &Sigma; (|X[k](t)| - |X[k](t-1)|)&sup2;</div>
+              <p>These features form a vector that can be compared against category prototypes using distance metrics or machine learning classifiers.</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Pattern Mapping</span></div>
+          <div class="panel-body">
+            <div class="content-block">
+              <p>Each sound category maps to a distinct visual pattern:</p>
+              <p><strong>Speech</strong> &rarr; horizontal bands (formant structure)<br/>
+                 <strong>Music</strong> &rarr; structured geometric patterns<br/>
+                 <strong>Noise</strong> &rarr; scattered particle field<br/>
+                 <strong>Beat</strong> &rarr; pulsing concentric rings<br/>
+                 <strong>Silence</strong> &rarr; calm minimal state</p>
+              <p style="margin-top: 12px;">The mapping function transforms the feature vector into visual parameters:</p>
+              <div class="eq">V = M &middot; F + B</div>
+              <p>where F is the feature vector, M is the mapping matrix, and B is the user customization bias.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Section 3: Physical Foundation ===== -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">03</span>
+        <span class="section-title">Physical Foundation</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="content-block">
+            <p><strong>Cross-modal perception.</strong> The human brain processes sensory information in specialized cortical areas, but cross-modal connections exist. The visual cortex can learn to interpret patterns that correspond to auditory events &mdash; this is the principle behind visual alerts, closed captioning, and visual music.</p>
+            <p style="margin-top: 12px;"><strong>Vocal tract acoustics.</strong> Speech sounds are distinguished by formant frequencies &mdash; resonant peaks determined by the shape of the vocal tract. Vowels have stable formant patterns; consonants produce transient bursts or noise. These acoustic differences are visible in a spectrogram, which means they can also be translated into visual patterns without requiring the listener to hear them.</p>
+            <p style="margin-top: 12px;"><strong>Why visual translation works.</strong> Sound is fundamentally a time-varying signal. Vision excels at detecting spatial patterns and temporal changes. By mapping frequency to spatial position and amplitude to brightness/color, we create a visual representation that preserves the information-bearing dimensions of sound. This does not replicate hearing, but it can convey the presence, category, and temporal structure of acoustic events.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Section 4: Experiments and Findings ===== -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">04</span>
+        <span class="section-title">Experiments and Findings</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="experiment">
+          <div class="exp-num">01</div>
+          <div class="exp-body">
+            <div class="exp-title">Planned: Speech vs. Music Classification</div>
+            <div class="exp-desc">Speak normally, then play music. The system should distinguish them by spectral flatness (speech has variable spectral entropy, music has harmonic structure) and ZCR patterns (speech varies rapidly, music is more consistent).</div>
+            <div class="exp-result">Status: Awaiting implementation</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">02</div>
+          <div class="exp-body">
+            <div class="exp-title">Planned: Sudden Sound Detection</div>
+            <div class="exp-desc">Test detection of sudden sounds (door slam, hand clap) using spectral flux. These events produce a rapid change in frequency content that should trigger an immediate, high-contrast visual notification.</div>
+            <div class="exp-result">Status: Awaiting implementation</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">03</div>
+          <div class="exp-body">
+            <div class="exp-title">Planned: Customizable Pattern Sensitivity</div>
+            <div class="exp-desc">Users adjust detection thresholds and visual feedback styles (color, intensity, pattern type) to match their visual sensitivity and preferences. This tests whether personalization improves the usability of visual sound feedback.</div>
+            <div class="exp-result">Status: Awaiting implementation</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">04</div>
+          <div class="exp-body">
+            <div class="exp-title">Planned: Limitation Study</div>
+            <div class="exp-desc">Document what the system can and cannot detect. Quiet sounds, distant sounds, and sounds with similar spectral profiles may be missed or misclassified. This honest assessment is essential for setting appropriate user expectations.</div>
+            <div class="exp-result">Status: Awaiting implementation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

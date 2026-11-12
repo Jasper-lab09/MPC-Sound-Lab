@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sound Visualizer — MPC Sound Lab</title>
+  <link rel="stylesheet" href="src/css/main.css" />
+  <link rel="stylesheet" href="src/css/visualizer.css" />
+  <script type="module">
+    import { VisualizerController } from './src/js/visualizer/visualizer.js';
+    const ctrl = new VisualizerController();
+    ctrl.init();
+  </script>
+</head>
+<body>
+  <nav class="topbar">
+    <a href="index.html" class="topbar-brand">
+      <span class="topbar-brand-mark">M</span>
+      <span class="topbar-brand-text">MPC Sound Lab</span>
+    </a>
+    <nav class="topbar-nav">
+      <a href="index.html" class="topbar-link">Lab</a>
+      <a href="visualizer.html" class="topbar-link active">Sound Visualizer</a>
+      <a href="generator.html" class="topbar-link">Music Generator</a>
+      <a href="accessibility.html" class="topbar-link">Accessibility</a>
+    </nav>
+    <div class="topbar-status">
+      <span id="status-dot" class="dot"></span>
+      <span id="status-text">Idle</span>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="page-head">
+      <div class="page-head-row">
+        <h1 class="page-h1">Sound Visualizer</h1>
+        <span class="page-tag tag-live">Live</span>
+      </div>
+      <p class="page-desc">
+        Real-time analysis of audio from your microphone or the built-in signal generator.
+        Three complementary visualizations — waveform, FFT spectrum, and spectrogram — alongside
+        pitch detection, beat detection, harmonic analysis, and a window function explorer.
+        All processing happens locally in your browser.
+      </p>
+    </div>
+
+    <!-- ===== Section 1: Interactive Tool ===== -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">01</span>
+        <span class="section-title">Interactive Tool</span>
+        <span class="section-divider"></span>
+      </div>
+
+      <!-- Gate: shown before audio starts -->
+      <div id="gate-panel" class="panel">
+        <div class="panel-body">
+          <div class="gate">
+            <div class="gate-icon">&#8767;</div>
+            <div class="gate-title">Select Source &amp; Start</div>
+            <p class="gate-desc">
+              Choose an audio source, configure parameters, then click start. Microphone audio
+              is processed locally — nothing is recorded or transmitted. The signal generator
+              produces controlled test tones for analysis.
+            </p>
+
+            <div class="gate-config">
+              <!-- Source selector -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">Source</span>
+                <select id="viz-source">
+                  <option value="mic" selected>Microphone</option>
+                  <option value="generator">Signal Generator</option>
+                </select>
+              </div>
+
+              <!-- Signal generator panel (hidden by default) -->
+              <div id="gen-panel" style="display: none;">
+                <div class="ctrl-row">
+                  <span class="ctrl-label">Waveform</span>
+                  <select id="gen-waveform">
+                    <option value="sine" selected>Sine</option>
+                    <option value="square">Square</option>
+                    <option value="triangle">Triangle</option>
+                    <option value="sawtooth">Sawtooth</option>
+                    <option value="noise">White Noise</option>
+                  </select>
+                  <button class="info-btn" data-explore="signal-generator" aria-label="Explore signal generator">&#8505;</button>
+                </div>
+                <div class="ctrl-row">
+                  <span class="ctrl-label">Frequency</span>
+                  <input type="range" id="gen-freq" min="20" max="4000" step="1" value="440" />
+                  <span class="ctrl-value" id="gen-freq-val">440 Hz</span>
+                </div>
+                <div class="ctrl-row">
+                  <span class="ctrl-label">Amplitude</span>
+                  <input type="range" id="gen-amp" min="0" max="1" step="0.01" value="0.3" />
+                  <span class="ctrl-value" id="gen-amp-val">0.30</span>
+                </div>
+              </div>
+
+              <!-- FFT / Smoothing / Gain -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">FFT Size</span>
+                <select id="viz-fft">
+                  <option value="512">512</option>
+                  <option value="1024">1024</option>
+                  <option value="2048" selected>2048</option>
+                  <option value="4096">4096</option>
+                  <option value="8192">8192</option>
+                </select>
+                <button class="info-btn" data-explore="fft-size" aria-label="Explore FFT size">&#8505;</button>
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">Smoothing</span>
+                <input type="range" id="viz-smoothing" min="0" max="0.99" step="0.01" value="0.8" />
+                <span class="ctrl-value" id="viz-smoothing-val">0.80</span>
+                <button class="info-btn" data-explore="smoothing" aria-label="Explore smoothing">&#8505;</button>
+              </div>
+              <div class="ctrl-row">
+                <span class="ctrl-label">Gain</span>
+                <input type="range" id="viz-gain" min="0.1" max="5" step="0.1" value="1" />
+                <span class="ctrl-value" id="viz-gain-val">1.0x</span>
+                <button class="info-btn" data-explore="gain" aria-label="Explore gain">&#8505;</button>
+              </div>
+
+              <!-- Window function explorer -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">Window</span>
+                <select id="viz-window">
+                  <option value="none" selected>None (AnalyserNode Blackman)</option>
+                  <option value="rectangular">Rectangular (overlay)</option>
+                  <option value="hann">Hann (overlay)</option>
+                  <option value="hamming">Hamming (overlay)</option>
+                </select>
+                <button class="info-btn" data-explore="window-function" aria-label="Explore window functions">&#8505;</button>
+              </div>
+
+              <!-- Harmonic analyzer toggle -->
+              <div class="ctrl-row">
+                <span class="ctrl-label">Harmonics</span>
+                <label class="toggle">
+                  <input type="checkbox" id="viz-harmonic-toggle" />
+                  <span class="toggle-slider"></span>
+                </label>
+                <span style="font-size: 0.72rem; color: var(--text-3); font-family: var(--font-mono);">Label harmonic peaks</span>
+                <button class="info-btn" data-explore="harmonic-analyzer" aria-label="Explore harmonic analyzer">&#8505;</button>
+              </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <button id="viz-start" class="btn btn-primary">Start Visualization</button>
+            </div>
+            <div id="error-msg" class="gate-error" style="display: none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live panel: shown after audio starts -->
+      <div id="live-panel" style="display: none;">
+
+        <!-- Toolbar -->
+        <div class="viz-toolbar mb-16">
+          <div class="viz-toolbar-group">
+            <span class="dot dot-rec"></span>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-2);" id="live-label">LIVE</span>
+          </div>
+          <div class="viz-toolbar-sep"></div>
+          <div class="viz-toolbar-group">
+            <span class="ctrl-label">FFT</span>
+            <select id="viz-fft-live">
+              <option value="512">512</option>
+              <option value="1024">1024</option>
+              <option value="2048" selected>2048</option>
+              <option value="4096">4096</option>
+              <option value="8192">8192</option>
+            </select>
+          </div>
+          <div class="viz-toolbar-group">
+            <span class="ctrl-label">Smooth</span>
+            <input type="range" id="viz-smoothing-live" min="0" max="0.99" step="0.01" value="0.8" />
+            <span class="ctrl-value" id="viz-smoothing-val-live">0.80</span>
+          </div>
+          <div class="viz-toolbar-group">
+            <span class="ctrl-label">Gain</span>
+            <input type="range" id="viz-gain-live" min="0.1" max="5" step="0.1" value="1" />
+            <span class="ctrl-value" id="viz-gain-val-live">1.0x</span>
+          </div>
+          <div class="viz-toolbar-group">
+            <span class="ctrl-label">Window</span>
+            <select id="viz-window-live" disabled>
+              <option value="none" selected>Blackman</option>
+            </select>
+          </div>
+          <div style="flex: 1;"></div>
+          <button id="viz-stop" class="btn btn-danger">Stop</button>
+        </div>
+
+        <!-- Waveform -->
+        <div class="viz-canvas-panel mb-16">
+          <div class="viz-canvas-head">
+            <span class="panel-title">Waveform / Time Domain</span>
+            <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-3);">getByteTimeDomainData()</span>
+          </div>
+          <div class="viz-canvas-area">
+            <canvas id="canvas-waveform" style="height: 140px;"></canvas>
+          </div>
+        </div>
+
+        <!-- Spectrum + Spectrogram -->
+        <div class="viz-grid-2 mb-16">
+          <div class="viz-canvas-panel">
+            <div class="viz-canvas-head">
+              <span class="panel-title">Frequency Spectrum / FFT</span>
+              <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-3);">getByteFrequencyData() + overlay</span>
+            </div>
+            <div class="viz-canvas-area">
+              <canvas id="canvas-spectrum" style="height: 200px;"></canvas>
+            </div>
+          </div>
+          <div class="viz-canvas-panel">
+            <div class="viz-canvas-head">
+              <span class="panel-title">Spectrogram / Waterfall</span>
+              <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-3);">scrolling FFT</span>
+            </div>
+            <div class="viz-canvas-area">
+              <canvas id="canvas-spectrogram" style="height: 200px;"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analysis readouts -->
+        <div class="panel mb-16">
+          <div class="panel-head">
+            <span class="panel-title">Analysis Readouts</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div id="beat-dot" class="beat-dot"></div>
+              <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-3);">BEAT</span>
+              <button class="info-btn" data-explore="beat" aria-label="Explore beat detection">&#8505;</button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <!-- Pitch -->
+            <div style="text-align: center; margin-bottom: 16px;">
+              <div style="font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); margin-bottom: 4px;">
+                Detected Pitch
+                <button class="info-btn" data-explore="pitch" aria-label="Explore pitch detection">&#8505;</button>
+              </div>
+              <div class="pitch-display"><span id="pitch-note">&mdash;</span></div>
+              <div class="pitch-sub">
+                <span id="pitch-freq"></span>
+                <span id="pitch-cents" style="margin-left: 12px;"></span>
+                <span id="pitch-conf" style="margin-left: 12px; color: var(--text-4);"></span>
+              </div>
+            </div>
+            <!-- Numeric grid -->
+            <div class="readout-grid">
+              <div class="readout">
+                <div class="readout-key">
+                  BPM
+                  <button class="info-btn info-btn-inline" data-explore="beat" aria-label="">&#8505;</button>
+                </div>
+                <div class="readout-val" id="val-bpm">&mdash;</div>
+              </div>
+              <div class="readout">
+                <div class="readout-key">
+                  RMS (dBFS)
+                  <button class="info-btn info-btn-inline" data-explore="rms" aria-label="">&#8505;</button>
+                </div>
+                <div class="readout-val c-amber" id="val-rms">&mdash;</div>
+              </div>
+              <div class="readout">
+                <div class="readout-key">
+                  Peak Freq
+                  <button class="info-btn info-btn-inline" data-explore="peak-freq" aria-label="">&#8505;</button>
+                </div>
+                <div class="readout-val c-green" id="val-peak">&mdash;</div>
+              </div>
+              <div class="readout">
+                <div class="readout-key">
+                  Centroid
+                  <button class="info-btn info-btn-inline" data-explore="centroid" aria-label="">&#8505;</button>
+                </div>
+                <div class="readout-val c-magenta" id="val-centroid">&mdash;</div>
+              </div>
+              <div class="readout">
+                <div class="readout-key">Bin Spacing</div>
+                <div class="readout-val" style="color: var(--text-2); font-size: 0.9rem;" id="val-bin-spacing">&mdash;</div>
+              </div>
+              <div class="readout">
+                <div class="readout-key">Min Resolution</div>
+                <div class="readout-val" style="color: var(--text-2); font-size: 0.9rem;" id="val-resolution">&mdash;</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experiment Comparison -->
+        <div class="panel mb-16">
+          <div class="panel-head">
+            <span class="panel-title">Experiment Comparison</span>
+            <div style="display: flex; gap: 8px;">
+              <button id="cmp-capture-a" class="btn btn-sm">Capture A</button>
+              <button id="cmp-capture-b" class="btn btn-sm">Capture B</button>
+              <button id="cmp-clear" class="btn btn-sm btn-danger">Clear</button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div id="cmp-view"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Section 2: Mathematical Foundation ===== -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">02</span>
+        <span class="section-title">Mathematical Foundation</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="cols-2">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Fourier Transform</span></div>
+          <div class="panel-body">
+            <div class="content-block">
+              <p>The <strong>Discrete Fourier Transform (DFT)</strong> decomposes a time-domain signal into its frequency components:</p>
+              <div class="eq-label">DFT Definition</div>
+              <div class="eq">X[k] = &Sigma;<sub>n=0</sub><sup>N-1</sup> x[n] &middot; e<sup>-2&pi;i&middot;k&middot;n/N</sup></div>
+              <p>The <strong>FFT</strong> computes this in O(N log N). Bin <em>k</em> corresponds to frequency:</p>
+              <div class="eq">f<sub>k</sub> = k &middot; f<sub>s</sub> / N</div>
+              <p><strong>Important:</strong> bin spacing (f<sub>s</sub>/N) is the distance between adjacent FFT output bins. It is <em>not</em> the same as frequency resolution — the ability to distinguish two simultaneous tones depends on the window's main-lobe width (see Window Function Explorer).</p>
+              <p>Click any <span style="color: var(--cyan);">&#8505;</span> icon beside a parameter for detailed equations and live calculations.</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Autocorrelation &amp; Energy Flux</span></div>
+          <div class="panel-body">
+            <div class="content-block">
+              <p><strong>Pitch detection</strong> uses normalized autocorrelation:</p>
+              <div class="eq">r[&tau;] = (1/N) &middot; &Sigma; x[n] &middot; x[n+&tau;] / r[0]</div>
+              <p>The first peak after zero-lag gives the fundamental period. Frequency = f<sub>s</sub> / &tau;.</p>
+              <p><strong>Beat detection</strong> computes instantaneous spectral energy:</p>
+              <div class="eq">E(t) = (1/K) &middot; &Sigma; |X[k]|&sup2;<br/><br/>beat &harr; E(t) &gt; C &middot; E&#772;<sub>avg</sub></div>
+              <p>BPM is derived from the median of recent inter-beat intervals.</p>
+              <p><strong>Harmonic analysis</strong> searches for peaks at integer multiples of the fundamental (f<sub>h</sub> = h&middot;f<sub>0</sub>). Only peaks that align with the harmonic series and exceed 5% of the fundamental amplitude are labeled.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Section 3: Physical Foundation ===== -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">03</span>
+        <span class="section-title">Physical Foundation</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="content-block">
+            <p><strong>Sound</strong> is a mechanical wave &mdash; pressure variations propagating through air at approximately 343 m/s (at 20&deg;C). The human ear perceives pressure oscillations in the range of 20 Hz to 20,000 Hz.</p>
+            <div class="cols-2 mt-16">
+              <div>
+                <div class="eq-label">Wave equation</div>
+                <div class="eq">&part;&sup2;p/&part;t&sup2; = c&sup2; &middot; &nabla;&sup2;p</div>
+                <p style="margin-top: 8px;">where <em>p</em> is acoustic pressure and <em>c</em> is the speed of sound.</p>
+              </div>
+              <div>
+                <div class="eq-label">Digital sampling</div>
+                <div class="eq">f<sub>Nyquist</sub> = f<sub>s</sub> / 2</div>
+                <p style="margin-top: 8px;">At 44.1 kHz sample rate, frequencies up to 22.05 kHz can be represented.</p>
+              </div>
+            </div>
+            <div class="cols-2 mt-16">
+              <div>
+                <div class="eq-label">Spectral centroid</div>
+                <div class="eq">SC = &Sigma; f<sub>k</sub> &middot; |X[k]| / &Sigma; |X[k]|</div>
+                <p style="margin-top: 8px;">Weighted mean frequency &mdash; measures timbral "brightness".</p>
+              </div>
+              <div>
+                <div class="eq-label">RMS &amp; dBFS</div>
+                <div class="eq">RMS = &radic;((1/N) &middot; &Sigma; x[n]&sup2;)<br/><br/>dBFS = 20 &middot; log<sub>10</sub>(RMS)</div>
+                <p style="margin-top: 8px;"><strong>dBFS</strong> is digital amplitude relative to full scale (0 = max). It is <em>not</em> calibrated to sound pressure level (dB SPL). Converting requires a calibrated reference microphone.</p>
+              </div>
+            </div>
+            <p style="margin-top: 16px;"><strong>Window functions</strong> taper the signal at the boundaries to reduce spectral leakage. There is a trade-off: lower sidelobes (less leakage) come at the cost of a wider main lobe (poorer frequency resolution). The AnalyserNode uses a Blackman window by default; the overlay feature lets you compare rectangular, Hann, and Hamming windows.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Section 4: Experiments and Findings ===== -->
+    <div class="section">
+      <div class="section-label">
+        <span class="section-number">04</span>
+        <span class="section-title">Experiments and Findings</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="experiment">
+          <div class="exp-num">01</div>
+          <div class="exp-body">
+            <div class="exp-title">FFT Size &mdash; Time-Frequency Trade-off</div>
+            <div class="exp-desc">Switch between FFT 512 and 8192 while speaking or humming. At 512, the waveform updates rapidly but frequency bars are coarse (86 Hz spacing at 44.1 kHz). At 8192, harmonics become visible but the display feels sluggish (5.4 Hz updates). Use the Capture A/B buttons to compare. This demonstrates the uncertainty principle: &Delta;t &middot; &Delta;f &ge; 1/(4&pi;).</div>
+            <div class="exp-result">Try: hum at FFT 8192, capture A &rarr; switch to 512, capture B &rarr; compare</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">02</div>
+          <div class="exp-body">
+            <div class="exp-title">Signal Generator &mdash; Fourier Series Visualization</div>
+            <div class="exp-desc">Switch source to Signal Generator. Set a 440 Hz sine wave &mdash; the spectrum shows one peak. Switch to square &mdash; odd harmonics appear (1320, 2200, 3080 Hz). Switch to sawtooth &mdash; all harmonics (880, 1320, 1760 Hz). This visually demonstrates the Fourier series decomposition of periodic waveforms.</div>
+            <div class="exp-result">Try: sine &rarr; square &rarr; sawtooth at same frequency, watch harmonics appear</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">03</div>
+          <div class="exp-body">
+            <div class="exp-title">Window Function &mdash; Spectral Leakage Comparison</div>
+            <div class="exp-desc">Generate a sine wave at a frequency that doesn't fall on a bin boundary. Enable the rectangular window overlay &mdash; you'll see energy spread into neighboring bins (leakage). Switch to Hann or Hamming overlay &mdash; the peak is cleaner but slightly broader. Compare bin spacing vs. actual resolution in the readout panel.</div>
+            <div class="exp-result">Try: 440 Hz sine, rectangular overlay &rarr; Hann overlay &rarr; compare leakage</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">04</div>
+          <div class="exp-body">
+            <div class="exp-title">Harmonic Analyzer &mdash; Harmonic Series Detection</div>
+            <div class="exp-desc">Generate a sawtooth wave at 220 Hz and enable the harmonic toggle. The analyzer labels harmonic peaks at 220, 440, 660, 880 Hz (integer multiples). Switch to square &mdash; only odd harmonics are confirmed. The reliability indicator shows confidence based on harmonic alignment.</div>
+            <div class="exp-result">Try: sawtooth 220 Hz &rarr; square 220 Hz &rarr; compare harmonic patterns</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">05</div>
+          <div class="exp-body">
+            <div class="exp-title">dBFS &mdash; Digital Amplitude vs Perceived Loudness</div>
+            <div class="exp-desc">Using the microphone, speak at different volumes. The RMS readout shows dBFS &mdash; digital amplitude relative to full scale, not calibrated SPL. A 6 dB increase roughly doubles amplitude but does not double perceived loudness (that requires ~10 dB). Adjust gain to see clipping at 0 dBFS.</div>
+            <div class="exp-result">Try: speak softly vs loudly &rarr; observe ~6-10 dB difference</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

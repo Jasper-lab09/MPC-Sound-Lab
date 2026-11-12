@@ -1,0 +1,62 @@
+/* Visualizer module styles */
+
+.viz-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.viz-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .viz-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* Toolbar — Ableton-style control strip */
+.viz-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius);
+}
+
+.viz-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-toolbar-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--border-1);
+}
+
+/* Canvas panels */
+.viz-canvas-panel {
+  background: var(--bg-2);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.viz-canvas-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-1);
+}
+
+.viz-canvas-area {
+  position: relative;
+  background: var(--bg-0);
+}
