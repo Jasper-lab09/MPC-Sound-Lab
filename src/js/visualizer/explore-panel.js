@@ -8,6 +8,7 @@
  */
 
 import { WINDOW_INFO } from './dsp-utils.js';
+import { i18n } from '../core/i18n.js';
 
 // ─── Definition registry ──────────────────────────────────────────
 
@@ -574,7 +575,7 @@ export class ExplorePanel {
 
     // Mathematics section
     html += '<div class="explore-section">';
-    html += '<div class="explore-section-label">Mathematics</div>';
+    html += `<div class="explore-section-label">${i18n.t('explore.math')}</div>`;
     for (const block of def.math) {
       html += `<div class="eq-label">${block.label}</div>`;
       html += `<div class="eq">${this._formatEq(block.eq)}</div>`;
@@ -588,7 +589,7 @@ export class ExplorePanel {
 
     // Physics section
     html += '<div class="explore-section">';
-    html += '<div class="explore-section-label">Physics</div>';
+    html += `<div class="explore-section-label">${i18n.t('explore.physics')}</div>`;
     for (const p of def.physics) {
       html += `<p class="explore-text">${p}</p>`;
     }
@@ -596,7 +597,7 @@ export class ExplorePanel {
 
     // Experiment section
     html += '<div class="explore-section">';
-    html += '<div class="explore-section-label">Experiment</div>';
+    html += `<div class="explore-section-label">${i18n.t('explore.experiment')}</div>`;
     for (const e of def.experiment) {
       html += `<p class="explore-text">${e}</p>`;
     }
@@ -607,7 +608,7 @@ export class ExplorePanel {
       const values = def.liveValues(ctx);
       if (values && values.length > 0) {
         html += '<div class="explore-live">';
-        html += '<div class="explore-live-label">Current Values</div>';
+        html += `<div class="explore-live-label">${i18n.t('explore.current')}</div>`;
         html += '<div class="explore-live-grid">';
         for (const [k, v] of values) {
           html += `<div class="explore-live-row"><span class="explore-live-key">${k}</span><span class="explore-live-val">${v}</span></div>`;

@@ -14,20 +14,25 @@
       <span class="topbar-brand-text">MPC Sound Lab</span>
     </a>
     <nav class="topbar-nav">
-      <a href="index.html" class="topbar-link">Lab</a>
-      <a href="visualizer.html" class="topbar-link">Sound Visualizer</a>
-      <a href="generator.html" class="topbar-link active">Music Generator</a>
-      <a href="accessibility.html" class="topbar-link">Accessibility</a>
+      <a href="index.html" class="topbar-link" data-i18n="nav.lab">Lab</a>
+      <a href="visualizer.html" class="topbar-link" data-i18n="nav.visualizer">Sound Visualizer</a>
+      <a href="generator.html" class="topbar-link active" data-i18n="nav.generator">Music Generator</a>
+      <a href="accessibility.html" class="topbar-link" data-i18n="nav.accessibility">Accessibility</a>
     </nav>
+    <div class="topbar-status">
+      <span class="dot"></span>
+      <span data-i18n="nav.status.idle">Idle</span>
+      <button class="lang-btn">中文</button>
+    </div>
   </nav>
 
   <div class="page">
     <div class="page-head">
       <div class="page-head-row">
-        <h1 class="page-h1">Mathematical Music Generator</h1>
+        <h1 class="page-h1" data-i18n="gen.title">Mathematical Music Generator</h1>
         <span class="page-tag tag-dev">Phase 3</span>
       </div>
-      <p class="page-desc">
+      <p class="page-desc" data-i18n="gen.desc">
         Generate musical patterns from mathematical structures. Fibonacci sequences, Euclidean rhythms,
         modular arithmetic, and harmonic series become compositional tools — revealing the deep
         connection between mathematics and music.
@@ -38,19 +43,19 @@
     <div class="section">
       <div class="section-label">
         <span class="section-number">01</span>
-        <span class="section-title">Interactive Tool</span>
+        <span class="section-title" data-i18n="section.interactive">Interactive Tool</span>
         <span class="section-divider"></span>
       </div>
       <div class="panel">
         <div class="panel-body">
           <div class="gen-placeholder">
             <div class="gen-placeholder-icon">&#8719;</div>
-            <div class="gen-placeholder-title">Tool Under Development</div>
-            <p class="gen-placeholder-desc">
+            <div class="gen-placeholder-title" data-i18n="gen.placeholder.title">Tool Under Development</div>
+            <p class="gen-placeholder-desc" data-i18n="gen.placeholder.desc">
               The interactive generator will be built in Phase 3. It will feature a piano roll editor,
               real-time Web Audio synthesis, and MIDI export — all driven by selectable mathematical algorithms.
             </p>
-            <a href="visualizer.html" class="btn btn-primary">Try the Visualizer &rarr;</a>
+            <a href="visualizer.html" class="btn btn-primary" data-i18n="gen.placeholder.cta">Try the Visualizer &rarr;</a>
           </div>
         </div>
       </div>
@@ -60,27 +65,27 @@
     <div class="section">
       <div class="section-label">
         <span class="section-number">02</span>
-        <span class="section-title">Mathematical Foundation</span>
+        <span class="section-title" data-i18n="section.math">Mathematical Foundation</span>
         <span class="section-divider"></span>
       </div>
       <div class="cols-2">
         <div class="panel">
-          <div class="panel-head"><span class="panel-title">Fibonacci Rhythms</span></div>
+          <div class="panel-head"><span class="panel-title" data-i18n="gen.math.fib.title">Fibonacci Rhythms</span></div>
           <div class="panel-body">
             <div class="content-block">
-              <p>The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13, 21, ...) can be mapped to rhythmic patterns by taking values modulo the pattern length:</p>
+              <p data-i18n="gen.math.fib.p1">The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13, 21, ...) can be mapped to rhythmic patterns by taking values modulo the pattern length:</p>
               <div class="eq">F(n) mod M &rarr; step position</div>
-              <p>This creates naturally evolving, non-repetitive but structured sequences. The golden ratio &phi; = (1+&radic;5)/2 &asymp; 1.618 emerges as the limit ratio F(n+1)/F(n), and patterns based on it avoid exact repetition while remaining coherent.</p>
+              <p data-i18n="gen.math.fib.p2">This creates naturally evolving, non-repetitive but structured sequences. The golden ratio &phi; = (1+&radic;5)/2 &asymp; 1.618 emerges as the limit ratio F(n+1)/F(n), and patterns based on it avoid exact repetition while remaining coherent.</p>
             </div>
           </div>
         </div>
         <div class="panel">
-          <div class="panel-head"><span class="panel-title">Euclidean Rhythms</span></div>
+          <div class="panel-head"><span class="panel-title" data-i18n="gen.math.euclid.title">Euclidean Rhythms</span></div>
           <div class="panel-body">
             <div class="content-block">
-              <p>The Euclidean algorithm for GCD can distribute <em>n</em> hits as evenly as possible across <em>m</em> steps:</p>
+              <p data-i18n="gen.math.euclid.p1">The Euclidean algorithm for GCD can distribute <em>n</em> hits as evenly as possible across <em>m</em> steps:</p>
               <div class="eq">E(n, m) &rarr; [x . . x . . x .]</div>
-              <p>This produces traditional world rhythms:</p>
+              <p data-i18n="gen.math.euclid.p2">This produces traditional world rhythms:</p>
               <p><strong>E(3, 8)</strong> &rarr; tresillo: [x . . x . . x .]<br/>
                  <strong>E(5, 8)</strong> &rarr; cinquillo: [x . x . x . x .]<br/>
                  <strong>E(2, 3)</strong> &rarr; habanera pattern</p>
@@ -89,19 +94,19 @@
         </div>
       </div>
       <div class="panel mt-16">
-        <div class="panel-head"><span class="panel-title">Harmonic Series &amp; Just Intonation</span></div>
+        <div class="panel-head"><span class="panel-title" data-i18n="gen.math.harmonic.title">Harmonic Series &amp; Just Intonation</span></div>
         <div class="panel-body">
           <div class="content-block">
-            <p>For a fundamental frequency f&#8320;, harmonics are f<sub>n</sub> = n &middot; f&#8320;. The ratios between early harmonics produce the consonant intervals of just intonation:</p>
+            <p data-i18n="gen.math.harmonic.p1">For a fundamental frequency f&#8320;, harmonics are f<sub>n</sub> = n &middot; f&#8320;. The ratios between early harmonics produce the consonant intervals of just intonation:</p>
             <div class="cols-2 mt-16">
               <div>
-                <div class="eq-label">Interval ratios</div>
+                <div class="eq-label" data-i18n="gen.math.harmonic.intervalLabel">Interval ratios</div>
                 <div class="eq">Octave: 2:1<br/>Fifth: 3:2<br/>Fourth: 4:3<br/>Major 3rd: 5:4<br/>Minor 3rd: 6:5</div>
               </div>
               <div>
-                <div class="eq-label">Equal temperament</div>
+                <div class="eq-label" data-i18n="gen.math.harmonic.temperamentLabel">Equal temperament</div>
                 <div class="eq">f = 440 &middot; 2<sup>(n-69)/12</sup></div>
-                <p style="margin-top: 8px;">where n is the MIDI note number. A4 = 440 Hz is the reference.</p>
+                <p style="margin-top: 8px;" data-i18n="gen.math.harmonic.temperamentDesc">where n is the MIDI note number. A4 = 440 Hz is the reference.</p>
               </div>
             </div>
           </div>
@@ -113,15 +118,15 @@
     <div class="section">
       <div class="section-label">
         <span class="section-number">03</span>
-        <span class="section-title">Physical Foundation</span>
+        <span class="section-title" data-i18n="section.physics">Physical Foundation</span>
         <span class="section-divider"></span>
       </div>
       <div class="panel">
         <div class="panel-body">
           <div class="content-block">
-            <p><strong>Consonance and the harmonic series.</strong> When a vibrating string or column of air produces a note, it does not vibrate at a single frequency. The physical modes of vibration produce a series of integer-multiple overtones. The ear's cochlea physically separates frequencies along its tapered basilar membrane, and harmonics that align with integer ratios create regular excitation patterns that the auditory system processes as "consonant."</p>
-            <p style="margin-top: 12px;"><strong>Why Euclidean rhythms sound good.</strong> Even distribution of hits (the Euclidean pattern) maximizes the minimum gap between hits. This regularity maps onto the brain's beat-tracking circuitry, which predicts the timing of the next event. When predictions are confirmed, the reward circuit engages &mdash; the rhythm "feels right."</p>
-            <p style="margin-top: 12px;"><strong>Web Audio synthesis.</strong> The OscillatorNode generates a waveform at a specified frequency. By connecting it to a GainNode (envelope) and scheduling note on/off events, we can play mathematical patterns as audible music. The AudioContext clock (sample-accurate) ensures tight timing.</p>
+            <p data-i18n-html="gen.physics.consonance"><strong>Consonance and the harmonic series.</strong> When a vibrating string or column of air produces a note, it does not vibrate at a single frequency. The physical modes of vibration produce a series of integer-multiple overtones. The ear's cochlea physically separates frequencies along its tapered basilar membrane, and harmonics that align with integer ratios create regular excitation patterns that the auditory system processes as "consonant."</p>
+            <p style="margin-top: 12px;" data-i18n-html="gen.physics.euclid"><strong>Why Euclidean rhythms sound good.</strong> Even distribution of hits (the Euclidean pattern) maximizes the minimum gap between hits. This regularity maps onto the brain's beat-tracking circuitry, which predicts the timing of the next event. When predictions are confirmed, the reward circuit engages &mdash; the rhythm "feels right."</p>
+            <p style="margin-top: 12px;" data-i18n-html="gen.physics.webaudio"><strong>Web Audio synthesis.</strong> The OscillatorNode generates a waveform at a specified frequency. By connecting it to a GainNode (envelope) and scheduling note on/off events, we can play mathematical patterns as audible music. The AudioContext clock (sample-accurate) ensures tight timing.</p>
           </div>
         </div>
       </div>
@@ -131,36 +136,40 @@
     <div class="section">
       <div class="section-label">
         <span class="section-number">04</span>
-        <span class="section-title">Experiments and Findings</span>
+        <span class="section-title" data-i18n="section.experiments">Experiments and Findings</span>
         <span class="section-divider"></span>
       </div>
       <div class="panel">
         <div class="experiment">
           <div class="exp-num">01</div>
           <div class="exp-body">
-            <div class="exp-title">Planned: Fibonacci vs. Euclidean Pattern Comparison</div>
-            <div class="exp-desc">Generate a 16-step pattern using both Fibonacci mapping and Euclidean distribution. Compare the rhythmic feel &mdash; Fibonacci patterns evolve asymmetrically, while Euclidean patterns have mathematically optimal evenness.</div>
-            <div class="exp-result">Status: Awaiting implementation</div>
+            <div class="exp-title" data-i18n="gen.exp1.title">Planned: Fibonacci vs. Euclidean Pattern Comparison</div>
+            <div class="exp-desc" data-i18n="gen.exp1.desc">Generate a 16-step pattern using both Fibonacci mapping and Euclidean distribution. Compare the rhythmic feel &mdash; Fibonacci patterns evolve asymmetrically, while Euclidean patterns have mathematically optimal evenness.</div>
+            <div class="exp-result" data-i18n="gen.exp1.result">Status: Awaiting implementation</div>
           </div>
         </div>
         <div class="experiment">
           <div class="exp-num">02</div>
           <div class="exp-body">
-            <div class="exp-title">Planned: Harmonic Series as Melody</div>
-            <div class="exp-desc">Map the first 8 harmonics of a low fundamental (e.g., 110 Hz) to a melody. Listen to how the naturally decreasing interval sizes (octave, fifth, fourth, major third...) create a scale that Western music eventually approximated with equal temperament.</div>
-            <div class="exp-result">Status: Awaiting implementation</div>
+            <div class="exp-title" data-i18n="gen.exp2.title">Planned: Harmonic Series as Melody</div>
+            <div class="exp-desc" data-i18n="gen.exp2.desc">Map the first 8 harmonics of a low fundamental (e.g., 110 Hz) to a melody. Listen to how the naturally decreasing interval sizes (octave, fifth, fourth, major third...) create a scale that Western music eventually approximated with equal temperament.</div>
+            <div class="exp-result" data-i18n="gen.exp2.result">Status: Awaiting implementation</div>
           </div>
         </div>
         <div class="experiment">
           <div class="exp-num">03</div>
           <div class="exp-body">
-            <div class="exp-title">Planned: Probability-Based Composition</div>
-            <div class="exp-desc">Assign probabilities to each step (e.g., 0.8 for downbeat, 0.3 for offbeat). Generate multiple patterns from the same distribution and listen to how they vary while maintaining a consistent "character."</div>
-            <div class="exp-result">Status: Awaiting implementation</div>
+            <div class="exp-title" data-i18n="gen.exp3.title">Planned: Probability-Based Composition</div>
+            <div class="exp-desc" data-i18n="gen.exp3.desc">Assign probabilities to each step (e.g., 0.8 for downbeat, 0.3 for offbeat). Generate multiple patterns from the same distribution and listen to how they vary while maintaining a consistent "character."</div>
+            <div class="exp-result" data-i18n="gen.exp3.result">Status: Awaiting implementation</div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <script type="module">
+    import { App } from './src/js/core/app.js';
+    new App().init();
+  </script>
 </body>
 </html>

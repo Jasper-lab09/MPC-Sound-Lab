@@ -8,43 +8,57 @@
   <script type="module" src="src/js/core/app.js"></script>
   <style>
     .lab-hero {
-      padding: 48px 0 40px;
+      padding: 64px 0 48px;
       border-bottom: 1px solid var(--border-1);
-      margin-bottom: 36px;
+      margin-bottom: 48px;
+      position: relative;
     }
     .lab-hero-eyebrow {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--cyan);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lab-hero-eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--cyan);
     }
     .lab-hero-title {
       font-family: var(--font-display);
-      font-size: 2.2rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 14px;
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.12;
+      margin-bottom: 18px;
+      background: linear-gradient(180deg, var(--text-1) 60%, var(--text-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .lab-hero-desc {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text-2);
-      max-width: 560px;
-      line-height: 1.7;
+      max-width: 600px;
+      line-height: 1.75;
     }
     .lab-domains {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
-      margin-top: 18px;
+      margin-top: 24px;
     }
     .lab-domain {
       font-family: var(--font-mono);
-      font-size: 0.68rem;
-      padding: 3px 10px;
-      border-radius: 3px;
+      font-size: 0.7rem;
+      padding: 4px 12px;
+      border-radius: 4px;
       background: var(--bg-2);
       border: 1px solid var(--border-1);
       color: var(--text-3);
@@ -53,67 +67,88 @@
 
     .modules-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 12px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
     }
     .mod-card {
       background: var(--bg-2);
       border: 1px solid var(--border-1);
       border-radius: var(--radius);
-      padding: 20px;
+      padding: 24px;
       text-decoration: none;
       color: inherit;
-      transition: border-color 0.15s, background 0.15s;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mod-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.2s;
     }
     .mod-card:hover {
       border-color: var(--border-3);
       background: var(--bg-3);
+      transform: translateY(-2px);
     }
+    .mod-card:hover::before { opacity: 1; }
+    .mod-card-a::before { background: var(--cyan); }
+    .mod-card-b::before { background: var(--magenta); }
+    .mod-card-c::before { background: var(--amber); }
     .mod-card-head {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
     .mod-glyph {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 700;
       font-family: var(--font-mono);
     }
-    .mod-glyph-a { background: rgba(79, 195, 247, 0.1); color: var(--cyan); }
-    .mod-glyph-b { background: rgba(233, 30, 99, 0.1); color: var(--magenta); }
-    .mod-glyph-c { background: rgba(255, 183, 77, 0.1); color: var(--amber); }
+    .mod-glyph-a { background: rgba(79, 195, 247, 0.12); color: var(--cyan); }
+    .mod-glyph-b { background: rgba(233, 30, 99, 0.12); color: var(--magenta); }
+    .mod-glyph-c { background: rgba(255, 183, 77, 0.12); color: var(--amber); }
     .mod-name {
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
     .mod-card-tag { margin-left: auto; }
     .mod-desc {
-      font-size: 0.8rem;
+      font-size: 0.84rem;
       color: var(--text-2);
-      line-height: 1.6;
+      line-height: 1.65;
       flex: 1;
     }
     .mod-features {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--text-3);
       line-height: 1.8;
     }
     .mod-arrow {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: var(--text-3);
       transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .mod-card:hover .mod-arrow { color: var(--text-1); }
     .mod-card-a:hover .mod-arrow { color: var(--cyan); }
@@ -123,28 +158,34 @@
     .roadmap-bar {
       display: flex;
       gap: 0;
-      margin-bottom: 40px;
+      margin-bottom: 48px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border-1);
     }
     .rm-phase {
       flex: 1;
-      padding: 12px 10px;
+      padding: 16px 12px;
       border-right: 1px solid var(--border-1);
       text-align: center;
+      transition: background 0.15s;
     }
     .rm-phase:last-child { border-right: none; }
+    .rm-phase:hover { background: var(--bg-3); }
     .rm-phase-id {
       font-family: var(--font-mono);
-      font-size: 0.62rem;
+      font-size: 0.65rem;
       color: var(--text-3);
     }
     .rm-phase-name {
-      font-size: 0.78rem;
-      font-weight: 600;
-      margin: 3px 0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin: 4px 0;
+      letter-spacing: -0.01em;
     }
     .rm-phase-status {
       font-family: var(--font-mono);
-      font-size: 0.62rem;
+      font-size: 0.64rem;
     }
     .rm-done .rm-phase-name { color: var(--green); }
     .rm-done .rm-phase-status { color: var(--green); }
@@ -161,28 +202,33 @@
       <span class="topbar-brand-text">MPC Sound Lab</span>
     </a>
     <nav class="topbar-nav">
-      <a href="index.html" class="topbar-link active">Lab</a>
-      <a href="visualizer.html" class="topbar-link">Sound Visualizer</a>
-      <a href="generator.html" class="topbar-link">Music Generator</a>
-      <a href="accessibility.html" class="topbar-link">Accessibility</a>
+      <a href="index.html" class="topbar-link active" data-i18n="nav.lab">Lab</a>
+      <a href="visualizer.html" class="topbar-link" data-i18n="nav.visualizer">Sound Visualizer</a>
+      <a href="generator.html" class="topbar-link" data-i18n="nav.generator">Music Generator</a>
+      <a href="accessibility.html" class="topbar-link" data-i18n="nav.accessibility">Accessibility</a>
     </nav>
+    <div class="topbar-status">
+      <span id="status-dot" class="dot"></span>
+      <span id="status-text" data-i18n="nav.status.idle">Idle</span>
+      <button class="lang-btn">中文</button>
+    </div>
   </nav>
 
   <div class="page">
     <div class="lab-hero">
-      <div class="lab-hero-eyebrow">Interactive Scientific Laboratory</div>
-      <h1 class="lab-hero-title">Where sound becomes data,<br />data becomes music,<br />and music becomes accessible.</h1>
-      <p class="lab-hero-desc">
+      <div class="lab-hero-eyebrow" data-i18n="home.eyebrow">Interactive Scientific Laboratory</div>
+      <h1 class="lab-hero-title" data-i18n-html="home.title">Where sound becomes data,<br>data becomes music,<br>and music becomes accessible.</h1>
+      <p class="lab-hero-desc" data-i18n="home.desc">
         MPC Sound Lab is a browser-based platform for exploring the intersection of physics, mathematics,
         and audio engineering. Analyze live sound, generate music from mathematical structures,
         and experience audio through visual translation — all in real time, right here in your browser.
       </p>
       <div class="lab-domains">
-        <span class="lab-domain">Mathematics</span>
-        <span class="lab-domain">Physics</span>
-        <span class="lab-domain">Music Technology</span>
-        <span class="lab-domain">Audio Engineering</span>
-        <span class="lab-domain">Accessibility</span>
+        <span class="lab-domain" data-i18n="home.domain.math">Mathematics</span>
+        <span class="lab-domain" data-i18n="home.domain.physics">Physics</span>
+        <span class="lab-domain" data-i18n="home.domain.music">Music Technology</span>
+        <span class="lab-domain" data-i18n="home.domain.audio">Audio Engineering</span>
+        <span class="lab-domain" data-i18n="home.domain.access">Accessibility</span>
       </div>
     </div>
 
@@ -190,39 +236,39 @@
     <div class="section">
       <div class="section-label">
         <span class="section-number">01</span>
-        <span class="section-title">Modules</span>
+        <span class="section-title" data-i18n="home.modules">Modules</span>
         <span class="section-divider"></span>
       </div>
       <div class="modules-grid">
         <a href="visualizer.html" class="mod-card mod-card-a">
           <div class="mod-card-head">
             <div class="mod-glyph mod-glyph-a">&#8767;</div>
-            <div class="mod-name">Sound Visualizer</div>
+            <div class="mod-name" data-i18n="home.mod.viz.name">Sound Visualizer</div>
             <span class="mod-card-tag tag-live">Live</span>
           </div>
-          <div class="mod-desc">Real-time audio analysis from your microphone: waveform, FFT spectrum, spectrogram waterfall, pitch and beat detection.</div>
-          <div class="mod-features">Waveform &middot; FFT &middot; Spectrogram &middot; Pitch &middot; Beat</div>
-          <div class="mod-arrow">Open module &rarr;</div>
+          <div class="mod-desc" data-i18n="home.mod.viz.desc">Real-time audio analysis from your microphone: waveform, FFT spectrum, spectrogram waterfall, pitch and beat detection.</div>
+          <div class="mod-features" data-i18n="home.mod.viz.features">Waveform &middot; FFT &middot; Spectrogram &middot; Pitch &middot; Beat</div>
+          <div class="mod-arrow" data-i18n="home.mod.viz.open">Open module &rarr;</div>
         </a>
         <a href="generator.html" class="mod-card mod-card-b">
           <div class="mod-card-head">
             <div class="mod-glyph mod-glyph-b">&#8719;</div>
-            <div class="mod-name">Mathematical Music Generator</div>
+            <div class="mod-name" data-i18n="home.mod.gen.name">Mathematical Music Generator</div>
             <span class="mod-card-tag tag-dev">Phase 3</span>
           </div>
-          <div class="mod-desc">Generate musical patterns from mathematical rules: Fibonacci sequences, Euclidean rhythms, harmonic series, and probability.</div>
-          <div class="mod-features">Fibonacci &middot; Euclidean &middot; Harmonic &middot; Piano Roll &middot; MIDI</div>
-          <div class="mod-arrow">Open module &rarr;</div>
+          <div class="mod-desc" data-i18n="home.mod.gen.desc">Generate musical patterns from mathematical rules: Fibonacci sequences, Euclidean rhythms, harmonic series, and probability.</div>
+          <div class="mod-features" data-i18n="home.mod.gen.features">Fibonacci &middot; Euclidean &middot; Harmonic &middot; Piano Roll &middot; MIDI</div>
+          <div class="mod-arrow" data-i18n="home.mod.gen.open">Open module &rarr;</div>
         </a>
         <a href="accessibility.html" class="mod-card mod-card-c">
           <div class="mod-card-head">
             <div class="mod-glyph mod-glyph-c">&#9673;</div>
-            <div class="mod-name">Accessible Sound Experience</div>
+            <div class="mod-name" data-i18n="home.mod.acc.name">Accessible Sound Experience</div>
             <span class="mod-card-tag tag-planned">Phase 4</span>
           </div>
-          <div class="mod-desc">Translating audio into visual patterns for Deaf and hard-of-hearing users. Distinct visual feedback for different sound categories.</div>
-          <div class="mod-features">Translation &middot; Detection &middot; Customizable &middot; Notifications</div>
-          <div class="mod-arrow">Open module &rarr;</div>
+          <div class="mod-desc" data-i18n="home.mod.acc.desc">Translating audio into visual patterns for Deaf and hard-of-hearing users. Distinct visual feedback for different sound categories.</div>
+          <div class="mod-features" data-i18n="home.mod.acc.features">Translation &middot; Detection &middot; Customizable &middot; Notifications</div>
+          <div class="mod-arrow" data-i18n="home.mod.acc.open">Open module &rarr;</div>
         </a>
       </div>
     </div>
@@ -231,34 +277,34 @@
     <div class="section">
       <div class="section-label">
         <span class="section-number">02</span>
-        <span class="section-title">Development Roadmap</span>
+        <span class="section-title" data-i18n="home.roadmap">Development Roadmap</span>
         <span class="section-divider"></span>
       </div>
       <div class="roadmap-bar">
         <div class="rm-phase rm-done">
           <div class="rm-phase-id">P1</div>
-          <div class="rm-phase-name">Foundation</div>
-          <div class="rm-phase-status">Complete</div>
+          <div class="rm-phase-name" data-i18n="home.rm.p1">Foundation</div>
+          <div class="rm-phase-status" data-i18n="home.rm.p1.status">Complete</div>
         </div>
         <div class="rm-phase rm-done">
           <div class="rm-phase-id">P2</div>
-          <div class="rm-phase-name">Visualizer</div>
-          <div class="rm-phase-status">Complete</div>
+          <div class="rm-phase-name" data-i18n="home.rm.p2">Visualizer</div>
+          <div class="rm-phase-status" data-i18n="home.rm.p2.status">Complete</div>
         </div>
         <div class="rm-phase rm-current">
           <div class="rm-phase-id">P3</div>
-          <div class="rm-phase-name">Generator</div>
-          <div class="rm-phase-status">In Progress</div>
+          <div class="rm-phase-name" data-i18n="home.rm.p3">Generator</div>
+          <div class="rm-phase-status" data-i18n="home.rm.p3.status">In Progress</div>
         </div>
         <div class="rm-phase rm-planned">
           <div class="rm-phase-id">P4</div>
-          <div class="rm-phase-name">Accessibility</div>
-          <div class="rm-phase-status">Planned</div>
+          <div class="rm-phase-name" data-i18n="home.rm.p4">Accessibility</div>
+          <div class="rm-phase-status" data-i18n="home.rm.p4.status">Planned</div>
         </div>
         <div class="rm-phase rm-planned">
           <div class="rm-phase-id">P5</div>
-          <div class="rm-phase-name">Polish</div>
-          <div class="rm-phase-status">Planned</div>
+          <div class="rm-phase-name" data-i18n="home.rm.p5">Polish</div>
+          <div class="rm-phase-status" data-i18n="home.rm.p5.status">Planned</div>
         </div>
       </div>
     </div>
