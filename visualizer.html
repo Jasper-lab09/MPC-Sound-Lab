@@ -4,15 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sound Visualizer — MPC Sound Lab</title>
-  <link rel="stylesheet" href="src/css/main.css?v=4" />
-  <link rel="stylesheet" href="src/css/visualizer.css?v=4" />
-  <script type="module">
-    import { App } from './src/js/core/app.js';
-    new App().init();
-    import { VisualizerController } from './src/js/visualizer/visualizer.js';
-    const ctrl = new VisualizerController();
-    ctrl.init();
-  </script>
+  <link rel="stylesheet" href="src/css/main.css?v=5" />
+  <link rel="stylesheet" href="src/css/visualizer.css?v=5" />
 </head>
 <body>
   <nav class="topbar">
@@ -316,7 +309,7 @@
     </div>
 
     <!-- ===== Section 2: Mathematical Foundation ===== -->
-    <div class="section">
+    <div class="section" data-collapsible>
       <div class="section-label">
         <span class="section-number">02</span>
         <span class="section-title" data-i18n="section.math">Mathematical Foundation</span>
@@ -355,7 +348,7 @@
     </div>
 
     <!-- ===== Section 3: Physical Foundation ===== -->
-    <div class="section">
+    <div class="section" data-collapsible>
       <div class="section-label">
         <span class="section-number">03</span>
         <span class="section-title" data-i18n="section.physics">Physical Foundation</span>
@@ -396,7 +389,7 @@
     </div>
 
     <!-- ===== Section 4: Experiments and Findings ===== -->
-    <div class="section">
+    <div class="section" data-collapsible>
       <div class="section-label">
         <span class="section-number">04</span>
         <span class="section-title" data-i18n="section.experiments">Experiments and Findings</span>
@@ -446,5 +439,12 @@
       </div>
     </div>
   </div>
+  <script type="module">
+    import { App } from './src/js/core/app.js';
+    new App().init();
+    import { VisualizerController } from './src/js/visualizer/visualizer.js';
+    const ctrl = new VisualizerController();
+    ctrl.init();
+  </script>
 </body>
 </html>

@@ -113,6 +113,11 @@ export class VisualizerController {
     // ── Bind events ──
     this._bindEvents();
 
+    // ── Re-apply dynamic text on language change ──
+    window.addEventListener('langchange', () => {
+      this._onLangChange();
+    });
+
     // ── Initialize comparison view ──
     this.comparison.onUpdate(() => this._updateComparison());
     this._updateComparison();
@@ -261,6 +266,25 @@ export class VisualizerController {
       this.startBtn.textContent = source === 'generator'
         ? i18n.t('viz.start.gen')
         : i18n.t('viz.start');
+    }
+  }
+
+  _onLangChange() {
+    // Update start button text based on current source
+    if (this.startBtn) {
+      this.startBtn.textContent = this.currentSource === 'generator'
+        ? i18n.t('viz.start.gen')
+        : i18n.t('viz.start');
+    }
+    // Update status text if not running
+    if (this.statusText && !this.isRunning) {
+      this.statusText.textContent = i18n.t('nav.status.idle');
+    }
+    // Update status text if running
+    if (this.statusText && this.isRunning) {
+      this.statusText.textContent = this.currentSource === 'generator'
+        ? i18n.t('nav.status.gen')
+        : i18n.t('nav.status.rec');
     }
   }
 

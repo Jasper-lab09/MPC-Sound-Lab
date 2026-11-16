@@ -4,12 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MPC Sound Lab</title>
-  <link rel="stylesheet" href="src/css/main.css?v=4" />
+  <link rel="stylesheet" href="src/css/main.css?v=5" />
   <script type="module">
     import { App } from './src/js/core/app.js';
     new App().init();
+    import { AnimatedBackground } from './src/js/core/animated-bg.js';
+    const bgCanvas = document.getElementById('bg-canvas');
+    if (bgCanvas) {
+      const bg = new AnimatedBackground(bgCanvas);
+      bg.start();
+    }
   </script>
   <style>
+    /* Animated background canvas */
+    .bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -3;
+      pointer-events: none;
+    }
+    /* On homepage, make body backgrounds transparent so canvas shows */
+    body { background: transparent; }
+    body::before { display: none; }
+    body::after { display: none; }
+
     .lab-hero {
       padding: 80px 0 56px;
       border-bottom: 1px solid var(--border-1);
@@ -225,6 +246,7 @@
   </style>
 </head>
 <body>
+  <canvas id="bg-canvas" class="bg-canvas"></canvas>
   <nav class="topbar">
     <a href="index.html" class="topbar-brand">
       <span class="topbar-brand-mark">M</span>

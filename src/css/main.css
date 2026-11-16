@@ -793,6 +793,66 @@ canvas { display: block; width: 100%; }
   transform: translateY(0);
 }
 
+/* ---- Collapsible Sections ---- */
+.section.collapsible .section-label {
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  margin: -8px -12px 0;
+}
+.section.collapsible .section-label:hover {
+  background: rgba(0, 212, 255, 0.04);
+}
+.section.collapsible .section-title {
+  transition: color 0.2s;
+}
+.section.collapsible .section-label:hover .section-title {
+  color: var(--cyan);
+}
+.section.collapsible .collapse-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-3);
+  border: 1px solid var(--border-2);
+  color: var(--text-3);
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.section.collapsible .section-label:hover .collapse-icon {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+.section.collapsible.collapsed .collapse-icon {
+  transform: rotate(0deg);
+}
+.section.collapsible:not(.collapsed) .collapse-icon {
+  transform: rotate(90deg);
+  color: var(--cyan);
+  border-color: rgba(0, 212, 255, 0.3);
+  background: rgba(0, 212, 255, 0.08);
+}
+.section-content-wrapper {
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin-top 0.3s ease;
+  max-height: 5000px;
+  opacity: 1;
+  margin-top: 24px;
+}
+.section.collapsible.collapsed .section-content-wrapper {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   .topbar { padding: 0 16px; }
