@@ -13,6 +13,8 @@ const translations = {
     'nav.generator': 'Music Generator',
     'nav.accessibility': 'Accessibility',
     'nav.status.idle': 'Idle',
+    'nav.status.rec': 'Recording',
+    'nav.status.gen': 'Generating',
     'nav.lang': '中文',
 
     // ── Homepage ──────────────────────────
@@ -81,6 +83,7 @@ const translations = {
     'viz.harmonics': 'Harmonics',
     'viz.harmonics.desc': 'Label harmonic peaks',
     'viz.start': 'Start Visualization',
+    'viz.start.gen': 'Start Generator',
     'viz.stop': 'Stop',
     'viz.live': 'LIVE',
     'viz.canvas.waveform': 'Waveform / Time Domain',
@@ -99,6 +102,8 @@ const translations = {
     'viz.captureA': 'Capture A',
     'viz.captureB': 'Capture B',
     'viz.clear': 'Clear',
+    'viz.error.mic': 'Microphone access denied. Please allow microphone permission in your browser settings and try again.',
+    'viz.error.nodev': 'No microphone found. Please connect a microphone and try again.',
 
     // Visualizer — Math section
     'viz.math.fourier.title': 'Fourier Transform',
@@ -221,6 +226,8 @@ const translations = {
     'nav.generator': '音乐生成器',
     'nav.accessibility': '无障碍体验',
     'nav.status.idle': '待机',
+    'nav.status.rec': '录音中',
+    'nav.status.gen': '生成中',
     'nav.lang': 'EN',
 
     // ── 首页 ──────────────────────────
@@ -289,6 +296,7 @@ const translations = {
     'viz.harmonics': '谐波',
     'viz.harmonics.desc': '标注谐波峰值',
     'viz.start': '开始可视化',
+    'viz.start.gen': '启动发生器',
     'viz.stop': '停止',
     'viz.live': '实时',
     'viz.canvas.waveform': '波形 / 时域',
@@ -307,6 +315,8 @@ const translations = {
     'viz.captureA': '捕获 A',
     'viz.captureB': '捕获 B',
     'viz.clear': '清除',
+    'viz.error.mic': '麦克风访问被拒绝。请在浏览器设置中允许麦克风权限，然后重试。',
+    'viz.error.nodev': '未找到麦克风。请连接麦克风后重试。',
 
     // 可视化器 — 数学部分
     'viz.math.fourier.title': '傅里叶变换',
@@ -451,10 +461,15 @@ class I18n {
 
   applyTranslations() {
     // Translate all elements with [data-i18n] — set textContent
+    // For <option> elements, use innerText to preserve the value attribute
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.getAttribute('data-i18n');
       const val = this.t(key);
-      el.textContent = val;
+      if (el.tagName === 'OPTION') {
+        el.innerText = val;
+      } else {
+        el.textContent = val;
+      }
     });
 
     // Translate all elements with [data-i18n-html] — set innerHTML

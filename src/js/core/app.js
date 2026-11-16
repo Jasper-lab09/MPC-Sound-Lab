@@ -2,7 +2,7 @@
  * App initialization — runs on every page
  * Sets up i18n, language toggle, and scroll-triggered animations.
  */
-import { i18n } from './i18n.js?v=3';
+import { i18n } from './i18n.js';
 
 export class App {
   init() {

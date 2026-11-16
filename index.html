@@ -4,156 +4,180 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MPC Sound Lab</title>
-  <link rel="stylesheet" href="src/css/main.css?v=3" />
+  <link rel="stylesheet" href="src/css/main.css?v=4" />
   <script type="module">
-    import { App } from './src/js/core/app.js?v=3';
+    import { App } from './src/js/core/app.js';
     new App().init();
   </script>
   <style>
     .lab-hero {
-      padding: 64px 0 48px;
+      padding: 80px 0 56px;
       border-bottom: 1px solid var(--border-1);
-      margin-bottom: 48px;
+      margin-bottom: 56px;
       position: relative;
+    }
+    .lab-hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--purple), transparent);
+      opacity: 0.5;
     }
     .lab-hero-eyebrow {
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.78rem;
       color: var(--cyan);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      font-weight: 600;
     }
     .lab-hero-eyebrow::before {
       content: '';
-      width: 24px;
+      width: 32px;
       height: 1px;
-      background: var(--cyan);
+      background: linear-gradient(90deg, var(--cyan), transparent);
     }
     .lab-hero-title {
       font-family: var(--font-display);
-      font-size: 2.6rem;
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 1.12;
-      margin-bottom: 18px;
-      background: linear-gradient(180deg, var(--text-1) 60%, var(--text-2));
+      font-size: 3.2rem;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 1.08;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text-1) 40%, var(--cyan) 70%, var(--purple));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .lab-hero-desc {
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       color: var(--text-2);
-      max-width: 600px;
-      line-height: 1.75;
+      max-width: 640px;
+      line-height: 1.8;
     }
     .lab-domains {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
-      margin-top: 24px;
+      margin-top: 28px;
     }
     .lab-domain {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      padding: 4px 12px;
+      font-size: 0.73rem;
+      padding: 6px 14px;
       border-radius: 4px;
-      background: var(--bg-2);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border-1);
       color: var(--text-3);
       letter-spacing: 0.02em;
+      transition: all 0.2s;
+    }
+    .lab-domain:hover {
+      color: var(--cyan);
+      border-color: rgba(0, 212, 255, 0.3);
+      background: rgba(0, 212, 255, 0.05);
     }
 
     .modules-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 16px;
-      margin-bottom: 48px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+      margin-bottom: 56px;
     }
     .mod-card {
       background: var(--bg-2);
       border: 1px solid var(--border-1);
       border-radius: var(--radius);
-      padding: 24px;
+      padding: 28px;
       text-decoration: none;
       color: inherit;
-      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       position: relative;
       overflow: hidden;
     }
     .mod-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
+      top: 0; left: 0; right: 0;
+      height: 3px;
       opacity: 0;
-      transition: opacity 0.2s;
+      transition: opacity 0.25s;
+    }
+    .mod-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 200px 100px at 50% 0%, rgba(0, 212, 255, 0.06), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.25s;
+      pointer-events: none;
     }
     .mod-card:hover {
       border-color: var(--border-3);
       background: var(--bg-3);
-      transform: translateY(-2px);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
     }
     .mod-card:hover::before { opacity: 1; }
-    .mod-card-a::before { background: var(--cyan); }
-    .mod-card-b::before { background: var(--magenta); }
-    .mod-card-c::before { background: var(--amber); }
+    .mod-card:hover::after { opacity: 1; }
+    .mod-card-a::before { background: linear-gradient(90deg, var(--cyan), var(--blue)); }
+    .mod-card-b::before { background: linear-gradient(90deg, var(--magenta), var(--purple)); }
+    .mod-card-c::before { background: linear-gradient(90deg, var(--amber), var(--red)); }
     .mod-card-head {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
     .mod-glyph {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
       font-family: var(--font-mono);
     }
-    .mod-glyph-a { background: rgba(79, 195, 247, 0.12); color: var(--cyan); }
-    .mod-glyph-b { background: rgba(233, 30, 99, 0.12); color: var(--magenta); }
-    .mod-glyph-c { background: rgba(255, 183, 77, 0.12); color: var(--amber); }
+    .mod-glyph-a { background: rgba(0, 212, 255, 0.12); color: var(--cyan); border: 1px solid rgba(0, 212, 255, 0.2); }
+    .mod-glyph-b { background: rgba(255, 32, 128, 0.12); color: var(--magenta); border: 1px solid rgba(255, 32, 128, 0.2); }
+    .mod-glyph-c { background: rgba(255, 160, 48, 0.12); color: var(--amber); border: 1px solid rgba(255, 160, 48, 0.2); }
     .mod-name {
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
     }
     .mod-card-tag { margin-left: auto; }
     .mod-desc {
-      font-size: 0.84rem;
+      font-size: 0.87rem;
       color: var(--text-2);
-      line-height: 1.65;
+      line-height: 1.7;
       flex: 1;
     }
     .mod-features {
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.73rem;
       color: var(--text-3);
-      line-height: 1.8;
+      line-height: 1.9;
     }
     .mod-arrow {
       font-family: var(--font-mono);
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       color: var(--text-3);
-      transition: color 0.15s;
+      transition: all 0.2s;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      font-weight: 600;
     }
-    .mod-card:hover .mod-arrow { color: var(--text-1); }
+    .mod-card:hover .mod-arrow { transform: translateX(4px); }
     .mod-card-a:hover .mod-arrow { color: var(--cyan); }
     .mod-card-b:hover .mod-arrow { color: var(--magenta); }
     .mod-card-c:hover .mod-arrow { color: var(--amber); }
@@ -161,34 +185,36 @@
     .roadmap-bar {
       display: flex;
       gap: 0;
-      margin-bottom: 48px;
+      margin-bottom: 56px;
       border-radius: var(--radius);
       overflow: hidden;
       border: 1px solid var(--border-1);
     }
     .rm-phase {
       flex: 1;
-      padding: 16px 12px;
+      padding: 20px 14px;
       border-right: 1px solid var(--border-1);
       text-align: center;
-      transition: background 0.15s;
+      transition: background 0.2s;
     }
     .rm-phase:last-child { border-right: none; }
     .rm-phase:hover { background: var(--bg-3); }
     .rm-phase-id {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
+      font-size: 0.68rem;
       color: var(--text-3);
+      font-weight: 600;
     }
     .rm-phase-name {
-      font-size: 0.82rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      margin: 4px 0;
-      letter-spacing: -0.01em;
+      margin: 6px 0;
+      letter-spacing: -0.02em;
     }
     .rm-phase-status {
       font-family: var(--font-mono);
-      font-size: 0.64rem;
+      font-size: 0.68rem;
+      font-weight: 600;
     }
     .rm-done .rm-phase-name { color: var(--green); }
     .rm-done .rm-phase-status { color: var(--green); }

@@ -23,6 +23,7 @@ import { HarmonicAnalyzer } from './harmonic-analyzer.js';
 import { ExperimentComparison } from './experiment-comparison.js';
 import { getExplorePanel, DEFINITIONS } from './explore-panel.js';
 import { WINDOW_INFO, binSpacing, minResolvableSeparation } from './dsp-utils.js';
+import { i18n } from '../core/i18n.js';
 
 export class VisualizerController {
   constructor() {
@@ -255,11 +256,11 @@ export class VisualizerController {
     if (this.genPanel) {
       this.genPanel.style.display = source === 'generator' ? 'block' : 'none';
     }
-    // Update start button text
+    // Update start button text using i18n
     if (this.startBtn) {
       this.startBtn.textContent = source === 'generator'
-        ? 'Start Generator'
-        : 'Start Visualization';
+        ? i18n.t('viz.start.gen')
+        : i18n.t('viz.start');
     }
   }
 
@@ -338,8 +339,8 @@ export class VisualizerController {
       }
       if (this.statusText) {
         this.statusText.textContent = this.currentSource === 'generator'
-          ? 'Generating'
-          : 'Recording';
+          ? i18n.t('nav.status.gen')
+          : i18n.t('nav.status.rec');
       }
 
       this.isRunning = true;
@@ -348,9 +349,17 @@ export class VisualizerController {
     } catch (err) {
       if (this.startBtn) this.startBtn.disabled = false;
       if (this.errorMsg) {
-        this.errorMsg.textContent = err.message;
+        let msg = err.message;
+        // More user-friendly error messages
+        if (msg.includes('Permission denied') || msg.includes('NotAllowedError')) {
+          msg = i18n.t('viz.error.mic') || 'Microphone access denied. Please allow microphone permission in your browser settings and try again.';
+        } else if (msg.includes('NotFoundError') || msg.includes('DevicesNotFoundError')) {
+          msg = i18n.t('viz.error.nodev') || 'No microphone found. Please connect a microphone and try again.';
+        }
+        this.errorMsg.textContent = msg;
         this.errorMsg.style.display = 'block';
       }
+      console.error('Visualizer start error:', err);
     }
   }
 
@@ -367,7 +376,7 @@ export class VisualizerController {
 
     this.isRunning = false;
     if (this.statusDot) this.statusDot.classList.remove('dot-rec');
-    if (this.statusText) this.statusText.textContent = 'Idle';
+    if (this.statusText) this.statusText.textContent = i18n.t('nav.status.idle');
 
     if (this.livePanel) this.livePanel.style.display = 'none';
     if (this.gatePanel) this.gatePanel.style.display = 'block';
