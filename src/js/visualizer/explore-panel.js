@@ -12,7 +12,7 @@ import { i18n } from '../core/i18n.js';
 
 // ─── Definition registry ──────────────────────────────────────────
 
-const DEFINITIONS = {
+export const DEFINITIONS = {
   // ── Parameters ──────────────────────────────────
 
   'fft-size': {
