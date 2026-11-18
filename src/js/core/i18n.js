@@ -149,6 +149,79 @@ const translations = {
     'viz.exp5.desc': 'Using the microphone, speak at different volumes. The RMS readout shows dBFS — digital amplitude relative to full scale, not calibrated SPL. A 6 dB increase roughly doubles amplitude but does not double perceived loudness (that requires ~10 dB). Adjust gain to see clipping at 0 dBFS.',
     'viz.exp5.result': 'Try: speak softly vs loudly → observe ~6-10 dB difference',
 
+    // Visualizer — Section labels (new UX)
+    'section.learn': 'Learn',
+    'viz.section.setup': 'Audio Setup',
+    'viz.section.waveform': 'Waveform',
+    'viz.section.spectrum': 'Frequency Spectrum',
+    'viz.section.spectrogram': 'Spectrogram',
+    'viz.section.readouts': 'Live Analysis Readouts',
+
+    // Visualizer — Explore / Explain buttons
+    'viz.explore': 'Explore',
+    'viz.explain': 'Explain',
+
+    // Visualizer — Waveform inline explanation
+    'viz.wf.explain.title': 'Understanding the Waveform',
+    'viz.wf.explain.body': 'The waveform shows how air pressure varies over time. The <strong>horizontal axis</strong> is time (milliseconds), and the <strong>vertical axis</strong> is amplitude (from -1 to +1, representing the digital signal range).',
+    'viz.wf.var.A': 'Amplitude — how loud the sound is',
+    'viz.wf.var.f': 'Frequency — how fast it oscillates (pitch)',
+    'viz.wf.var.phi': 'Phase — starting position of the wave',
+    'viz.wf.var.t': 'Time in seconds',
+
+    // Visualizer — Peak inspector
+    'viz.peak.inspector': 'Peak Inspector',
+
+    // Visualizer — Readout card equation labels and notes
+    'viz.pitch.eqLabel': 'Autocorrelation',
+    'viz.pitch.note': 'Pitch is detected via normalized autocorrelation. The first peak after zero-lag gives the fundamental period. The confidence bar shows detection reliability.',
+    'viz.bpm.eqLabel': 'Energy Flux Beat Detection',
+    'viz.bpm.note': 'Beats are detected when instantaneous spectral energy exceeds the rolling average by a factor of 1.4. BPM is derived from the median of recent inter-beat intervals.',
+    'viz.rms.eqLabel': 'RMS & dBFS',
+    'viz.rms.note': 'dBFS measures digital amplitude relative to full scale (0 = maximum). It is NOT calibrated to sound pressure level (dB SPL). A 6 dB increase roughly doubles amplitude.',
+    'viz.peak.eqLabel': 'Peak Frequency',
+    'viz.peak.note': 'The peak frequency is the FFT bin with the highest magnitude. It indicates the dominant frequency component. The value is quantized to bin spacing (f_s/N).',
+    'viz.centroid.eqLabel': 'Spectral Centroid',
+    'viz.centroid.note': 'The spectral centroid is the weighted average frequency of the spectrum. It measures timbral "brightness" — high values indicate treble-heavy sound, low values indicate bass-heavy sound.',
+
+    // Visualizer — Resolution info card
+    'viz.resolution.title': 'Resolution Info',
+    'viz.resolution.desc': 'Bin spacing = f_s/N. Actual resolution depends on window main-lobe width.',
+
+    // Visualizer — Experiment cards
+    'viz.exp.start': 'Start Experiment',
+    'viz.exp1.steps': '<strong>Steps:</strong> 1. Click Start Experiment to configure. 2. Hum a steady note. 3. Capture A at FFT 8192. 4. Switch to 512. 5. Capture B. 6. Compare.',
+    'viz.exp2.steps': '<strong>Steps:</strong> 1. Click Start Experiment (sets sine 440 Hz). 2. Observe single peak. 3. Switch to square → odd harmonics appear. 4. Switch to sawtooth → all harmonics. 5. Compare with Capture A/B.',
+    'viz.exp3.steps': '<strong>Steps:</strong> 1. Click Start Experiment (sets sine 440 Hz, FFT 4096). 2. Set rectangular window overlay → observe leakage. 3. Capture A. 4. Switch to Hann overlay. 5. Capture B. 6. Compare peak width.',
+    'viz.exp4.steps': '<strong>Steps:</strong> 1. Click Start Experiment (sawtooth 220 Hz + harmonics on). 2. Observe labeled peaks. 3. Capture A. 4. Switch to square. 5. Only odd harmonics remain. 6. Capture B → compare.',
+    'viz.exp5.steps': '<strong>Steps:</strong> 1. Click Start Experiment (mic source). 2. Speak softly → note RMS (~-30 dBFS). 3. Capture A. 4. Speak loudly → note RMS (~-15 dBFS). 5. Capture B. 6. Compare the ~15 dB difference.',
+
+    // Visualizer — Learn section topics
+    'viz.learn.sound': 'Sound Waves',
+    'viz.learn.time': 'Time Domain',
+    'viz.learn.freq': 'Frequency Domain',
+    'viz.learn.fourier': 'Fourier Transform',
+    'viz.learn.sampling': 'Sampling & Nyquist',
+    'viz.learn.windows': 'Window Functions',
+    'viz.learn.harmonics': 'Harmonics',
+    'viz.learn.pitch': 'Pitch Detection',
+    'viz.learn.beat': 'Beat Detection',
+    'viz.learn.rms': 'RMS & dBFS',
+
+    // Visualizer — Learn section content
+    'viz.learn.time.body': 'The <strong>time domain</strong> shows how a signal changes over time. The waveform visualization displays amplitude (vertical) against time (horizontal). Every sound can be represented this way — but it doesn\'t directly tell you what frequencies are present.',
+    'viz.learn.freq.body': 'The <strong>frequency domain</strong> decomposes a signal into its constituent frequencies. The FFT spectrum shows magnitude (vertical) against frequency (horizontal, log scale). Each bar represents the energy at a particular frequency band.',
+    'viz.learn.freq.body2': 'Click on peaks in the spectrum chart above to inspect individual frequencies. The spectrogram shows how the frequency content changes over time.',
+    'viz.learn.sampling.body': 'Digital audio samples a continuous sound wave at discrete time intervals. The <strong>sample rate</strong> f<sub>s</sub> determines the highest frequency that can be represented:',
+    'viz.learn.sampling.body2': 'At 44.1 kHz (CD quality), frequencies up to 22.05 kHz can be accurately represented. Frequencies above the Nyquist limit cause <em>aliasing</em> — they appear as false lower frequencies in the spectrum. An anti-aliasing filter removes frequencies above f<sub>s</sub>/2 before sampling.',
+    'viz.learn.harmonics.body': 'A sawtooth wave contains all harmonics with amplitudes decreasing as 1/n. A square wave contains only odd harmonics. A triangle wave contains odd harmonics with 1/n² amplitudes. The pattern of harmonics determines timbre — what makes a violin sound different from a flute.',
+    'viz.learn.windows.rect': 'Rectangular',
+
+    // Visualizer — Learn section cross-links
+    'viz.learn.gotoWf': 'Go to Waveform',
+    'viz.learn.gotoSpec': 'Go to Spectrum',
+    'viz.learn.gotoRead': 'Go to Readouts',
+
     // ── Generator page ──────────────────────────
     'gen.title': 'Mathematical Music Generator',
     'gen.desc': 'Generate musical patterns from mathematical structures. Fibonacci sequences, Euclidean rhythms, modular arithmetic, and harmonic series become compositional tools — revealing the deep connection between mathematics and music.',
@@ -361,6 +434,79 @@ const translations = {
     'viz.exp5.title': 'dBFS — 数字振幅与感知响度',
     'viz.exp5.desc': '使用麦克风以不同音量说话。RMS 读数显示 dBFS——相对于满量程的数字振幅，而非校准的 SPL。增加 6 dB 大约使振幅翻倍，但不会使感知响度翻倍（需要约 10 dB）。调整增益以查看 0 dBFS 处的削波。',
     'viz.exp5.result': '尝试：轻声 vs 大声说话 → 观察约 6-10 dB 差异',
+
+    // 可视化器 — 章节标签（新 UX）
+    'section.learn': '学习',
+    'viz.section.setup': '音频设置',
+    'viz.section.waveform': '波形',
+    'viz.section.spectrum': '频率谱',
+    'viz.section.spectrogram': '频谱图',
+    'viz.section.readouts': '实时分析读数',
+
+    // 可视化器 — 探索/解释按钮
+    'viz.explore': '探索',
+    'viz.explain': '解释',
+
+    // 可视化器 — 波形内嵌解释
+    'viz.wf.explain.title': '理解波形',
+    'viz.wf.explain.body': '波形展示声压随时间的变化。<strong>水平轴</strong>是时间（毫秒），<strong>垂直轴</strong>是振幅（从 -1 到 +1，代表数字信号范围）。',
+    'viz.wf.var.A': '振幅 — 声音有多响',
+    'viz.wf.var.f': '频率 — 振荡有多快（音高）',
+    'viz.wf.var.phi': '相位 — 波的起始位置',
+    'viz.wf.var.t': '时间（秒）',
+
+    // 可视化器 — 峰值检查器
+    'viz.peak.inspector': '峰值检查器',
+
+    // 可视化器 — 读数卡片方程标签和说明
+    'viz.pitch.eqLabel': '自相关',
+    'viz.pitch.note': '音高通过归一化自相关检测。零滞后后的第一个峰值给出基频周期。置信度条显示检测可靠性。',
+    'viz.bpm.eqLabel': '能量通量节拍检测',
+    'viz.bpm.note': '当瞬时频谱能量超过滚动平均值的 1.4 倍时检测到节拍。BPM 由最近拍间间隔的中位数得出。',
+    'viz.rms.eqLabel': 'RMS 与 dBFS',
+    'viz.rms.note': 'dBFS 衡量相对于满量程的数字振幅（0 = 最大值）。它不是校准的声压级（dB SPL）。6 dB 增加约使振幅翻倍。',
+    'viz.peak.eqLabel': '峰值频率',
+    'viz.peak.note': '峰值频率是 FFT 中幅度最高的 bin。它表示当前主导频率分量。值被量化为 bin 间距（f_s/N）。',
+    'viz.centroid.eqLabel': '谱重心',
+    'viz.centroid.note': '谱重心是频谱的加权平均频率。它衡量音色"明亮度"——高值表示高频为主，低值表示低频为主。',
+
+    // 可视化器 — 分辨率信息卡
+    'viz.resolution.title': '分辨率信息',
+    'viz.resolution.desc': 'Bin 间距 = f_s/N。实际分辨率取决于窗函数主瓣宽度。',
+
+    // 可视化器 — 实验卡片
+    'viz.exp.start': '开始实验',
+    'viz.exp1.steps': '<strong>步骤：</strong> 1. 点击开始实验配置。 2. 哼一个稳定的音。 3. FFT 8192 时捕获 A。 4. 切换到 512。 5. 捕获 B。 6. 对比。',
+    'viz.exp2.steps': '<strong>步骤：</strong> 1. 点击开始实验（设置正弦 440 Hz）。 2. 观察单峰。 3. 切换到方波 → 出现奇次谐波。 4. 切换到锯齿波 → 所有谐波。 5. 用 A/B 捕获对比。',
+    'viz.exp3.steps': '<strong>步骤：</strong> 1. 点击开始实验（正弦 440 Hz，FFT 4096）。 2. 设置矩形窗叠加 → 观察泄漏。 3. 捕获 A。 4. 切换到汉宁叠加。 5. 捕获 B。 6. 对比峰宽。',
+    'viz.exp4.steps': '<strong>步骤：</strong> 1. 点击开始实验（锯齿 220 Hz + 谐波开）。 2. 观察标注峰。 3. 捕获 A。 4. 切换到方波。 5. 仅剩奇次谐波。 6. 捕获 B → 对比。',
+    'viz.exp5.steps': '<strong>步骤：</strong> 1. 点击开始实验（麦克风源）。 2. 轻声说话 → 注意 RMS（~-30 dBFS）。 3. 捕获 A。 4. 大声说话 → 注意 RMS（~-15 dBFS）。 5. 捕获 B。 6. 对比约 15 dB 差异。',
+
+    // 可视化器 — 学习部分主题
+    'viz.learn.sound': '声波',
+    'viz.learn.time': '时域',
+    'viz.learn.freq': '频域',
+    'viz.learn.fourier': '傅里叶变换',
+    'viz.learn.sampling': '采样与奈奎斯特',
+    'viz.learn.windows': '窗函数',
+    'viz.learn.harmonics': '谐波',
+    'viz.learn.pitch': '音高检测',
+    'viz.learn.beat': '节拍检测',
+    'viz.learn.rms': 'RMS 与 dBFS',
+
+    // 可视化器 — 学习部分内容
+    'viz.learn.time.body': '<strong>时域</strong>展示信号随时间的变化。波形可视化显示振幅（垂直）对时间（水平）。每种声音都可以这样表示——但它不能直接告诉你存在哪些频率。',
+    'viz.learn.freq.body': '<strong>频域</strong>将信号分解为其构成频率。FFT 频谱显示幅度（垂直）对频率（水平，对数刻度）。每个条代表特定频率带的能量。',
+    'viz.learn.freq.body2': '点击上方频谱图中的峰值可检查各个频率。频谱图展示频率内容随时间的变化。',
+    'viz.learn.sampling.body': '数字音频以离散时间间隔采样连续声波。<strong>采样率</strong> f<sub>s</sub> 决定了可表示的最高频率：',
+    'viz.learn.sampling.body2': '在 44.1 kHz（CD 质量）下，可准确表示高达 22.05 kHz 的频率。超过奈奎斯特极限的频率会导致<em>混叠</em>——它们在频谱中显示为虚假的较低频率。抗混叠滤波器在采样前去除高于 f<sub>s</sub>/2 的频率。',
+    'viz.learn.harmonics.body': '锯齿波包含所有谐波，振幅以 1/n 递减。方波仅包含奇次谐波。三角波包含奇次谐波，振幅为 1/n²。谐波的模式决定了音色——这就是小提琴和长笛听起来不同的原因。',
+    'viz.learn.windows.rect': '矩形窗',
+
+    // 可视化器 — 学习部分交叉链接
+    'viz.learn.gotoWf': '前往波形',
+    'viz.learn.gotoSpec': '前往频谱',
+    'viz.learn.gotoRead': '前往读数',
 
     // ── 生成器页面 ──────────────────────────
     'gen.title': '数学音乐生成器',

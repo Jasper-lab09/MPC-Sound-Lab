@@ -30,6 +30,116 @@ export class FrequencySpectrumRenderer {
     this.windowOverlay = null; // {type, spectrum} for comparison
     this._overlayWindow = null;
     this._overlayCache = null;
+
+    // Interaction state
+    this._hoverX = null;       // mouse x position (CSS pixels)
+    this._hoverY = null;
+    this._selectedBar = null;  // bar index of clicked peak
+    this._barData = [];        // last rendered bar data [{x, y, w, h, freq, dB}]
+
+    // Callbacks for external UI
+    this.onHover = null;       // (info|null) => void
+    this.onSelectPeak = null;  // (info|null) => void
+
+    this._bindInteraction();
+  }
+
+  // ── Interaction: hover + click ──────────────────────────
+
+  _bindInteraction() {
+    this.canvas.addEventListener('mousemove', (e) => {
+      const rect = this.canvas.getBoundingClientRect();
+      this._hoverX = e.clientX - rect.left;
+      this._hoverY = e.clientY - rect.top;
+    });
+
+    this.canvas.addEventListener('mouseleave', () => {
+      this._hoverX = null;
+      this._hoverY = null;
+      if (this.onHover) this.onHover(null);
+    });
+
+    this.canvas.addEventListener('click', (e) => {
+      const rect = this.canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      this._handleClick(mx);
+    });
+  }
+
+  _handleClick(mx) {
+    // Find the bar closest to the click x
+    const pl = this.padL;
+    const pw = this.plotW;
+    if (mx < pl || mx > pl + pw) return;
+
+    const numBars = this._barData.length;
+    if (numBars === 0) return;
+
+    let bestIdx = -1;
+    let bestDist = Infinity;
+    for (let i = 0; i < numBars; i++) {
+      const bar = this._barData[i];
+      if (!bar) continue;
+      const center = bar.x + bar.w / 2;
+      const dist = Math.abs(mx - center);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestIdx = i;
+      }
+    }
+
+    if (bestIdx < 0) return;
+
+    // Find the local peak: look for the tallest bar within +/- 3 bars
+    let peakIdx = bestIdx;
+    const range = 3;
+    for (let i = Math.max(0, bestIdx - range); i <= Math.min(numBars - 1, bestIdx + range); i++) {
+      if (this._barData[i] && this._barData[i].dB > this._barData[peakIdx].dB) {
+        peakIdx = i;
+      }
+    }
+
+    this._selectedBar = peakIdx;
+    const peak = this._barData[peakIdx];
+    if (this.onSelectPeak && peak) {
+      this.onSelectPeak({
+        freq: peak.freq,
+        dB: peak.dB,
+        barIndex: peakIdx,
+      });
+    }
+  }
+
+  clearSelection() {
+    this._selectedBar = null;
+  }
+
+  // ── Frequency helpers ──────────────────────────────────
+
+  _freqToNote(freq) {
+    if (freq <= 0) return null;
+    const midi = 69 + 12 * Math.log2(freq / 440);
+    const midiRound = Math.round(midi);
+    const cents = Math.round((midi - midiRound) * 100);
+    const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const octave = Math.floor(midiRound / 12) - 1;
+    const noteName = noteNames[midiRound % 12];
+    return {
+      name: `${noteName}${octave}`,
+      midi: midiRound,
+      cents,
+    };
+  }
+
+  _xToFreq(x) {
+    const pl = this.padL;
+    const pw = this.plotW;
+    const minFreq = 20;
+    const sampleRate = this.analyser.context.sampleRate;
+    const maxFreq = sampleRate / 2;
+    const ratio = (x - pl) / pw;
+    if (ratio < 0 || ratio > 1) return null;
+    return minFreq * Math.pow(maxFreq / minFreq, ratio);
   }
 
   _setupCanvas() {
@@ -136,6 +246,7 @@ export class FrequencySpectrumRenderer {
     // Draw bars (AnalyserNode data — always Blackman window internally)
     const numBars = 80;
     const barWidth = pw / numBars;
+    this._barData = [];
 
     for (let i = 0; i < numBars; i++) {
       const freqStart = minFreq * Math.pow(maxFreq / minFreq, i / numBars);
@@ -153,20 +264,27 @@ export class FrequencySpectrumRenderer {
       const avg = count > 0 ? sum / count : 0;
 
       // Convert byte value (0-255) to approximate dBFS
-      // AnalyserNode byte data: 0-255 maps to -100..0 dB (minDecibels to maxDecibels)
-      // Default: minDecibels = -100, maxDecibels = -20 (approx)
-      // We'll approximate: byte/255 * 100 - 100 = dB, then clamp to our -60 range
       const dbApprox = avg > 0 ? (avg / 255) * 80 - 80 : -80;
       const yRatio = Math.max(0, Math.min(1, (dbApprox + 60) / 60));
       const barHeight = yRatio * ph;
       const x = pl + i * barWidth;
       const y = pt + ph - barHeight;
 
+      // Store bar data for interaction
+      const barCenterFreq = Math.sqrt(freqStart * freqEnd);
+      this._barData.push({ x, y, w: barWidth, h: barHeight, freq: barCenterFreq, dB: dbApprox });
+
       // Color: magenta → cyan gradient across frequency range
       const ratio = i / numBars;
       const r = Math.round(233 * (1 - ratio) + 79 * ratio);
       const g = Math.round(30 * (1 - ratio) + 195 * ratio);
       const b = Math.round(99 * (1 - ratio) + 247 * ratio);
+
+      // Highlight selected bar
+      if (this._selectedBar === i) {
+        ctx.fillStyle = `rgba(255, 255, 255, 0.95)`;
+        ctx.fillRect(x, pt, barWidth - 1, ph);
+      }
 
       ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.85)`;
       ctx.fillRect(x, y, barWidth - 1, barHeight);
@@ -180,6 +298,49 @@ export class FrequencySpectrumRenderer {
     // Draw harmonic labels (if available)
     if (this.harmonicData) {
       this._drawHarmonicLabels(ctx, pl, pt, pw, ph, minFreq, maxFreq);
+    }
+
+    // Draw hover crosshair
+    if (this._hoverX !== null && this._hoverX >= pl && this._hoverX <= pl + pw) {
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(this._hoverX, pt);
+      ctx.lineTo(this._hoverX, pt + ph);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Notify hover callback
+      if (this.onHover) {
+        const freq = this._xToFreq(this._hoverX);
+        if (freq) {
+          const note = this._freqToNote(freq);
+          this.onHover({ freq, note, x: this._hoverX, y: this._hoverY });
+        }
+      }
+    }
+
+    // Draw selected peak indicator
+    if (this._selectedBar !== null && this._barData[this._selectedBar]) {
+      const bar = this._barData[this._selectedBar];
+      const cx = bar.x + bar.w / 2;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([2, 2]);
+      ctx.beginPath();
+      ctx.moveTo(cx, pt);
+      ctx.lineTo(cx, pt + ph);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Small label at top
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.font = '8px SF Mono, monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      const freqStr = bar.freq >= 1000 ? `${(bar.freq / 1000).toFixed(2)}k` : `${bar.freq.toFixed(0)}`;
+      ctx.fillText(freqStr, cx, pt - 1);
     }
   }
 

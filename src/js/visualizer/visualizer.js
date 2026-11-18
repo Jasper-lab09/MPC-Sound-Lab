@@ -100,6 +100,22 @@ export class VisualizerController {
     this.binSpacingVal = document.getElementById('val-bin-spacing');
     this.minResolutionVal = document.getElementById('val-resolution');
 
+    // ── Readout card interpretation elements ──
+    this.pitchInterpret = document.getElementById('pitch-interpret');
+    this.pitchBar = document.getElementById('pitch-bar');
+    this.bpmInterpret = document.getElementById('bpm-interpret');
+    this.rmsInterpret = document.getElementById('rms-interpret');
+    this.rmsBar = document.getElementById('rms-bar');
+    this.peakInterpret = document.getElementById('peak-interpret');
+    this.centroidInterpret = document.getElementById('centroid-interpret');
+    this.centroidBar = document.getElementById('centroid-bar');
+
+    // ── Spectrum interaction elements ──
+    this.spectrumTooltip = document.getElementById('spectrum-tooltip');
+    this.peakInspector = document.getElementById('peak-inspector');
+    this.peakBody = document.getElementById('peak-body');
+    this.peakClose = document.getElementById('peak-close');
+
     // ── Panels ──
     this.gatePanel = document.getElementById('gate-panel');
     this.livePanel = document.getElementById('live-panel');
@@ -122,8 +138,16 @@ export class VisualizerController {
     this.comparison.onUpdate(() => this._updateComparison());
     this._updateComparison();
 
-    // ── Bind explore buttons ──
+    // ── Bind explore buttons (info icons) ──
     this._bindExploreButtons();
+
+    // ── Bind new UX features ──
+    this._bindLearnSection();
+    this._bindReadoutToggles();
+    this._bindExperimentCards();
+    this._bindVizExploreButtons();
+    this._bindVizLinks();
+    this._bindPeakClose();
 
     // ── Window resize ──
     window.addEventListener('resize', () => {
@@ -286,6 +310,16 @@ export class VisualizerController {
         ? i18n.t('nav.status.gen')
         : i18n.t('nav.status.rec');
     }
+    // Update readout toggle buttons
+    document.querySelectorAll('.readout-card-toggle').forEach((btn) => {
+      const targetId = btn.getAttribute('data-target');
+      if (!targetId) return;
+      const target = document.getElementById(targetId);
+      const isHidden = target ? target.style.display === 'none' : true;
+      btn.textContent = isHidden
+        ? (i18n.getLang() === 'zh' ? '\u89e3\u91ca' : 'Explain')
+        : (i18n.getLang() === 'zh' ? '\u6536\u8d77' : 'Hide');
+    });
   }
 
   _onFFTChange(value) {
@@ -420,6 +454,17 @@ export class VisualizerController {
     if (this.peakFreqVal) this.peakFreqVal.textContent = '\u2014';
     if (this.centroidVal) this.centroidVal.textContent = '\u2014';
     if (this.beatDot) this.beatDot.classList.remove('flash');
+    // Reset new elements
+    if (this.pitchInterpret) this.pitchInterpret.textContent = '';
+    if (this.pitchBar) this.pitchBar.style.width = '0%';
+    if (this.bpmInterpret) this.bpmInterpret.textContent = '';
+    if (this.rmsInterpret) this.rmsInterpret.textContent = '';
+    if (this.rmsBar) this.rmsBar.style.width = '0%';
+    if (this.peakInterpret) this.peakInterpret.textContent = '';
+    if (this.centroidInterpret) this.centroidInterpret.textContent = '';
+    if (this.centroidBar) this.centroidBar.style.width = '0%';
+    if (this.peakInspector) this.peakInspector.style.display = 'none';
+    if (this.spectrumTooltip) this.spectrumTooltip.style.display = 'none';
   }
 
   _createRenderers(analyser) {
@@ -437,12 +482,311 @@ export class VisualizerController {
     if (this.windowOverlayType !== 'none') {
       this.spectrumRenderer.setWindowOverlay(this.windowOverlayType);
     }
+
+    // Wire spectrum interaction callbacks
+    this._wireSpectrumInteraction();
   }
 
   _recreateRenderers() {
     const analyser = audioManager.analyser;
     if (!analyser) return;
     this._createRenderers(analyser);
+  }
+
+  // ── Spectrum interaction wiring ──────────────────────────
+
+  _wireSpectrumInteraction() {
+    if (!this.spectrumRenderer) return;
+
+    // Hover → tooltip
+    this.spectrumRenderer.onHover = (info) => {
+      if (!info) {
+        if (this.spectrumTooltip) this.spectrumTooltip.style.display = 'none';
+        return;
+      }
+      if (this.spectrumTooltip) {
+        const freqStr = info.freq >= 1000
+          ? `${(info.freq / 1000).toFixed(2)} kHz`
+          : `${info.freq.toFixed(0)} Hz`;
+        let html = `<span class="tip-freq">${freqStr}</span>`;
+        if (info.note) {
+          html += ` <span class="tip-note">${info.note.name}`;
+          if (info.note.cents !== 0) {
+            html += ` ${info.note.cents > 0 ? '+' : ''}${info.note.cents}\u00a2`;
+          }
+          html += `</span>`;
+        }
+        this.spectrumTooltip.innerHTML = html;
+        this.spectrumTooltip.style.display = 'block';
+        this.spectrumTooltip.style.left = `${info.x}px`;
+        this.spectrumTooltip.style.top = `${info.y}px`;
+      }
+    };
+
+    // Click → peak inspector
+    this.spectrumRenderer.onSelectPeak = (info) => {
+      if (!info) {
+        if (this.peakInspector) this.peakInspector.style.display = 'none';
+        return;
+      }
+      this._showPeakInspector(info);
+    };
+  }
+
+  _showPeakInspector(info) {
+    if (!this.peakInspector || !this.peakBody) return;
+    this.peakInspector.style.display = 'block';
+
+    const freq = info.freq;
+    const db = info.dB;
+    const freqStr = freq >= 1000 ? `${(freq / 1000).toFixed(2)} kHz` : `${freq.toFixed(1)} Hz`;
+
+    // Note name
+    const midi = 69 + 12 * Math.log2(freq / 440);
+    const midiRound = Math.round(midi);
+    const cents = Math.round((midi - midiRound) * 100);
+    const noteNames = ['C', 'C\u266f', 'D', 'D\u266f', 'E', 'F', 'F\u266f', 'G', 'G\u266f', 'A', 'A\u266f', 'B'];
+    const octave = Math.floor(midiRound / 12) - 1;
+    const noteName = `${noteNames[midiRound % 12]}${octave}`;
+    const centsStr = cents === 0 ? '' : (cents > 0 ? ` +${cents}\u00a2` : ` ${cents}\u00a2`);
+
+    // Check if this is a harmonic
+    let harmonicInfo = '';
+    if (this._harmonicData && this._harmonicData.fundamental) {
+      const f0 = this._harmonicData.fundamental.freq;
+      if (f0 > 0) {
+        const ratio = freq / f0;
+        const h = Math.round(ratio);
+        if (h >= 1 && Math.abs(ratio - h) < 0.05) {
+          harmonicInfo = h === 1 ? 'Fundamental (H1)' : `Harmonic H${h}`;
+        }
+      }
+    }
+
+    const lang = i18n.getLang();
+    const labels = {
+      en: { freq: 'Frequency', note: 'Note', level: 'Level', type: 'Type' },
+      zh: { freq: '频率', note: '音名', level: '电平', type: '类型' },
+    };
+    const L = labels[lang] || labels.en;
+
+    this.peakBody.innerHTML = `
+      <div class="viz-peak-item">
+        <span class="viz-peak-item-label">${L.freq}</span>
+        <span class="viz-peak-item-val c-cyan">${freqStr}</span>
+      </div>
+      <div class="viz-peak-item">
+        <span class="viz-peak-item-label">${L.note}</span>
+        <span class="viz-peak-item-val c-amber">${noteName}${centsStr}</span>
+      </div>
+      <div class="viz-peak-item">
+        <span class="viz-peak-item-label">${L.level}</span>
+        <span class="viz-peak-item-val c-green">${db.toFixed(1)} dBFS</span>
+      </div>
+      <div class="viz-peak-item">
+        <span class="viz-peak-item-label">${L.type}</span>
+        <span class="viz-peak-item-val">${harmonicInfo || '\u2014'}</span>
+      </div>
+    `;
+  }
+
+  _bindPeakClose() {
+    if (this.peakClose) {
+      this.peakClose.addEventListener('click', () => {
+        if (this.peakInspector) this.peakInspector.style.display = 'none';
+        if (this.spectrumRenderer) this.spectrumRenderer.clearSelection();
+      });
+    }
+  }
+
+  // ── Readout card expand toggles ──────────────────────────
+
+  _bindReadoutToggles() {
+    document.querySelectorAll('.readout-card-toggle').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        if (!targetId) return;
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        const isHidden = target.style.display === 'none';
+        target.style.display = isHidden ? 'block' : 'none';
+        btn.textContent = isHidden
+          ? (i18n.getLang() === 'zh' ? '收起' : 'Hide')
+          : (i18n.getLang() === 'zh' ? '解释' : 'Explain');
+      });
+    });
+  }
+
+  // ── Experiment auto-config ───────────────────────────────
+
+  _bindExperimentCards() {
+    document.querySelectorAll('[data-exp-config]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const config = btn.getAttribute('data-exp-config');
+        this._autoConfigExperiment(config, btn);
+      });
+    });
+  }
+
+  _autoConfigExperiment(config, btn) {
+    // Mark card as active
+    document.querySelectorAll('.exp-card').forEach((c) => c.classList.remove('exp-active'));
+    if (btn) {
+      const card = btn.closest('.exp-card');
+      if (card) card.classList.add('exp-active');
+    }
+
+    switch (config) {
+      case 'fft-size':
+        // Set FFT to 8192 for detailed analysis
+        this._setSource('mic');
+        this._setFFT('8192');
+        break;
+
+      case 'fourier':
+        // Sine 440 Hz
+        this._setSource('generator');
+        this._setGenWaveform('sine');
+        this._setGenFreq(440);
+        this._setGenAmp(0.3);
+        break;
+
+      case 'leakage':
+        // Sine 440 Hz, FFT 4096, rectangular overlay
+        this._setSource('generator');
+        this._setGenWaveform('sine');
+        this._setGenFreq(440);
+        this._setGenAmp(0.3);
+        this._setFFT('4096');
+        this._setWindow('rectangular');
+        break;
+
+      case 'harmonics':
+        // Sawtooth 220 Hz + harmonics on
+        this._setSource('generator');
+        this._setGenWaveform('sawtooth');
+        this._setGenFreq(220);
+        this._setGenAmp(0.3);
+        if (this.harmonicToggle) this.harmonicToggle.checked = true;
+        this.harmonicAnalysisEnabled = true;
+        break;
+
+      case 'rms':
+        // Microphone source
+        this._setSource('mic');
+        break;
+    }
+
+    // Auto-start if not running
+    if (!this.isRunning) {
+      this.start();
+    }
+  }
+
+  _setSource(source) {
+    this.currentSource = source;
+    if (this.sourceSelect) this.sourceSelect.value = source;
+    if (this.genPanel) this.genPanel.style.display = source === 'generator' ? 'block' : 'none';
+    if (this.startBtn) {
+      this.startBtn.textContent = source === 'generator'
+        ? i18n.t('viz.start.gen')
+        : i18n.t('viz.start');
+    }
+  }
+
+  _setFFT(value) {
+    if (this.fftSelect) this.fftSelect.value = value;
+    if (this.fftLive) this.fftLive.value = value;
+    this._onFFTChange(value);
+  }
+
+  _setGenWaveform(waveform) {
+    if (this.genWaveform) this.genWaveform.value = waveform;
+    if (signalGenerator.isActive) signalGenerator.setWaveform(waveform);
+  }
+
+  _setGenFreq(freq) {
+    if (this.genFreq) this.genFreq.value = freq;
+    if (this.genFreqVal) this.genFreqVal.textContent = `${freq} Hz`;
+    if (signalGenerator.isActive) signalGenerator.setFrequency(freq);
+  }
+
+  _setGenAmp(amp) {
+    if (this.genAmp) this.genAmp.value = amp;
+    if (this.genAmpVal) this.genAmpVal.textContent = amp.toFixed(2);
+    if (signalGenerator.isActive) signalGenerator.setAmplitude(amp);
+  }
+
+  _setWindow(type) {
+    if (this.windowSelect) this.windowSelect.value = type;
+    this.windowOverlayType = type;
+    if (this.spectrumRenderer) this.spectrumRenderer.setWindowOverlay(type);
+    this._updateResolutionInfo();
+  }
+
+  // ── Learn section navigation ─────────────────────────────
+
+  _bindLearnSection() {
+    document.querySelectorAll('.learn-topic-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const topic = btn.getAttribute('data-topic');
+        this._switchLearnTopic(topic);
+      });
+    });
+  }
+
+  _switchLearnTopic(topic) {
+    // Update button states
+    document.querySelectorAll('.learn-topic-btn').forEach((b) => {
+      b.classList.toggle('active', b.getAttribute('data-topic') === topic);
+    });
+    // Update panel visibility
+    document.querySelectorAll('.learn-panel').forEach((p) => {
+      p.classList.toggle('active', p.getAttribute('data-topic-panel') === topic);
+    });
+  }
+
+  // ── Visualization section "Explore" buttons ──────────────
+
+  _bindVizExploreButtons() {
+    document.querySelectorAll('[data-learn]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-learn');
+        if (target === 'time-domain') {
+          // Toggle inline waveform explanation
+          const explain = document.getElementById('waveform-explain');
+          if (explain) {
+            explain.style.display = explain.style.display === 'none' ? 'block' : 'none';
+          }
+        } else {
+          // Scroll to learn section and switch topic
+          this._switchLearnTopic(target);
+          const learnSection = document.getElementById('section-learn');
+          if (learnSection) learnSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  // ── Cross-links in learn panels ──────────────────────────
+
+  _bindVizLinks() {
+    document.querySelectorAll('[data-viz-link]').forEach((el) => {
+      el.addEventListener('click', () => {
+        const target = el.getAttribute('data-viz-link');
+        const sectionMap = {
+          'waveform': 'section-waveform',
+          'spectrum': 'section-spectrum',
+          'spectrogram': 'section-spectrogram',
+          'readouts': 'section-readouts',
+        };
+        const sectionId = sectionMap[target];
+        if (sectionId) {
+          const section = document.getElementById(sectionId);
+          if (section) section.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
   }
 
   _renderLoop() {
@@ -515,13 +859,14 @@ export class VisualizerController {
     const analyser = audioManager.analyser;
     if (!analyser) return;
 
+    const lang = i18n.getLang();
     const freqData = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(freqData);
 
     const timeData = new Uint8Array(analyser.fftSize);
     analyser.getByteTimeDomainData(timeData);
 
-    // RMS amplitude (digital, 0-1 range)
+    // RMS amplitude
     let sumSquares = 0;
     for (let i = 0; i < timeData.length; i++) {
       const v = (timeData[i] - 128) / 128;
@@ -529,18 +874,35 @@ export class VisualizerController {
     }
     const rms = Math.sqrt(sumSquares / timeData.length);
     const rmsDb = rms > 0 ? 20 * Math.log10(rms) : -Infinity;
-
-    // Store for state
     this._rms = rms;
     this._rmsDb = rmsDb;
 
     if (this.rmsVal) {
       this.rmsVal.textContent = rmsDb === -Infinity
-        ? '−∞ dBFS'
+        ? '\u2212\u221e dBFS'
         : `${rmsDb.toFixed(1)} dBFS`;
     }
 
-    // Peak frequency (using byte data — approximate)
+    // RMS interpretation + bar
+    if (this.rmsInterpret) {
+      if (rmsDb === -Infinity || rmsDb < -60) {
+        this.rmsInterpret.textContent = lang === 'zh' ? '\u9759\u97f3' : 'Silent';
+      } else if (rmsDb < -35) {
+        this.rmsInterpret.textContent = lang === 'zh' ? '\u8f7b\u58f0' : 'Quiet';
+      } else if (rmsDb < -20) {
+        this.rmsInterpret.textContent = lang === 'zh' ? '\u4e2d\u7b49\u97f3\u91cf' : 'Moderate';
+      } else if (rmsDb < -6) {
+        this.rmsInterpret.textContent = lang === 'zh' ? '\u8f83\u5927\u97f3\u91cf' : 'Loud';
+      } else {
+        this.rmsInterpret.textContent = lang === 'zh' ? '\u63a5\u8fd1\u524a\u6ce2' : 'Near clipping';
+      }
+    }
+    if (this.rmsBar) {
+      const pct = rmsDb === -Infinity ? 0 : Math.max(0, Math.min(100, ((rmsDb + 60) / 60) * 100));
+      this.rmsBar.style.width = `${pct}%`;
+    }
+
+    // Peak frequency
     let peakBin = 0;
     let peakValue = 0;
     for (let i = 0; i < freqData.length; i++) {
@@ -558,6 +920,23 @@ export class VisualizerController {
           : `${peakFreq.toFixed(0)} Hz`;
       } else {
         this.peakFreqVal.textContent = '\u2014';
+      }
+    }
+
+    // Peak interpretation
+    if (this.peakInterpret) {
+      if (peakFreq > 0 && peakValue > 10) {
+        if (peakFreq < 250) {
+          this.peakInterpret.textContent = lang === 'zh' ? '\u4f4e\u9891' : 'Low frequency';
+        } else if (peakFreq < 2000) {
+          this.peakInterpret.textContent = lang === 'zh' ? '\u4e2d\u9891' : 'Mid frequency';
+        } else if (peakFreq < 6000) {
+          this.peakInterpret.textContent = lang === 'zh' ? '\u9ad8\u9891' : 'High frequency';
+        } else {
+          this.peakInterpret.textContent = lang === 'zh' ? '\u751a\u9ad8\u9891' : 'Very high';
+        }
+      } else {
+        this.peakInterpret.textContent = '\u2014';
       }
     }
 
@@ -582,10 +961,63 @@ export class VisualizerController {
       }
     }
 
+    // Centroid interpretation + bar
+    if (this.centroidInterpret) {
+      if (centroid > 0) {
+        if (centroid < 500) {
+          this.centroidInterpret.textContent = lang === 'zh' ? '\u6697\u8272/\u4f4e\u9891\u4e3a\u4e3b' : 'Dark / bass-heavy';
+        } else if (centroid < 2000) {
+          this.centroidInterpret.textContent = lang === 'zh' ? '\u5e73\u8861' : 'Balanced';
+        } else {
+          this.centroidInterpret.textContent = lang === 'zh' ? '\u660e\u4eae/\u9ad8\u9891\u4e3a\u4e3b' : 'Bright / treble-heavy';
+        }
+      } else {
+        this.centroidInterpret.textContent = '\u2014';
+      }
+    }
+    if (this.centroidBar) {
+      const pct = centroid > 0 ? Math.max(0, Math.min(100, (centroid / 8000) * 100)) : 0;
+      this.centroidBar.style.width = `${pct}%`;
+    }
+
     // BPM
     this._bpm = this.beatDetector.bpm > 0 ? this.beatDetector.bpm : null;
     if (this.bpmVal && this.beatDetector.bpm > 0) {
       this.bpmVal.textContent = `${this.beatDetector.bpm}`;
+    }
+
+    // BPM interpretation
+    if (this.bpmInterpret) {
+      if (this.beatDetector.bpm > 0) {
+        const bpm = this.beatDetector.bpm;
+        if (bpm < 70) {
+          this.bpmInterpret.textContent = lang === 'zh' ? '\u6162\u901f' : 'Slow';
+        } else if (bpm < 120) {
+          this.bpmInterpret.textContent = lang === 'zh' ? '\u4e2d\u901f' : 'Moderate';
+        } else if (bpm < 160) {
+          this.bpmInterpret.textContent = lang === 'zh' ? '\u5feb\u901f' : 'Fast';
+        } else {
+          this.bpmInterpret.textContent = lang === 'zh' ? '\u6781\u5feb' : 'Very fast';
+        }
+      } else {
+        this.bpmInterpret.textContent = lang === 'zh' ? '\u7b49\u5f85\u8282\u62cd...' : 'Waiting for beats...';
+      }
+    }
+
+    // Pitch confidence bar + interpretation
+    if (this.pitchBar) {
+      const conf = this.pitchDetector ? this.pitchDetector.confidence : 0;
+      this.pitchBar.style.width = `${Math.round(conf * 100)}%`;
+    }
+    if (this.pitchInterpret) {
+      const conf = this.pitchDetector ? this.pitchDetector.confidence : 0;
+      if (this._pitchData && conf > 0.5) {
+        this.pitchInterpret.textContent = lang === 'zh'
+          ? `\u7f6e\u4fe1\u5ea6 ${Math.round(conf * 100)}%`
+          : `${Math.round(conf * 100)}% confident`;
+      } else {
+        this.pitchInterpret.textContent = lang === 'zh' ? '\u672a\u68c0\u6d4b\u5230\u97f3\u9ad8' : 'No pitch detected';
+      }
     }
   }
 
