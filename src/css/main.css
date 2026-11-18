@@ -8,35 +8,45 @@
 
 /* ---- Design Tokens ---- */
 :root {
-  /* Surfaces — deep space dark with blue tint */
-  --bg-0: #050510;
-  --bg-1: #0a0a18;
-  --bg-2: #11112a;
-  --bg-3: #1a1a38;
-  --bg-4: #24244a;
+  /* Surfaces — near-black navy, cinematic scientific */
+  --bg-0: #050709;
+  --bg-1: #07090D;
+  --bg-2: #0D1117;
+  --bg-3: #131820;
+  --bg-4: #1A212B;
 
-  /* Lines — more visible */
-  --border-1: #22224a;
-  --border-2: #333366;
-  --border-3: #4444aa;
+  /* Lines — subtle, elegant */
+  --border-1: #1C2330;
+  --border-2: #2A3344;
+  --border-3: #3A4658;
 
-  /* Text — high contrast */
-  --text-1: #ffffff;
-  --text-2: #b0b0d0;
-  --text-3: #7070a0;
-  --text-4: #404060;
+  /* Text — clean white and cool gray */
+  --text-1: #F0F4F8;
+  --text-2: #98A4B4;
+  --text-3: #5C6A7A;
+  --text-4: #364050;
 
-  /* Signal colors — vibrant, saturated */
-  --cyan: #00d4ff;
-  --magenta: #ff2080;
-  --amber: #ffa030;
-  --green: #00e676;
-  --red: #ff4060;
-  --purple: #b060ff;
-  --blue: #4080ff;
+  /* Signal colors — restrained, premium */
+  --cyan: #00D4FF;
+  --magenta: #FF3D7F;
+  --amber: #FFB13D;
+  --green: #00E676;
+  --red: #FF4060;
+  --purple: #8B6FFF;
+  --blue: #4080FF;
 
   --accent: var(--cyan);
-  --accent-glow: rgba(0, 212, 255, 0.15);
+  --accent-2: var(--purple);
+  --accent-glow: rgba(0, 212, 255, 0.12);
+  --accent-2-glow: rgba(139, 111, 255, 0.10);
+
+  /* Ambient */
+  --ambient-radial-1: rgba(0, 212, 255, 0.06);
+  --ambient-radial-2: rgba(139, 111, 255, 0.05);
+  --grid-line: rgba(80, 120, 160, 0.025);
+  --grain-opacity: 0.018;
+  --vignette-strength: 0.35;
+  --ambient-amplitude: 0;
 
   /* Typography — premium university-grade */
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Consolas', monospace;
@@ -68,38 +78,71 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* ---- Layered Background — DRAMATIC ---- */
+/* ---- Layered Ambient Background — Cinematic Scientific ---- */
+/* Layer 1: Deep navy-black base with subtle radial ambient gradients */
+/* On inner pages, the radial glows subtly respond to audio amplitude */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: -3;
   background:
-    radial-gradient(ellipse 900px 700px at 15% -5%, rgba(0, 212, 255, 0.12), transparent 55%),
-    radial-gradient(ellipse 800px 600px at 85% 25%, rgba(176, 96, 255, 0.10), transparent 55%),
-    radial-gradient(ellipse 700px 500px at 50% 90%, rgba(255, 32, 128, 0.07), transparent 55%),
-    radial-gradient(ellipse 500px 300px at 70% 50%, rgba(64, 128, 255, 0.06), transparent 55%),
+    radial-gradient(ellipse 800px 600px at 12% -8%,
+      rgba(0, 212, 255, calc(0.06 + var(--ambient-amplitude) * 0.08)), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 88% 30%,
+      rgba(139, 111, 255, calc(0.05 + var(--ambient-amplitude) * 0.04)), transparent 60%),
+    radial-gradient(ellipse 600px 400px at 50% 95%,
+      rgba(0, 212, 255, calc(0.03 + var(--ambient-amplitude) * 0.02)), transparent 60%),
     var(--bg-1);
+  transition: background 0.3s ease;
 }
 
+/* Layer 2: Faint scientific grid */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   background-image:
-    linear-gradient(rgba(100, 140, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(100, 140, 255, 0.03) 1px, transparent 1px);
-  background-size: 56px 56px;
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
   pointer-events: none;
-  mask-image: radial-gradient(ellipse 1400px 1000px at center, black 20%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse 1400px 1000px at center, black 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 1200px 900px at center, black 15%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 1200px 900px at center, black 15%, transparent 70%);
 }
+
+/* Layer 3: Fine grain texture + vignette (via a dedicated element) */
+body > .ambient-grain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+body > .ambient-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 1400px 1000px at center, transparent 50%, rgba(0, 0, 0, var(--vignette-strength)));
+}
+
+/* Inner pages: when body has .page-inner, suppress canvas animation backgrounds */
+body.page-inner > .ambient-grain,
+body.page-inner > .ambient-vignette { display: block; }
+
+/* Homepage: canvas provides background, keep grain + vignette */
+body.page-home > .ambient-grain,
+body.page-home > .ambient-vignette { display: block; }
 
 /* ---- Top Navigation — GLASSMORPHISM ---- */
 .topbar {
   height: var(--nav-h);
-  background: rgba(5, 5, 16, 0.80);
+  background: rgba(7, 9, 13, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border-1);
@@ -127,7 +170,7 @@ body::after {
   width: 28px;
   height: 28px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,7 +178,7 @@ body::after {
   font-weight: 900;
   color: var(--bg-0);
   font-family: var(--font-mono);
-  box-shadow: 0 0 16px rgba(0, 212, 255, 0.4), 0 2px 8px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.3), 0 2px 6px rgba(0, 212, 255, 0.15);
 }
 .topbar-brand-text { white-space: nowrap; }
 .topbar-nav { display: flex; gap: 2px; align-items: center; flex: 1; }
@@ -182,7 +225,42 @@ body::after {
   color: var(--bg-0);
   border-color: var(--cyan);
   background: var(--cyan);
-  box-shadow: 0 0 16px rgba(0, 212, 255, 0.3);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.25);
+}
+
+/* Ambient animation toggle — discreet */
+.ambient-btn {
+  padding: 7px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-3);
+  background: transparent;
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.ambient-btn:hover {
+  color: var(--text-1);
+  border-color: var(--border-2);
+}
+.ambient-btn .ambient-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 6px rgba(0, 212, 255, 0.4);
+  transition: all 0.2s;
+}
+body.ambient-off .ambient-btn .ambient-dot {
+  background: var(--text-4);
+  box-shadow: none;
 }
 
 /* ---- Page Layout ---- */
@@ -195,7 +273,7 @@ body::after {
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.1;
-  background: linear-gradient(135deg, var(--text-1) 50%, var(--cyan));
+  background: linear-gradient(135deg, var(--text-1) 50%, var(--cyan) 80%, var(--purple));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -222,10 +300,10 @@ body::after {
   font-size: 0.75rem;
   color: var(--cyan);
   font-weight: 700;
-  background: rgba(0, 212, 255, 0.08);
+  background: rgba(0, 212, 255, 0.06);
   padding: 4px 10px;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(0, 212, 255, 0.15);
+  border: 1px solid rgba(0, 212, 255, 0.12);
 }
 .section-title {
   font-family: var(--font-display);
@@ -235,7 +313,7 @@ body::after {
 }
 .section-divider { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-1), transparent); }
 
-/* ---- Panels — GLOW ON HOVER ---- */
+/* ---- Panels — Subtle Elevation ---- */
 .panel {
   background: var(--bg-2);
   border: 1px solid var(--border-1);
@@ -245,7 +323,7 @@ body::after {
 }
 .panel:hover {
   border-color: var(--border-2);
-  box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.05), 0 4px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.04), 0 4px 24px rgba(0, 0, 0, 0.25);
 }
 .panel-head {
   display: flex;
@@ -253,7 +331,7 @@ body::after {
   justify-content: space-between;
   padding: 14px 18px;
   border-bottom: 1px solid var(--border-1);
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.12);
 }
 .panel-title {
   font-family: var(--font-mono);
@@ -309,11 +387,11 @@ body::after {
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .btn-sm { padding: 5px 12px; font-size: 0.73rem; }
 .btn-primary {
-  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
   color: var(--bg-0);
   border-color: transparent;
   font-weight: 700;
-  box-shadow: 0 4px 16px rgba(0, 212, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 212, 255, 0.2);
 }
 .btn-primary:hover {
   box-shadow: 0 6px 24px rgba(0, 212, 255, 0.35);
@@ -548,7 +626,7 @@ canvas { display: block; width: 100%; }
   border: 1px solid var(--border-2);
   display: flex; align-items: center; justify-content: center;
   font-size: 32px; color: var(--cyan);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 24px rgba(0, 212, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 24px rgba(0, 212, 255, 0.08);
 }
 .gate-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.025em; }
 .gate-desc { color: var(--text-2); font-size: 0.88rem; max-width: 500px; margin: 0 auto 28px; line-height: 1.75; }
@@ -602,7 +680,7 @@ canvas { display: block; width: 100%; }
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: -12px 0 48px rgba(0, 0, 0, 0.5);
+  box-shadow: -12px 0 48px rgba(0, 0, 0, 0.4);
 }
 .explore-panel.open { transform: translateX(0); }
 
@@ -872,16 +950,23 @@ canvas { display: block; width: 100%; }
 }
 
 /* ---- Scrollbar ---- */
-::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-0); }
-::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border-3); }
 
 /* ---- Accessibility ---- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  body > .ambient-grain { display: none !important; }
+  .bg-canvas { display: none !important; }
 }
 :focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+/* ---- Ambient Animation Toggle ---- */
+body.ambient-off .bg-canvas { display: none !important; }
+body.ambient-off > .ambient-grain { display: none !important; }
+body.ambient-off > .ambient-vignette { display: block !important; }
 
 /* ---- Utility ---- */
 .flex { display: flex; }

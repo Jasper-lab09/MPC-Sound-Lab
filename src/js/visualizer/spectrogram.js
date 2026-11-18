@@ -63,7 +63,7 @@ export class SpectrogramRenderer {
     const pl = this.padL, pt = this.padT, pw = this.plotW, ph = this.plotH;
 
     // Draw axis frame
-    ctx.fillStyle = '#08080c';
+    ctx.fillStyle = '#050709';
     ctx.fillRect(0, 0, this.width, this.height);
 
     // Frequency labels (Y axis, log scale)
@@ -72,7 +72,7 @@ export class SpectrogramRenderer {
     const minFreq = 20;
 
     ctx.font = '9px SF Mono, monospace';
-    ctx.fillStyle = '#383844';
+    ctx.fillStyle = '#364050';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
 
@@ -86,12 +86,12 @@ export class SpectrogramRenderer {
     }
 
     // Bottom labels
-    ctx.fillStyle = '#60606e';
+    ctx.fillStyle = '#5C6A7A';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'top';
-    ctx.fillText('Hz (log)  ←  time →', pl + pw, pt + ph + 4);
+    ctx.fillText('Hz (log)  \u2190  time \u2192', pl + pw, pt + ph + 4);
 
-    ctx.fillStyle = '#60606e';
+    ctx.fillStyle = '#5C6A7A';
     ctx.textAlign = 'left';
     ctx.fillText('FREQ', pl, pt - 2);
 
@@ -123,7 +123,7 @@ export class SpectrogramRenderer {
     }
 
     // Clear the rightmost strip
-    ctx.fillStyle = '#08080c';
+    ctx.fillStyle = '#050709';
     ctx.fillRect(pl + pw - this.scrollSpeed, pt, this.scrollSpeed, ph);
 
     // Draw new frequency column on the right edge

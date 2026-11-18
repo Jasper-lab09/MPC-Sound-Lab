@@ -142,7 +142,7 @@
 .spectrum-tooltip {
   position: absolute;
   pointer-events: none;
-  background: rgba(10, 10, 24, 0.95);
+  background: rgba(7, 9, 13, 0.95);
   border: 1px solid var(--border-2);
   border-radius: var(--radius-sm);
   padding: 4px 8px;
@@ -160,7 +160,7 @@
 .spectrogram-tooltip {
   position: absolute;
   pointer-events: none;
-  background: rgba(10, 10, 24, 0.95);
+  background: rgba(7, 9, 13, 0.95);
   border: 1px solid var(--border-2);
   border-radius: var(--radius-sm);
   padding: 4px 8px;

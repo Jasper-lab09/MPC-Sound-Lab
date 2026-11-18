@@ -191,7 +191,7 @@ export class FrequencySpectrumRenderer {
     const pw = this.plotW, ph = this.plotH;
 
     // Background
-    ctx.fillStyle = '#08080c';
+    ctx.fillStyle = '#050709';
     ctx.fillRect(0, 0, w, h);
 
     const sampleRate = this.analyser.context.sampleRate;
@@ -199,10 +199,10 @@ export class FrequencySpectrumRenderer {
     const minFreq = 20;
 
     // Horizontal grid lines (dBFS)
-    ctx.strokeStyle = '#1a1a24';
+    ctx.strokeStyle = '#111620';
     ctx.lineWidth = 1;
     ctx.font = '9px SF Mono, JetBrains Mono, monospace';
-    ctx.fillStyle = '#383844';
+    ctx.fillStyle = '#364050';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
 
@@ -224,18 +224,18 @@ export class FrequencySpectrumRenderer {
     for (const freq of freqMarks) {
       if (freq > maxFreq) continue;
       const x = pl + (Math.log(freq / minFreq) / Math.log(maxFreq / minFreq)) * pw;
-      ctx.strokeStyle = '#1a1a24';
+      ctx.strokeStyle = '#111620';
       ctx.beginPath();
       ctx.moveTo(x, pt);
       ctx.lineTo(x, pt + ph);
       ctx.stroke();
       const label = freq >= 1000 ? `${freq / 1000}k` : `${freq}`;
-      ctx.fillStyle = '#383844';
+      ctx.fillStyle = '#364050';
       ctx.fillText(label, x, pt + ph + 4);
     }
 
     // Axis labels
-    ctx.fillStyle = '#60606e';
+    ctx.fillStyle = '#5C6A7A';
     ctx.font = '9px SF Mono, JetBrains Mono, monospace';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
@@ -441,7 +441,7 @@ export class FrequencySpectrumRenderer {
       ctx.fillText(label, x + 2, labelY);
 
       // Frequency label (smaller)
-      ctx.fillStyle = 'rgba(96, 96, 110, 0.8)';
+      ctx.fillStyle = 'rgba(92, 106, 122, 0.8)';
       ctx.font = '7px SF Mono, monospace';
       const freqStr = freq >= 1000 ? `${(freq / 1000).toFixed(1)}k` : `${freq.toFixed(0)}`;
       ctx.fillText(freqStr, x + 2, labelY + 9);

@@ -43,7 +43,7 @@ export class WaveformRenderer {
     const pw = this.plotW, ph = this.plotH;
 
     // Background
-    ctx.fillStyle = '#08080c';
+    ctx.fillStyle = '#050709';
     ctx.fillRect(0, 0, w, h);
 
     const sampleRate = this.analyser.context.sampleRate;
@@ -51,10 +51,10 @@ export class WaveformRenderer {
     const durationMs = (fftSize / sampleRate) * 1000;
 
     // Grid — horizontal lines (amplitude)
-    ctx.strokeStyle = '#1a1a24';
+    ctx.strokeStyle = '#111620';
     ctx.lineWidth = 1;
     ctx.font = '9px SF Mono, JetBrains Mono, monospace';
-    ctx.fillStyle = '#383844';
+    ctx.fillStyle = '#364050';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
 
@@ -75,17 +75,17 @@ export class WaveformRenderer {
     }
 
     // Center line (zero amplitude) — brighter
-    ctx.strokeStyle = '#2a2a38';
+    ctx.strokeStyle = '#1C2330';
     ctx.beginPath();
     ctx.moveTo(pl, pt + ph / 2);
     ctx.lineTo(pl + pw, pt + ph / 2);
     ctx.stroke();
 
     // Vertical grid (time) with actual time labels
-    ctx.strokeStyle = '#1a1a24';
+    ctx.strokeStyle = '#111620';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
-    ctx.fillStyle = '#383844';
+    ctx.fillStyle = '#364050';
 
     const numTicks = 5;
     for (let i = 0; i <= numTicks; i++) {
@@ -109,17 +109,17 @@ export class WaveformRenderer {
     }
 
     // Axis labels
-    ctx.fillStyle = '#60606e';
+    ctx.fillStyle = '#5C6A7A';
     ctx.font = '9px SF Mono, JetBrains Mono, monospace';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
     ctx.fillText('AMPLITUDE', pl, pt - 2);
     ctx.textAlign = 'right';
-    ctx.fillText('TIME →', pl + pw, pt + ph + 12);
+    ctx.fillText('TIME \u2192', pl + pw, pt + ph + 12);
 
     // Draw waveform
     ctx.lineWidth = 1.5;
-    ctx.strokeStyle = '#4fc3f7';
+    ctx.strokeStyle = '#00D4FF';
     ctx.beginPath();
 
     const sliceWidth = pw / this.bufferLength;

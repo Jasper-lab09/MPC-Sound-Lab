@@ -436,6 +436,9 @@ export class VisualizerController {
     if (this.statusDot) this.statusDot.classList.remove('dot-rec');
     if (this.statusText) this.statusText.textContent = i18n.t('nav.status.idle');
 
+    // Reset ambient amplitude
+    document.documentElement.style.setProperty('--ambient-amplitude', '0');
+
     if (this.livePanel) this.livePanel.style.display = 'none';
     if (this.gatePanel) this.gatePanel.style.display = 'block';
     if (this.startBtn) this.startBtn.disabled = false;
@@ -797,6 +800,23 @@ export class VisualizerController {
     this.waveformRenderer.render();
     this.spectrumRenderer.render();
     this.spectrogramRenderer.render(now);
+
+    // Sound-reactive ambient effect — update CSS variable on body
+    // This is purely decorative; it does not affect measured data.
+    if (now - (this._lastAmbientUpdate || 0) > 80) {
+      this._lastAmbientUpdate = now;
+      const timeData = this.waveformRenderer.dataArray;
+      if (timeData) {
+        let sumSq = 0;
+        for (let i = 0; i < timeData.length; i++) {
+          const v = (timeData[i] - 128) / 128;
+          sumSq += v * v;
+        }
+        const rms = Math.sqrt(sumSq / timeData.length);
+        const normalized = Math.min(1, rms * 3);
+        document.documentElement.style.setProperty('--ambient-amplitude', normalized.toFixed(3));
+      }
+    }
 
     // Beat detection
     const beat = this.beatDetector.detect();
