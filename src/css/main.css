@@ -794,7 +794,7 @@ canvas { display: block; width: 100%; }
 }
 
 /* ---- Collapsible Sections ---- */
-.section.collapsible .section-label {
+.section[data-collapsible] .section-label {
   cursor: pointer;
   user-select: none;
   transition: background 0.15s;
@@ -802,16 +802,16 @@ canvas { display: block; width: 100%; }
   padding: 8px 12px;
   margin: -8px -12px 0;
 }
-.section.collapsible .section-label:hover {
+.section[data-collapsible] .section-label:hover {
   background: rgba(0, 212, 255, 0.04);
 }
-.section.collapsible .section-title {
+.section[data-collapsible] .section-title {
   transition: color 0.2s;
 }
-.section.collapsible .section-label:hover .section-title {
+.section[data-collapsible] .section-label:hover .section-title {
   color: var(--cyan);
 }
-.section.collapsible .collapse-icon {
+.section[data-collapsible] .collapse-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -827,14 +827,14 @@ canvas { display: block; width: 100%; }
   transition: all 0.2s;
   flex-shrink: 0;
 }
-.section.collapsible .section-label:hover .collapse-icon {
+.section[data-collapsible] .section-label:hover .collapse-icon {
   border-color: var(--cyan);
   color: var(--cyan);
 }
-.section.collapsible.collapsed .collapse-icon {
+.section[data-collapsible].collapsed .collapse-icon {
   transform: rotate(0deg);
 }
-.section.collapsible:not(.collapsed) .collapse-icon {
+.section[data-collapsible]:not(.collapsed) .collapse-icon {
   transform: rotate(90deg);
   color: var(--cyan);
   border-color: rgba(0, 212, 255, 0.3);
@@ -847,7 +847,7 @@ canvas { display: block; width: 100%; }
   opacity: 1;
   margin-top: 24px;
 }
-.section.collapsible.collapsed .section-content-wrapper {
+.section[data-collapsible].collapsed .section-content-wrapper {
   max-height: 0;
   opacity: 0;
   margin-top: 0;
