@@ -4,41 +4,89 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Accessible Sound Experience — MPC Sound Lab</title>
-  <link rel="stylesheet" href="src/css/main.css?v=7" />
-  <link rel="stylesheet" href="src/css/accessibility.css?v=7" />
+  <link rel="stylesheet" href="src/css/design-system.css?v=2" />
+  <link rel="stylesheet" href="src/css/nav.css?v=2" />
+  <link rel="stylesheet" href="src/css/accessibility.css?v=2" />
 </head>
 <body class="page-inner">
   <div class="ambient-grain"></div>
   <div class="ambient-vignette"></div>
-  <nav class="topbar">
-    <a href="index.html" class="topbar-brand">
-      <span class="topbar-brand-mark">M</span>
-      <span class="topbar-brand-text">MPC Sound Lab</span>
+
+  <!-- Navigation -->
+  <nav class="site-nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-mark">M</span>
+      <span class="nav-brand-text">MPC SOUND LAB</span>
     </a>
-    <nav class="topbar-nav">
-      <a href="index.html" class="topbar-link" data-i18n="nav.lab">Lab</a>
-      <a href="visualizer.html" class="topbar-link" data-i18n="nav.visualizer">Sound Visualizer</a>
-      <a href="generator.html" class="topbar-link" data-i18n="nav.generator">Music Generator</a>
-      <a href="accessibility.html" class="topbar-link active" data-i18n="nav.accessibility">Accessibility</a>
-    </nav>
-    <div class="topbar-status">
-      <span class="dot"></span>
-      <span data-i18n="nav.status.idle">Idle</span>
-      <button class="lang-btn">中文</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger active" data-i18n="nav.lab">Lab</a>
+        <div class="nav-dropdown-menu">
+          <a href="visualizer.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.visualizer">Sound Visualizer</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.visualizer.desc">Real-time audio analysis</span>
+          </a>
+          <a href="generator.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.generator">Music Generator</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.generator.desc">Mathematical composition</span>
+          </a>
+          <a href="accessibility.html" class="nav-dropdown-link active">
+            <span class="nav-dropdown-link-title" data-i18n="nav.accessibility">Accessibility</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.accessibility.desc">Sound-to-visual translation</span>
+          </a>
+        </div>
+      </div>
+      <a href="experiments.html" class="nav-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
     </div>
+    <div class="nav-right">
+      <span class="dot"></span>
+      <span class="nav-status" data-i18n="nav.status.idle">Idle</span>
+      <button class="lang-btn" data-i18n="nav.lang">中文</button>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <!-- Mobile menu -->
+  <div class="nav-mobile-menu">
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Navigation</div>
+      <a href="index.html" class="nav-mobile-link" data-i18n="nav.home">Home</a>
+      <a href="experiments.html" class="nav-mobile-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-mobile-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-mobile-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-mobile-link" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Lab Modules</div>
+      <a href="visualizer.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.visualizer">Sound Visualizer</a>
+      <a href="generator.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.generator">Music Generator</a>
+      <a href="accessibility.html" class="nav-mobile-link nav-mobile-sub active" data-i18n="nav.accessibility">Accessibility</a>
+    </div>
+  </div>
 
   <div class="page">
-    <div class="page-head">
-      <div class="page-head-row">
-        <h1 class="page-h1" data-i18n="acc.title">Accessible Sound Experience</h1>
-        <span class="page-tag tag-planned">Phase 4</span>
+    <!-- Editorial Header -->
+    <header class="editorial-header">
+      <div class="editorial-eyebrow">Lab / Module 03</div>
+      <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;">
+        <h1 class="editorial-title" data-i18n="acc.title">Accessible Sound Experience</h1>
+        <span class="status-badge status-planned">Phase 4</span>
       </div>
-      <p class="page-desc" data-i18n="acc.desc">
+      <p class="editorial-subtitle" data-i18n="acc.desc">
         Translating audio information into visual patterns for Deaf and hard-of-hearing users.
         Different sound categories produce distinct, customizable visual feedback.
       </p>
-    </div>
+      <div class="metadata-strip">
+        <span><span class="ms-label">Status</span><span class="ms-value">Planned</span></span>
+        <span><span class="ms-label">Phase</span><span class="ms-value">04</span></span>
+        <span><span class="ms-label">Domain</span><span class="ms-value">Accessibility</span></span>
+      </div>
+    </header>
 
     <div class="access-disclaimer" data-i18n-html="acc.disclaimer">
       <strong>Important:</strong> This module is an experimental exploration of sound-to-visual translation.
@@ -49,8 +97,8 @@
 
     <!-- ===== Section 1: Interactive Tool ===== -->
     <div class="section">
-      <div class="section-label">
-        <span class="section-number">01</span>
+      <div class="section-header">
+        <span class="section-number">§ 01</span>
         <span class="section-title" data-i18n="section.interactive">Interactive Tool</span>
         <span class="section-divider"></span>
       </div>
@@ -72,40 +120,42 @@
 
     <!-- ===== Section 2: Mathematical Foundation ===== -->
     <div class="section" data-collapsible>
-      <div class="section-label">
-        <span class="section-number">02</span>
+      <div class="section-header">
+        <span class="section-number">§ 02</span>
         <span class="section-title" data-i18n="section.math">Mathematical Foundation</span>
         <span class="section-divider"></span>
       </div>
-      <div class="cols-2">
-        <div class="panel">
-          <div class="panel-head"><span class="panel-title" data-i18n="acc.math.classification.title">Sound Classification Features</span></div>
-          <div class="panel-body">
-            <div class="content-block">
-              <p data-i18n="acc.math.classification.p1">Classifying sound into categories requires extracting numerical features from the audio signal:</p>
-              <div class="eq-label" data-i18n="acc.math.classification.scLabel">Spectral centroid (brightness)</div>
-              <div class="eq">SC = &Sigma; f<sub>k</sub>&middot;|X[k]| / &Sigma;|X[k]|</div>
-              <div class="eq-label" data-i18n="acc.math.classification.zcrLabel">Zero-crossing rate (noisiness)</div>
-              <div class="eq">ZCR = (1/N) &middot; #{sign changes in x[n]}</div>
-              <div class="eq-label" data-i18n="acc.math.classification.sfLabel">Spectral flux (onset detection)</div>
-              <div class="eq">SF = &Sigma; (|X[k](t)| - |X[k](t-1)|)&sup2;</div>
-              <p data-i18n="acc.math.classification.p2">These features form a vector that can be compared against category prototypes using distance metrics or machine learning classifiers.</p>
+      <div class="section-content-wrapper">
+        <div class="cols-2">
+          <div class="panel">
+            <div class="panel-head"><span class="panel-title" data-i18n="acc.math.classification.title">Sound Classification Features</span></div>
+            <div class="panel-body">
+              <div class="content-block">
+                <p data-i18n="acc.math.classification.p1">Classifying sound into categories requires extracting numerical features from the audio signal:</p>
+                <div class="math-label" data-i18n="acc.math.classification.scLabel">Spectral centroid (brightness)</div>
+                <div class="math-block">SC = &Sigma; f<sub>k</sub>&middot;|X[k]| / &Sigma;|X[k]|</div>
+                <div class="math-label" data-i18n="acc.math.classification.zcrLabel">Zero-crossing rate (noisiness)</div>
+                <div class="math-block">ZCR = (1/N) &middot; #{sign changes in x[n]}</div>
+                <div class="math-label" data-i18n="acc.math.classification.sfLabel">Spectral flux (onset detection)</div>
+                <div class="math-block">SF = &Sigma; (|X[k](t)| - |X[k](t-1)|)&sup2;</div>
+                <p data-i18n="acc.math.classification.p2">These features form a vector that can be compared against category prototypes using distance metrics or machine learning classifiers.</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="panel">
-          <div class="panel-head"><span class="panel-title" data-i18n="acc.math.mapping.title">Pattern Mapping</span></div>
-          <div class="panel-body">
-            <div class="content-block">
-              <p data-i18n="acc.math.mapping.p1">Each sound category maps to a distinct visual pattern:</p>
-              <p><strong>Speech</strong> &rarr; horizontal bands (formant structure)<br/>
-                 <strong>Music</strong> &rarr; structured geometric patterns<br/>
-                 <strong>Noise</strong> &rarr; scattered particle field<br/>
-                 <strong>Beat</strong> &rarr; pulsing concentric rings<br/>
-                 <strong>Silence</strong> &rarr; calm minimal state</p>
-              <p style="margin-top: 12px;" data-i18n="acc.math.mapping.p2">The mapping function transforms the feature vector into visual parameters:</p>
-              <div class="eq">V = M &middot; F + B</div>
-              <p data-i18n="acc.math.mapping.p3">where F is the feature vector, M is the mapping matrix, and B is the user customization bias.</p>
+          <div class="panel">
+            <div class="panel-head"><span class="panel-title" data-i18n="acc.math.mapping.title">Pattern Mapping</span></div>
+            <div class="panel-body">
+              <div class="content-block">
+                <p data-i18n="acc.math.mapping.p1">Each sound category maps to a distinct visual pattern:</p>
+                <p><strong>Speech</strong> &rarr; horizontal bands (formant structure)<br/>
+                   <strong>Music</strong> &rarr; structured geometric patterns<br/>
+                   <strong>Noise</strong> &rarr; scattered particle field<br/>
+                   <strong>Beat</strong> &rarr; pulsing concentric rings<br/>
+                   <strong>Silence</strong> &rarr; calm minimal state</p>
+                <p style="margin-top: 12px;" data-i18n="acc.math.mapping.p2">The mapping function transforms the feature vector into visual parameters:</p>
+                <div class="math-block">V = M &middot; F + B</div>
+                <p data-i18n="acc.math.mapping.p3">where F is the feature vector, M is the mapping matrix, and B is the user customization bias.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -114,17 +164,19 @@
 
     <!-- ===== Section 3: Physical Foundation ===== -->
     <div class="section" data-collapsible>
-      <div class="section-label">
-        <span class="section-number">03</span>
+      <div class="section-header">
+        <span class="section-number">§ 03</span>
         <span class="section-title" data-i18n="section.physics">Physical Foundation</span>
         <span class="section-divider"></span>
       </div>
-      <div class="panel">
-        <div class="panel-body">
-          <div class="content-block">
-            <p data-i18n-html="acc.physics.cross"><strong>Cross-modal perception.</strong> The human brain processes sensory information in specialized cortical areas, but cross-modal connections exist. The visual cortex can learn to interpret patterns that correspond to auditory events &mdash; this is the principle behind visual alerts, closed captioning, and visual music.</p>
-            <p style="margin-top: 12px;" data-i18n-html="acc.physics.vocal"><strong>Vocal tract acoustics.</strong> Speech sounds are distinguished by formant frequencies &mdash; resonant peaks determined by the shape of the vocal tract. Vowels have stable formant patterns; consonants produce transient bursts or noise. These acoustic differences are visible in a spectrogram, which means they can also be translated into visual patterns without requiring the listener to hear them.</p>
-            <p style="margin-top: 12px;" data-i18n-html="acc.physics.why"><strong>Why visual translation works.</strong> Sound is fundamentally a time-varying signal. Vision excels at detecting spatial patterns and temporal changes. By mapping frequency to spatial position and amplitude to brightness/color, we create a visual representation that preserves the information-bearing dimensions of sound. This does not replicate hearing, but it can convey the presence, category, and temporal structure of acoustic events.</p>
+      <div class="section-content-wrapper">
+        <div class="panel">
+          <div class="panel-body">
+            <div class="content-block">
+              <p data-i18n-html="acc.physics.cross"><strong>Cross-modal perception.</strong> The human brain processes sensory information in specialized cortical areas, but cross-modal connections exist. The visual cortex can learn to interpret patterns that correspond to auditory events &mdash; this is the principle behind visual alerts, closed captioning, and visual music.</p>
+              <p style="margin-top: 12px;" data-i18n-html="acc.physics.vocal"><strong>Vocal tract acoustics.</strong> Speech sounds are distinguished by formant frequencies &mdash; resonant peaks determined by the shape of the vocal tract. Vowels have stable formant patterns; consonants produce transient bursts or noise. These acoustic differences are visible in a spectrogram, which means they can also be translated into visual patterns without requiring the listener to hear them.</p>
+              <p style="margin-top: 12px;" data-i18n-html="acc.physics.why"><strong>Why visual translation works.</strong> Sound is fundamentally a time-varying signal. Vision excels at detecting spatial patterns and temporal changes. By mapping frequency to spatial position and amplitude to brightness/color, we create a visual representation that preserves the information-bearing dimensions of sound. This does not replicate hearing, but it can convey the presence, category, and temporal structure of acoustic events.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -132,47 +184,92 @@
 
     <!-- ===== Section 4: Experiments and Findings ===== -->
     <div class="section" data-collapsible>
-      <div class="section-label">
-        <span class="section-number">04</span>
+      <div class="section-header">
+        <span class="section-number">§ 04</span>
         <span class="section-title" data-i18n="section.experiments">Experiments and Findings</span>
         <span class="section-divider"></span>
       </div>
-      <div class="panel">
-        <div class="experiment">
-          <div class="exp-num">01</div>
-          <div class="exp-body">
-            <div class="exp-title" data-i18n="acc.exp1.title">Planned: Speech vs. Music Classification</div>
-            <div class="exp-desc" data-i18n="acc.exp1.desc">Speak normally, then play music. The system should distinguish them by spectral flatness (speech has variable spectral entropy, music has harmonic structure) and ZCR patterns (speech varies rapidly, music is more consistent).</div>
-            <div class="exp-result" data-i18n="acc.exp1.result">Status: Awaiting implementation</div>
+      <div class="section-content-wrapper">
+        <div class="panel">
+          <div class="experiment">
+            <div class="exp-num">01</div>
+            <div class="exp-body">
+              <div class="exp-title" data-i18n="acc.exp1.title">Planned: Speech vs. Music Classification</div>
+              <div class="exp-desc" data-i18n="acc.exp1.desc">Speak normally, then play music. The system should distinguish them by spectral flatness (speech has variable spectral entropy, music has harmonic structure) and ZCR patterns (speech varies rapidly, music is more consistent).</div>
+              <div class="exp-result" data-i18n="acc.exp1.result">Status: Awaiting implementation</div>
+            </div>
           </div>
-        </div>
-        <div class="experiment">
-          <div class="exp-num">02</div>
-          <div class="exp-body">
-            <div class="exp-title" data-i18n="acc.exp2.title">Planned: Sudden Sound Detection</div>
-            <div class="exp-desc" data-i18n="acc.exp2.desc">Test detection of sudden sounds (door slam, hand clap) using spectral flux. These events produce a rapid change in frequency content that should trigger an immediate, high-contrast visual notification.</div>
-            <div class="exp-result" data-i18n="acc.exp2.result">Status: Awaiting implementation</div>
+          <div class="experiment">
+            <div class="exp-num">02</div>
+            <div class="exp-body">
+              <div class="exp-title" data-i18n="acc.exp2.title">Planned: Sudden Sound Detection</div>
+              <div class="exp-desc" data-i18n="acc.exp2.desc">Test detection of sudden sounds (door slam, hand clap) using spectral flux. These events produce a rapid change in frequency content that should trigger an immediate, high-contrast visual notification.</div>
+              <div class="exp-result" data-i18n="acc.exp2.result">Status: Awaiting implementation</div>
+            </div>
           </div>
-        </div>
-        <div class="experiment">
-          <div class="exp-num">03</div>
-          <div class="exp-body">
-            <div class="exp-title" data-i18n="acc.exp3.title">Planned: Customizable Pattern Sensitivity</div>
-            <div class="exp-desc" data-i18n="acc.exp3.desc">Users adjust detection thresholds and visual feedback styles (color, intensity, pattern type) to match their visual sensitivity and preferences. This tests whether personalization improves the usability of visual sound feedback.</div>
-            <div class="exp-result" data-i18n="acc.exp3.result">Status: Awaiting implementation</div>
+          <div class="experiment">
+            <div class="exp-num">03</div>
+            <div class="exp-body">
+              <div class="exp-title" data-i18n="acc.exp3.title">Planned: Customizable Pattern Sensitivity</div>
+              <div class="exp-desc" data-i18n="acc.exp3.desc">Users adjust detection thresholds and visual feedback styles (color, intensity, pattern type) to match their visual sensitivity and preferences. This tests whether personalization improves the usability of visual sound feedback.</div>
+              <div class="exp-result" data-i18n="acc.exp3.result">Status: Awaiting implementation</div>
+            </div>
           </div>
-        </div>
-        <div class="experiment">
-          <div class="exp-num">04</div>
-          <div class="exp-body">
-            <div class="exp-title" data-i18n="acc.exp4.title">Planned: Limitation Study</div>
-            <div class="exp-desc" data-i18n="acc.exp4.desc">Document what the system can and cannot detect. Quiet sounds, distant sounds, and sounds with similar spectral profiles may be missed or misclassified. This honest assessment is essential for setting appropriate user expectations.</div>
-            <div class="exp-result" data-i18n="acc.exp4.result">Status: Awaiting implementation</div>
+          <div class="experiment">
+            <div class="exp-num">04</div>
+            <div class="exp-body">
+              <div class="exp-title" data-i18n="acc.exp4.title">Planned: Limitation Study</div>
+              <div class="exp-desc" data-i18n="acc.exp4.desc">Document what the system can and cannot detect. Quiet sounds, distant sounds, and sounds with similar spectral profiles may be missed or misclassified. This honest assessment is essential for setting appropriate user expectations.</div>
+              <div class="exp-result" data-i18n="acc.exp4.result">Status: Awaiting implementation</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand" data-i18n="footer.brand">MPC Sound Lab</div>
+        <p class="footer-brand-desc" data-i18n="footer.brandDesc">An independent digital research studio exploring the intersection of mathematics, physics, sound, music technology, and accessibility.</p>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.nav">Navigation</div>
+        <a href="index.html" class="footer-link" data-i18n="nav.home">Home</a>
+        <a href="experiments.html" class="footer-link" data-i18n="nav.experiments">Experiments</a>
+        <a href="field-notes.html" class="footer-link" data-i18n="nav.fieldNotes">Field Notes</a>
+        <a href="research.html" class="footer-link" data-i18n="nav.research">Research</a>
+        <a href="about.html" class="footer-link" data-i18n="nav.about">About</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.lab">Lab Modules</div>
+        <a href="visualizer.html" class="footer-link" data-i18n="nav.visualizer">Sound Visualizer</a>
+        <a href="generator.html" class="footer-link" data-i18n="nav.generator">Music Generator</a>
+        <a href="accessibility.html" class="footer-link" data-i18n="nav.accessibility">Accessibility</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.experiments">Experiments</div>
+        <a href="experiments.html" class="footer-link">EXP-01 Fourier</a>
+        <a href="experiments.html" class="footer-link">EXP-02 FFT Resolution</a>
+        <a href="experiments.html" class="footer-link">EXP-03 Leakage</a>
+        <a href="experiments.html" class="footer-link">EXP-04 Harmonics</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.knowledge">Knowledge</div>
+        <a href="field-notes.html" class="footer-link">Mathematics</a>
+        <a href="field-notes.html" class="footer-link">Physics</a>
+        <a href="field-notes.html" class="footer-link">Acoustics</a>
+        <a href="field-notes.html" class="footer-link">Signal Processing</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024&ndash;2025 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span data-i18n="footer.version">v2.0 &mdash; Editorial Redesign</span>
+    </div>
+  </footer>
+
   <script type="module">
     import { App } from './src/js/core/app.js';
     new App().init();

@@ -3,395 +3,350 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MPC Sound Lab</title>
-  <link rel="stylesheet" href="src/css/main.css?v=7" />
-  <style>
-    /* Homepage uses cinematic canvas background */
-    body { background: transparent; }
-    body::before { display: none; }
-    body::after { display: none; }
-
-    /* Cinematic background canvas */
-    .bg-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -3;
-      pointer-events: none;
-    }
-
-    /* Dark gradient overlay for hero readability */
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 100vh;
-      background: linear-gradient(180deg,
-        rgba(7, 9, 13, 0.55) 0%,
-        rgba(7, 9, 13, 0.35) 30%,
-        rgba(7, 9, 13, 0.6) 70%,
-        rgba(7, 9, 13, 0.85) 100%
-      );
-      pointer-events: none;
-      z-index: -2;
-    }
-
-    .lab-hero {
-      padding: 80px 0 56px;
-      border-bottom: 1px solid var(--border-1);
-      margin-bottom: 56px;
-      position: relative;
-    }
-    .lab-hero::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--cyan), var(--purple), transparent);
-      opacity: 0.4;
-    }
-    .lab-hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--cyan);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
-    }
-    .lab-hero-eyebrow::before {
-      content: '';
-      width: 32px;
-      height: 1px;
-      background: linear-gradient(90deg, var(--cyan), transparent);
-    }
-    .lab-hero-title {
-      font-family: var(--font-display);
-      font-size: 3.2rem;
-      font-weight: 900;
-      letter-spacing: -0.045em;
-      line-height: 1.08;
-      margin-bottom: 24px;
-      background: linear-gradient(135deg, var(--text-1) 40%, var(--cyan) 65%, var(--purple));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 60px rgba(0, 212, 255, 0.08);
-    }
-    .lab-hero-desc {
-      font-size: 1.05rem;
-      color: var(--text-2);
-      max-width: 640px;
-      line-height: 1.8;
-    }
-    .lab-domains {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-    }
-    .lab-domain {
-      font-family: var(--font-mono);
-      font-size: 0.73rem;
-      padding: 6px 14px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid var(--border-1);
-      color: var(--text-3);
-      letter-spacing: 0.02em;
-      transition: all 0.2s;
-    }
-    .lab-domain:hover {
-      color: var(--cyan);
-      border-color: rgba(0, 212, 255, 0.25);
-      background: rgba(0, 212, 255, 0.04);
-    }
-
-    .modules-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 18px;
-      margin-bottom: 56px;
-    }
-    .mod-card {
-      background: var(--bg-2);
-      border: 1px solid var(--border-1);
-      border-radius: var(--radius);
-      padding: 28px;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      position: relative;
-      overflow: hidden;
-    }
-    .mod-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      opacity: 0;
-      transition: opacity 0.25s;
-    }
-    .mod-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 200px 100px at 50% 0%, rgba(0, 212, 255, 0.04), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.25s;
-      pointer-events: none;
-    }
-    .mod-card:hover {
-      border-color: var(--border-3);
-      background: var(--bg-3);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.35);
-    }
-    .mod-card:hover::before { opacity: 1; }
-    .mod-card:hover::after { opacity: 1; }
-    .mod-card-a::before { background: linear-gradient(90deg, var(--cyan), var(--purple)); }
-    .mod-card-b::before { background: linear-gradient(90deg, var(--purple), var(--magenta)); }
-    .mod-card-c::before { background: linear-gradient(90deg, var(--amber), var(--cyan)); }
-    .mod-card-head {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .mod-glyph {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: 700;
-      font-family: var(--font-mono);
-    }
-    .mod-glyph-a { background: rgba(0, 212, 255, 0.1); color: var(--cyan); border: 1px solid rgba(0, 212, 255, 0.18); }
-    .mod-glyph-b { background: rgba(139, 111, 255, 0.1); color: var(--purple); border: 1px solid rgba(139, 111, 255, 0.18); }
-    .mod-glyph-c { background: rgba(255, 177, 61, 0.1); color: var(--amber); border: 1px solid rgba(255, 177, 61, 0.18); }
-    .mod-name {
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: -0.025em;
-    }
-    .mod-card-tag { margin-left: auto; }
-    .mod-desc {
-      font-size: 0.87rem;
-      color: var(--text-2);
-      line-height: 1.7;
-      flex: 1;
-    }
-    .mod-features {
-      font-family: var(--font-mono);
-      font-size: 0.73rem;
-      color: var(--text-3);
-      line-height: 1.9;
-    }
-    .mod-arrow {
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      color: var(--text-3);
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-    }
-    .mod-card:hover .mod-arrow { transform: translateX(4px); }
-    .mod-card-a:hover .mod-arrow { color: var(--cyan); }
-    .mod-card-b:hover .mod-arrow { color: var(--purple); }
-    .mod-card-c:hover .mod-arrow { color: var(--amber); }
-
-    .roadmap-bar {
-      display: flex;
-      gap: 0;
-      margin-bottom: 56px;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border-1);
-    }
-    .rm-phase {
-      flex: 1;
-      padding: 20px 14px;
-      border-right: 1px solid var(--border-1);
-      text-align: center;
-      transition: background 0.2s;
-    }
-    .rm-phase:last-child { border-right: none; }
-    .rm-phase:hover { background: var(--bg-3); }
-    .rm-phase-id {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--text-3);
-      font-weight: 600;
-    }
-    .rm-phase-name {
-      font-size: 0.88rem;
-      font-weight: 700;
-      margin: 6px 0;
-      letter-spacing: -0.02em;
-    }
-    .rm-phase-status {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      font-weight: 600;
-    }
-    .rm-done .rm-phase-name { color: var(--green); }
-    .rm-done .rm-phase-status { color: var(--green); }
-    .rm-current .rm-phase-name { color: var(--cyan); }
-    .rm-current .rm-phase-status { color: var(--cyan); }
-    .rm-planned .rm-phase-name { color: var(--text-2); }
-    .rm-planned .rm-phase-status { color: var(--text-4); }
-  </style>
+  <title>MPC Sound Lab — Independent Digital Research Studio</title>
+  <link rel="stylesheet" href="src/css/design-system.css?v=2" />
+  <link rel="stylesheet" href="src/css/nav.css?v=2" />
+  <link rel="stylesheet" href="src/css/home.css?v=2" />
 </head>
 <body class="page-home">
-  <canvas id="bg-canvas" class="bg-canvas"></canvas>
-  <div class="hero-overlay"></div>
   <div class="ambient-grain"></div>
   <div class="ambient-vignette"></div>
-  <nav class="topbar">
-    <a href="index.html" class="topbar-brand">
-      <span class="topbar-brand-mark">M</span>
-      <span class="topbar-brand-text">MPC Sound Lab</span>
+
+  <!-- Sound Sculpture Canvas -->
+  <canvas id="sculpture-canvas" class="sculpture-canvas"></canvas>
+  <div class="home-hero-overlay"></div>
+
+  <!-- Navigation -->
+  <nav class="site-nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-mark">M</span>
+      <span class="nav-brand-text">MPC SOUND LAB</span>
     </a>
-    <nav class="topbar-nav">
-      <a href="index.html" class="topbar-link active" data-i18n="nav.lab">Lab</a>
-      <a href="visualizer.html" class="topbar-link" data-i18n="nav.visualizer">Sound Visualizer</a>
-      <a href="generator.html" class="topbar-link" data-i18n="nav.generator">Music Generator</a>
-      <a href="accessibility.html" class="topbar-link" data-i18n="nav.accessibility">Accessibility</a>
-    </nav>
-    <div class="topbar-status">
-      <span id="status-dot" class="dot"></span>
-      <span id="status-text" data-i18n="nav.status.idle">Idle</span>
-      <button class="lang-btn">中文</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active" data-i18n="nav.home">Home</a>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger" data-i18n="nav.lab">Lab</a>
+        <div class="nav-dropdown-menu">
+          <a href="visualizer.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.visualizer">Sound Visualizer</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.visualizer.desc">Real-time audio analysis</span>
+          </a>
+          <a href="generator.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.generator">Music Generator</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.generator.desc">Mathematical composition</span>
+          </a>
+          <a href="accessibility.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.accessibility">Accessibility</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.accessibility.desc">Sound-to-visual translation</span>
+          </a>
+        </div>
+      </div>
+      <a href="experiments.html" class="nav-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-right">
       <button class="ambient-btn" id="ambient-toggle" aria-label="Toggle ambient animation"><span class="ambient-dot"></span>FX</button>
+      <button class="lang-btn" data-i18n="nav.lang">中文</button>
     </div>
+    <button class="nav-mobile-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
-
-  <div class="page">
-    <div class="lab-hero">
-      <div class="lab-hero-eyebrow" data-i18n="home.eyebrow">Interactive Scientific Laboratory</div>
-      <h1 class="lab-hero-title" data-i18n-html="home.title">Where sound becomes data,<br>data becomes music,<br>and music becomes accessible.</h1>
-      <p class="lab-hero-desc" data-i18n="home.desc">
-        MPC Sound Lab is a browser-based platform for exploring the intersection of physics, mathematics,
-        and audio engineering. Analyze live sound, generate music from mathematical structures,
-        and experience audio through visual translation — all in real time, right here in your browser.
-      </p>
-      <div class="lab-domains">
-        <span class="lab-domain" data-i18n="home.domain.math">Mathematics</span>
-        <span class="lab-domain" data-i18n="home.domain.physics">Physics</span>
-        <span class="lab-domain" data-i18n="home.domain.music">Music Technology</span>
-        <span class="lab-domain" data-i18n="home.domain.audio">Audio Engineering</span>
-        <span class="lab-domain" data-i18n="home.domain.access">Accessibility</span>
-      </div>
+  <!-- Mobile menu -->
+  <div class="nav-mobile-menu">
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Navigation</div>
+      <a href="index.html" class="nav-mobile-link active" data-i18n="nav.home">Home</a>
+      <a href="experiments.html" class="nav-mobile-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-mobile-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-mobile-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-mobile-link" data-i18n="nav.about">About</a>
     </div>
-
-    <!-- Modules -->
-    <div class="section">
-      <div class="section-label">
-        <span class="section-number">01</span>
-        <span class="section-title" data-i18n="home.modules">Modules</span>
-        <span class="section-divider"></span>
-      </div>
-      <div class="modules-grid">
-        <a href="visualizer.html" class="mod-card mod-card-a">
-          <div class="mod-card-head">
-            <div class="mod-glyph mod-glyph-a">&#8767;</div>
-            <div class="mod-name" data-i18n="home.mod.viz.name">Sound Visualizer</div>
-            <span class="mod-card-tag tag-live">Live</span>
-          </div>
-          <div class="mod-desc" data-i18n="home.mod.viz.desc">Real-time audio analysis from your microphone: waveform, FFT spectrum, spectrogram waterfall, pitch and beat detection.</div>
-          <div class="mod-features" data-i18n="home.mod.viz.features">Waveform &middot; FFT &middot; Spectrogram &middot; Pitch &middot; Beat</div>
-          <div class="mod-arrow" data-i18n="home.mod.viz.open">Open module &rarr;</div>
-        </a>
-        <a href="generator.html" class="mod-card mod-card-b">
-          <div class="mod-card-head">
-            <div class="mod-glyph mod-glyph-b">&#8719;</div>
-            <div class="mod-name" data-i18n="home.mod.gen.name">Mathematical Music Generator</div>
-            <span class="mod-card-tag tag-dev">Phase 3</span>
-          </div>
-          <div class="mod-desc" data-i18n="home.mod.gen.desc">Generate musical patterns from mathematical rules: Fibonacci sequences, Euclidean rhythms, harmonic series, and probability.</div>
-          <div class="mod-features" data-i18n="home.mod.gen.features">Fibonacci &middot; Euclidean &middot; Harmonic &middot; Piano Roll &middot; MIDI</div>
-          <div class="mod-arrow" data-i18n="home.mod.gen.open">Open module &rarr;</div>
-        </a>
-        <a href="accessibility.html" class="mod-card mod-card-c">
-          <div class="mod-card-head">
-            <div class="mod-glyph mod-glyph-c">&#9673;</div>
-            <div class="mod-name" data-i18n="home.mod.acc.name">Accessible Sound Experience</div>
-            <span class="mod-card-tag tag-planned">Phase 4</span>
-          </div>
-          <div class="mod-desc" data-i18n="home.mod.acc.desc">Translating audio into visual patterns for Deaf and hard-of-hearing users. Distinct visual feedback for different sound categories.</div>
-          <div class="mod-features" data-i18n="home.mod.acc.features">Translation &middot; Detection &middot; Customizable &middot; Notifications</div>
-          <div class="mod-arrow" data-i18n="home.mod.acc.open">Open module &rarr;</div>
-        </a>
-      </div>
-    </div>
-
-    <!-- Roadmap -->
-    <div class="section">
-      <div class="section-label">
-        <span class="section-number">02</span>
-        <span class="section-title" data-i18n="home.roadmap">Development Roadmap</span>
-        <span class="section-divider"></span>
-      </div>
-      <div class="roadmap-bar">
-        <div class="rm-phase rm-done">
-          <div class="rm-phase-id">P1</div>
-          <div class="rm-phase-name" data-i18n="home.rm.p1">Foundation</div>
-          <div class="rm-phase-status" data-i18n="home.rm.p1.status">Complete</div>
-        </div>
-        <div class="rm-phase rm-done">
-          <div class="rm-phase-id">P2</div>
-          <div class="rm-phase-name" data-i18n="home.rm.p2">Visualizer</div>
-          <div class="rm-phase-status" data-i18n="home.rm.p2.status">Complete</div>
-        </div>
-        <div class="rm-phase rm-current">
-          <div class="rm-phase-id">P3</div>
-          <div class="rm-phase-name" data-i18n="home.rm.p3">Generator</div>
-          <div class="rm-phase-status" data-i18n="home.rm.p3.status">In Progress</div>
-        </div>
-        <div class="rm-phase rm-planned">
-          <div class="rm-phase-id">P4</div>
-          <div class="rm-phase-name" data-i18n="home.rm.p4">Accessibility</div>
-          <div class="rm-phase-status" data-i18n="home.rm.p4.status">Planned</div>
-        </div>
-        <div class="rm-phase rm-planned">
-          <div class="rm-phase-id">P5</div>
-          <div class="rm-phase-name" data-i18n="home.rm.p5">Polish</div>
-          <div class="rm-phase-status" data-i18n="home.rm.p5.status">Planned</div>
-        </div>
-      </div>
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Lab Modules</div>
+      <a href="visualizer.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.visualizer">Sound Visualizer</a>
+      <a href="generator.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.generator">Music Generator</a>
+      <a href="accessibility.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.accessibility">Accessibility</a>
     </div>
   </div>
+
+  <!-- ===== Section 1: Hero ===== -->
+  <section class="home-hero home-section">
+    <div class="hero-eyebrow" data-i18n="home.eyebrow">Independent Digital Research Studio</div>
+    <h1 class="hero-title" data-i18n-html="home.title">Where sound becomes data,<br>data becomes music,<br>and music becomes accessible.</h1>
+    <p class="hero-subtitle" data-i18n="home.desc">
+      MPC Sound Lab is a browser-based platform for exploring the intersection of physics, mathematics,
+      and audio engineering. Analyze live sound, generate music from mathematical structures,
+      and experience audio through visual translation.
+    </p>
+    <div class="hero-domains">
+      <span class="hero-domain" data-i18n="home.domain.math">Mathematics</span>
+      <span class="hero-domain" data-i18n="home.domain.physics">Physics</span>
+      <span class="hero-domain" data-i18n="home.domain.music">Music Technology</span>
+      <span class="hero-domain" data-i18n="home.domain.audio">Audio Engineering</span>
+      <span class="hero-domain" data-i18n="home.domain.access">Accessibility</span>
+    </div>
+    <div class="hero-scroll-hint" data-i18n="home.scroll">Scroll to explore</div>
+  </section>
+
+  <!-- ===== Section 2: Concept ===== -->
+  <section class="home-section">
+    <div class="home-section-header">
+      <span class="home-section-number">§ 01</span>
+      <span class="home-section-title" data-i18n="home.concept">Concept</span>
+      <span class="home-section-divider"></span>
+    </div>
+    <div class="concept-grid">
+      <div>
+        <div class="concept-label" data-i18n="home.concept.label">Premise</div>
+      </div>
+      <div class="concept-body" data-i18n-html="home.concept.body">
+        Sound is <strong>physical</strong> — pressure waves propagating through air at 343 m/s.
+        It is also <strong>mathematical</strong> — decomposable into pure frequencies via the Fourier transform.
+        And it is <em>accessible</em> — translatable into visual patterns that convey the same information through a different sense.
+        <br/><br/>
+        This studio explores all three dimensions simultaneously. Every tool is built from first principles:
+        a custom FFT implementation, real-time Web Audio processing, and Canvas-based generative visualization —
+        all running locally in your browser, no servers, no data collection.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Section 3: Research Directions (Lab Modules) ===== -->
+  <section class="home-section">
+    <div class="home-section-header">
+      <span class="home-section-number">§ 02</span>
+      <span class="home-section-title" data-i18n="home.directions">Research Directions</span>
+      <span class="home-section-divider"></span>
+    </div>
+    <div class="directions-grid">
+      <a href="visualizer.html" class="direction-card">
+        <div class="direction-num">DIRECTION 01</div>
+        <div class="direction-title" data-i18n="home.mod.viz.name">Sound Visualizer</div>
+        <div class="direction-desc" data-i18n="home.mod.viz.desc">Real-time audio analysis from your microphone: waveform, FFT spectrum, spectrogram waterfall, pitch and beat detection.</div>
+        <div class="direction-status">
+          <span class="status-badge status-live" data-i18n="home.status.live">Live</span>
+          <span class="direction-link" data-i18n="home.mod.viz.open">Enter &rarr;</span>
+        </div>
+      </a>
+      <a href="generator.html" class="direction-card">
+        <div class="direction-num">DIRECTION 02</div>
+        <div class="direction-title" data-i18n="home.mod.gen.name">Mathematical Music Generator</div>
+        <div class="direction-desc" data-i18n="home.mod.gen.desc">Generate musical patterns from mathematical rules: Fibonacci sequences, Euclidean rhythms, harmonic series, and probability.</div>
+        <div class="direction-status">
+          <span class="status-badge status-dev" data-i18n="home.status.dev">Phase 3</span>
+          <span class="direction-link" data-i18n="home.mod.gen.open">Enter &rarr;</span>
+        </div>
+      </a>
+      <a href="accessibility.html" class="direction-card">
+        <div class="direction-num">DIRECTION 03</div>
+        <div class="direction-title" data-i18n="home.mod.acc.name">Accessible Sound Experience</div>
+        <div class="direction-desc" data-i18n="home.mod.acc.desc">Translating audio into visual patterns for Deaf and hard-of-hearing users. Distinct visual feedback for different sound categories.</div>
+        <div class="direction-status">
+          <span class="status-badge status-planned" data-i18n="home.status.planned">Phase 4</span>
+          <span class="direction-link" data-i18n="home.mod.acc.open">Enter &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Section 4: Experiment Archive ===== -->
+  <section class="home-section">
+    <div class="home-section-header">
+      <span class="home-section-number">§ 03</span>
+      <span class="home-section-title" data-i18n="home.expArchive">Experiment Archive</span>
+      <span class="home-section-divider"></span>
+    </div>
+    <div class="experiments-grid">
+      <a href="experiments.html" class="experiment-card">
+        <div class="exp-card-num">EXP-01</div>
+        <div class="exp-card-title" data-i18n="home.exp1">Fourier Series Visualization</div>
+        <div class="exp-card-status" data-i18n="home.status.live">Live</div>
+      </a>
+      <a href="experiments.html" class="experiment-card">
+        <div class="exp-card-num">EXP-02</div>
+        <div class="exp-card-title" data-i18n="home.exp2">FFT Resolution Trade-off</div>
+        <div class="exp-card-status" data-i18n="home.status.live">Live</div>
+      </a>
+      <a href="experiments.html" class="experiment-card">
+        <div class="exp-card-num">EXP-03</div>
+        <div class="exp-card-title" data-i18n="home.exp3">Spectral Leakage & Windows</div>
+        <div class="exp-card-status" data-i18n="home.status.live">Live</div>
+      </a>
+      <a href="experiments.html" class="experiment-card">
+        <div class="exp-card-num">EXP-04</div>
+        <div class="exp-card-title" data-i18n="home.exp4">Harmonic Structures</div>
+        <div class="exp-card-status" data-i18n="home.status.live">Live</div>
+      </a>
+      <a href="experiments.html" class="experiment-card">
+        <div class="exp-card-num">EXP-05</div>
+        <div class="exp-card-title" data-i18n="home.exp5">Wave Superposition</div>
+        <div class="exp-card-status" data-i18n="home.status.planned">Planned</div>
+      </a>
+      <a href="experiments.html" class="experiment-card">
+        <div class="exp-card-num">EXP-06</div>
+        <div class="exp-card-title" data-i18n="home.exp6">Euclidean Rhythms</div>
+        <div class="exp-card-status" data-i18n="home.status.planned">Planned</div>
+      </a>
+      <a href="experiments.html" class="experiment-card">
+        <div class="exp-card-num">EXP-07</div>
+        <div class="exp-card-title" data-i18n="home.exp7">Mathematical Music</div>
+        <div class="exp-card-status" data-i18n="home.status.planned">Planned</div>
+      </a>
+      <a href="experiments.html" class="experiment-card">
+        <div class="exp-card-num">EXP-08</div>
+        <div class="exp-card-title" data-i18n="home.exp8">Sound-to-Visual Translation</div>
+        <div class="exp-card-status" data-i18n="home.status.planned">Planned</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Section 5: Field Notes ===== -->
+  <section class="home-section">
+    <div class="home-section-header">
+      <span class="home-section-number">§ 04</span>
+      <span class="home-section-title" data-i18n="home.fieldNotes">Field Notes</span>
+      <span class="home-section-divider"></span>
+    </div>
+    <div class="fn-grid">
+      <a href="field-notes.html" class="fn-card">
+        <div class="fn-card-icon">&#8721;</div>
+        <div class="fn-card-title" data-i18n="home.fn.math">Mathematics</div>
+        <div class="fn-card-desc" data-i18n="home.fn.math.desc">Fourier transforms, autocorrelation, harmonic series, Euclidean algorithms.</div>
+        <div class="fn-card-count">12 notes</div>
+      </a>
+      <a href="field-notes.html" class="fn-card">
+        <div class="fn-card-icon">&#9758;</div>
+        <div class="fn-card-title" data-i18n="home.fn.physics">Physics</div>
+        <div class="fn-card-desc" data-i18n="home.fn.physics.desc">Wave mechanics, cochlear mechanics, consonance, vocal tract acoustics.</div>
+        <div class="fn-card-count">8 notes</div>
+      </a>
+      <a href="field-notes.html" class="fn-card">
+        <div class="fn-card-icon">&#9836;</div>
+        <div class="fn-card-title" data-i18n="home.fn.acoustics">Acoustics</div>
+        <div class="fn-card-desc" data-i18n="home.fn.acoustics.desc">Room acoustics, reverberation, standing waves, sound propagation.</div>
+        <div class="fn-card-count">6 notes</div>
+      </a>
+      <a href="field-notes.html" class="fn-card">
+        <div class="fn-card-icon">&#9680;</div>
+        <div class="fn-card-title" data-i18n="home.fn.signal">Signal Processing</div>
+        <div class="fn-card-desc" data-i18n="home.fn.signal.desc">FFT, window functions, spectral leakage, digital filtering, DSP fundamentals.</div>
+        <div class="fn-card-count">14 notes</div>
+      </a>
+      <a href="field-notes.html" class="fn-card">
+        <div class="fn-card-icon">&#9833;</div>
+        <div class="fn-card-title" data-i18n="home.fn.music">Music Theory</div>
+        <div class="fn-card-desc" data-i18n="home.fn.music.desc">Just intonation, equal temperament, harmonic series, rhythm patterns.</div>
+        <div class="fn-card-count">9 notes</div>
+      </a>
+      <a href="field-notes.html" class="fn-card">
+        <div class="fn-card-icon">&#9673;</div>
+        <div class="fn-card-title" data-i18n="home.fn.access">Accessibility</div>
+        <div class="fn-card-desc" data-i18n="home.fn.access.desc">Cross-modal perception, visual translation, sound classification.</div>
+        <div class="fn-card-count">5 notes</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Section 6: Project Development ===== -->
+  <section class="home-section">
+    <div class="home-section-header">
+      <span class="home-section-number">§ 05</span>
+      <span class="home-section-title" data-i18n="home.roadmap">Project Development</span>
+      <span class="home-section-divider"></span>
+    </div>
+    <div class="roadmap-bar">
+      <div class="rm-phase rm-done">
+        <div class="rm-phase-id">P1</div>
+        <div class="rm-phase-name" data-i18n="home.rm.p1">Foundation</div>
+        <div class="rm-phase-status" data-i18n="home.rm.p1.status">Complete</div>
+      </div>
+      <div class="rm-phase rm-done">
+        <div class="rm-phase-id">P2</div>
+        <div class="rm-phase-name" data-i18n="home.rm.p2">Visualizer</div>
+        <div class="rm-phase-status" data-i18n="home.rm.p2.status">Complete</div>
+      </div>
+      <div class="rm-phase rm-current">
+        <div class="rm-phase-id">P3</div>
+        <div class="rm-phase-name" data-i18n="home.rm.p3">Generator</div>
+        <div class="rm-phase-status" data-i18n="home.rm.p3.status">In Progress</div>
+      </div>
+      <div class="rm-phase rm-planned">
+        <div class="rm-phase-id">P4</div>
+        <div class="rm-phase-name" data-i18n="home.rm.p4">Accessibility</div>
+        <div class="rm-phase-status" data-i18n="home.rm.p4.status">Planned</div>
+      </div>
+      <div class="rm-phase rm-planned">
+        <div class="rm-phase-id">P5</div>
+        <div class="rm-phase-name" data-i18n="home.rm.p5">Polish</div>
+        <div class="rm-phase-status" data-i18n="home.rm.p5.status">Planned</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand" data-i18n="footer.brand">MPC Sound Lab</div>
+        <p class="footer-brand-desc" data-i18n="footer.brandDesc">An independent digital research studio exploring the intersection of mathematics, physics, sound, music technology, and accessibility.</p>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.nav">Navigation</div>
+        <a href="index.html" class="footer-link" data-i18n="nav.home">Home</a>
+        <a href="experiments.html" class="footer-link" data-i18n="nav.experiments">Experiments</a>
+        <a href="field-notes.html" class="footer-link" data-i18n="nav.fieldNotes">Field Notes</a>
+        <a href="research.html" class="footer-link" data-i18n="nav.research">Research</a>
+        <a href="about.html" class="footer-link" data-i18n="nav.about">About</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.lab">Lab Modules</div>
+        <a href="visualizer.html" class="footer-link" data-i18n="nav.visualizer">Sound Visualizer</a>
+        <a href="generator.html" class="footer-link" data-i18n="nav.generator">Music Generator</a>
+        <a href="accessibility.html" class="footer-link" data-i18n="nav.accessibility">Accessibility</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.experiments">Experiments</div>
+        <a href="experiments.html" class="footer-link">EXP-01 Fourier</a>
+        <a href="experiments.html" class="footer-link">EXP-02 FFT Resolution</a>
+        <a href="experiments.html" class="footer-link">EXP-03 Leakage</a>
+        <a href="experiments.html" class="footer-link">EXP-04 Harmonics</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.knowledge">Knowledge</div>
+        <a href="field-notes.html" class="footer-link">Mathematics</a>
+        <a href="field-notes.html" class="footer-link">Physics</a>
+        <a href="field-notes.html" class="footer-link">Acoustics</a>
+        <a href="field-notes.html" class="footer-link">Signal Processing</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024&ndash;2025 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span data-i18n="footer.version">v2.0 &mdash; Editorial Redesign</span>
+    </div>
+  </footer>
+
   <script type="module">
     import { App } from './src/js/core/app.js';
     new App().init();
-    import { CinematicBackground } from './src/js/core/animated-bg.js';
-    const bgCanvas = document.getElementById('bg-canvas');
-    let bg = null;
-    if (bgCanvas) {
-      bg = new CinematicBackground(bgCanvas);
-      bg.start();
+    import { SoundSculpture } from './src/js/visual/sound-sculpture.js';
+    const sculptureCanvas = document.getElementById('sculpture-canvas');
+    let sculpture = null;
+    if (sculptureCanvas) {
+      sculpture = new SoundSculpture(sculptureCanvas);
+      sculpture.start();
     }
-    // Ambient animation toggle
+    // Ambient toggle
     const ambientBtn = document.getElementById('ambient-toggle');
     if (ambientBtn) {
       ambientBtn.addEventListener('click', () => {
         document.body.classList.toggle('ambient-off');
         if (document.body.classList.contains('ambient-off')) {
-          if (bg) bg.stop();
+          if (sculpture) sculpture.stop();
         } else {
-          if (bg) bg.start();
+          if (sculpture) sculpture.start();
         }
       });
     }

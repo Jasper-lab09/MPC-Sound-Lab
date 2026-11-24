@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experiments — MPC Sound Lab</title>
+  <link rel="stylesheet" href="src/css/design-system.css?v=2" />
+  <link rel="stylesheet" href="src/css/nav.css?v=2" />
+</head>
+<body class="page-inner">
+  <div class="ambient-grain"></div>
+  <div class="ambient-vignette"></div>
+
+  <!-- Navigation -->
+  <nav class="site-nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-mark">M</span>
+      <span class="nav-brand-text">MPC SOUND LAB</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger" data-i18n="nav.lab">Lab</a>
+        <div class="nav-dropdown-menu">
+          <a href="visualizer.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.visualizer">Sound Visualizer</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.visualizer.desc">Real-time audio analysis</span>
+          </a>
+          <a href="generator.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.generator">Music Generator</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.generator.desc">Mathematical composition</span>
+          </a>
+          <a href="accessibility.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.accessibility">Accessibility</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.accessibility.desc">Sound-to-visual translation</span>
+          </a>
+        </div>
+      </div>
+      <a href="experiments.html" class="nav-link active" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-right">
+      <button class="lang-btn" data-i18n="nav.lang">中文</button>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <!-- Mobile menu -->
+  <div class="nav-mobile-menu">
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Navigation</div>
+      <a href="index.html" class="nav-mobile-link" data-i18n="nav.home">Home</a>
+      <a href="experiments.html" class="nav-mobile-link active" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-mobile-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-mobile-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-mobile-link" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Lab Modules</div>
+      <a href="visualizer.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.visualizer">Sound Visualizer</a>
+      <a href="generator.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.generator">Music Generator</a>
+      <a href="accessibility.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.accessibility">Accessibility</a>
+    </div>
+  </div>
+
+  <div class="page">
+    <!-- Editorial Header -->
+    <header class="editorial-header">
+      <div class="editorial-eyebrow">Archive / 08 Experiments</div>
+      <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;">
+        <h1 class="editorial-title" data-i18n="exp.title">Experiment Archive</h1>
+      </div>
+      <p class="editorial-subtitle" data-i18n="exp.desc">
+        A structured catalog of experiments exploring sound, mathematics, and signal processing.
+        Each experiment is runnable in the browser using the Sound Visualizer's interactive tools.
+      </p>
+      <div class="metadata-strip">
+        <span><span class="ms-label">Total</span><span class="ms-value">8</span></span>
+        <span><span class="ms-label">Live</span><span class="ms-value">4</span></span>
+        <span><span class="ms-label">Planned</span><span class="ms-value">4</span></span>
+      </div>
+    </header>
+
+    <!-- Experiment entries -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">§ 01</span>
+        <span class="section-title" data-i18n="exp.live">Live Experiments</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <a href="visualizer.html" class="experiment" style="text-decoration: none; color: inherit;">
+          <div class="exp-num">EXP-01</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp1">Fourier Series Visualization</div>
+            <div class="exp-desc" data-i18n="viz.exp2.desc">Switch source to Signal Generator. Set a 440 Hz sine wave — the spectrum shows one peak. Switch to square — odd harmonics appear. Switch to sawtooth — all harmonics. This visually demonstrates the Fourier series decomposition of periodic waveforms.</div>
+            <div class="exp-result" data-i18n="home.status.live">Live</div>
+          </div>
+        </a>
+        <a href="visualizer.html" class="experiment" style="text-decoration: none; color: inherit;">
+          <div class="exp-num">EXP-02</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp2">FFT Resolution Trade-off</div>
+            <div class="exp-desc" data-i18n="viz.exp1.desc">Switch between FFT 512 and 8192 while speaking or humming. At 512, the waveform updates rapidly but frequency bars are coarse. At 8192, harmonics become visible but the display feels sluggish. This demonstrates the uncertainty principle.</div>
+            <div class="exp-result" data-i18n="home.status.live">Live</div>
+          </div>
+        </a>
+        <a href="visualizer.html" class="experiment" style="text-decoration: none; color: inherit;">
+          <div class="exp-num">EXP-03</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp3">Spectral Leakage &amp; Windows</div>
+            <div class="exp-desc" data-i18n="viz.exp3.desc">Generate a sine wave at a frequency that doesn't fall on a bin boundary. Enable the rectangular window overlay — you'll see energy spread into neighboring bins. Switch to Hann or Hamming — the peak is cleaner but slightly broader.</div>
+            <div class="exp-result" data-i18n="home.status.live">Live</div>
+          </div>
+        </a>
+        <a href="visualizer.html" class="experiment" style="text-decoration: none; color: inherit;">
+          <div class="exp-num">EXP-04</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp4">Harmonic Structures</div>
+            <div class="exp-desc" data-i18n="viz.exp4.desc">Generate a sawtooth wave at 220 Hz and enable the harmonic toggle. The analyzer labels harmonic peaks at 220, 440, 660, 880 Hz. Switch to square — only odd harmonics are confirmed.</div>
+            <div class="exp-result" data-i18n="home.status.live">Live</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Planned experiments -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">§ 02</span>
+        <span class="section-title" data-i18n="exp.planned">Planned Experiments</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="experiment">
+          <div class="exp-num">EXP-05</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp5">Wave Superposition</div>
+            <div class="exp-desc">Visualize how multiple sine waves of different frequencies and amplitudes combine to produce complex waveforms. Demonstrates the linearity of the Fourier transform and the constructive/destructive interference patterns.</div>
+            <div class="exp-result" data-i18n="home.status.planned">Planned</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">EXP-06</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp6">Euclidean Rhythms</div>
+            <div class="exp-desc">Generate and compare Euclidean rhythms — the mathematically optimal distribution of hits across steps. Listen to how E(3,8) produces the tresillo, E(5,8) the cinquillo, and how these patterns appear in world music.</div>
+            <div class="exp-result" data-i18n="home.status.planned">Planned</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">EXP-07</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp7">Mathematical Music</div>
+            <div class="exp-desc">Map mathematical sequences (Fibonacci, prime numbers, Pascal's triangle) to musical parameters (pitch, rhythm, dynamics). Listen to the structural qualities of pure mathematics expressed as sound.</div>
+            <div class="exp-result" data-i18n="home.status.planned">Planned</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">EXP-08</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp8">Sound-to-Visual Translation</div>
+            <div class="exp-desc">Classify incoming audio into categories (speech, music, noise, beat, silence) and render distinct visual patterns for each. Tests whether visual representation can convey sound information to Deaf users.</div>
+            <div class="exp-result" data-i18n="home.status.planned">Planned</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand" data-i18n="footer.brand">MPC Sound Lab</div>
+        <p class="footer-brand-desc" data-i18n="footer.brandDesc">An independent digital research studio exploring the intersection of mathematics, physics, sound, music technology, and accessibility.</p>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.nav">Navigation</div>
+        <a href="index.html" class="footer-link" data-i18n="nav.home">Home</a>
+        <a href="experiments.html" class="footer-link" data-i18n="nav.experiments">Experiments</a>
+        <a href="field-notes.html" class="footer-link" data-i18n="nav.fieldNotes">Field Notes</a>
+        <a href="research.html" class="footer-link" data-i18n="nav.research">Research</a>
+        <a href="about.html" class="footer-link" data-i18n="nav.about">About</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.lab">Lab Modules</div>
+        <a href="visualizer.html" class="footer-link" data-i18n="nav.visualizer">Sound Visualizer</a>
+        <a href="generator.html" class="footer-link" data-i18n="nav.generator">Music Generator</a>
+        <a href="accessibility.html" class="footer-link" data-i18n="nav.accessibility">Accessibility</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.experiments">Experiments</div>
+        <a href="experiments.html" class="footer-link">EXP-01 Fourier</a>
+        <a href="experiments.html" class="footer-link">EXP-02 FFT Resolution</a>
+        <a href="experiments.html" class="footer-link">EXP-03 Leakage</a>
+        <a href="experiments.html" class="footer-link">EXP-04 Harmonics</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.knowledge">Knowledge</div>
+        <a href="field-notes.html" class="footer-link">Mathematics</a>
+        <a href="field-notes.html" class="footer-link">Physics</a>
+        <a href="field-notes.html" class="footer-link">Acoustics</a>
+        <a href="field-notes.html" class="footer-link">Signal Processing</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024&ndash;2025 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span data-i18n="footer.version">v2.0 &mdash; Editorial Redesign</span>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { App } from './src/js/core/app.js';
+    new App().init();
+  </script>
+</body>
+</html>

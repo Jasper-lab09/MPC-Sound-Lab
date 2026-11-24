@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research — MPC Sound Lab</title>
+  <link rel="stylesheet" href="src/css/design-system.css?v=2" />
+  <link rel="stylesheet" href="src/css/nav.css?v=2" />
+</head>
+<body class="page-inner">
+  <div class="ambient-grain"></div>
+  <div class="ambient-vignette"></div>
+
+  <nav class="site-nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-mark">M</span>
+      <span class="nav-brand-text">MPC SOUND LAB</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger" data-i18n="nav.lab">Lab</a>
+        <div class="nav-dropdown-menu">
+          <a href="visualizer.html" class="nav-dropdown-link"><span class="nav-dropdown-link-title" data-i18n="nav.visualizer">Sound Visualizer</span><span class="nav-dropdown-link-desc" data-i18n="nav.visualizer.desc">Real-time audio analysis</span></a>
+          <a href="generator.html" class="nav-dropdown-link"><span class="nav-dropdown-link-title" data-i18n="nav.generator">Music Generator</span><span class="nav-dropdown-link-desc" data-i18n="nav.generator.desc">Mathematical composition</span></a>
+          <a href="accessibility.html" class="nav-dropdown-link"><span class="nav-dropdown-link-title" data-i18n="nav.accessibility">Accessibility</span><span class="nav-dropdown-link-desc" data-i18n="nav.accessibility.desc">Sound-to-visual translation</span></a>
+        </div>
+      </div>
+      <a href="experiments.html" class="nav-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-link active" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-right">
+      <button class="lang-btn" data-i18n="nav.lang">中文</button>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mobile-menu">
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Navigation</div>
+      <a href="index.html" class="nav-mobile-link" data-i18n="nav.home">Home</a>
+      <a href="experiments.html" class="nav-mobile-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-mobile-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-mobile-link active" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-mobile-link" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Lab Modules</div>
+      <a href="visualizer.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.visualizer">Sound Visualizer</a>
+      <a href="generator.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.generator">Music Generator</a>
+      <a href="accessibility.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.accessibility">Accessibility</a>
+    </div>
+  </div>
+
+  <div class="page">
+    <header class="editorial-header">
+      <div class="editorial-eyebrow">Studio / Research</div>
+      <h1 class="editorial-title">Research</h1>
+      <p class="editorial-subtitle">
+        Ongoing investigations into the relationships between sound, mathematics, and perception.
+        This page documents the studio's research directions, methodology, and open questions.
+      </p>
+      <div class="metadata-strip">
+        <span><span class="ms-label">Directions</span><span class="ms-value">3</span></span>
+        <span><span class="ms-label">Status</span><span class="ms-value">Active</span></span>
+      </div>
+    </header>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">§ 01</span>
+        <span class="section-title">Research Directions</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="cols-2">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Direction A — Signal Analysis</span></div>
+          <div class="panel-body">
+            <div class="content-block">
+              <p>How can we make the invisible structure of sound visible and understandable? The Sound Visualizer module explores real-time frequency analysis, pitch detection, and harmonic decomposition using browser-native APIs.</p>
+              <div class="math-block">X[k] = &Sigma;<sub>n=0</sub><sup>N-1</sup> x[n] &middot; e<sup>-2&pi;i&middot;k&middot;n/N</sup></div>
+              <p>Key questions: How does FFT size affect the trade-off between time and frequency resolution? How do window functions influence spectral leakage? Can we reliably detect harmonic structures in real-time?</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Direction B — Mathematical Composition</span></div>
+          <div class="panel-body">
+            <div class="content-block">
+              <p>Can mathematical structures generate musically meaningful patterns? The Music Generator module investigates Fibonacci sequences, Euclidean rhythms, and harmonic series as compositional tools.</p>
+              <div class="math-block">E(n, m) distributes n hits across m steps maximally evenly</div>
+              <p>Key questions: What makes Euclidean rhythms sound "good"? How does the golden ratio relate to musical aesthetics? Can probability-based generation maintain stylistic coherence?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel mt-16">
+        <div class="panel-head"><span class="panel-title">Direction C — Sound-to-Visual Translation</span></div>
+        <div class="panel-body">
+          <div class="content-block">
+            <p>Can audio information be faithfully translated into visual patterns for Deaf and hard-of-hearing users? The Accessibility module explores cross-modal perception, sound classification, and customizable visual feedback.</p>
+            <div class="math-block">V = M &middot; F + B<br/><span style="color: var(--paper-faint); font-size: 0.78rem;">F = feature vector, M = mapping matrix, B = user bias</span></div>
+            <p>Key questions: Which acoustic features best discriminate sound categories? How do visual patterns map to perceived sound qualities? What are the honest limitations of visual translation?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">§ 02</span>
+        <span class="section-title">Methodology</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="content-block">
+            <p><strong>First principles.</strong> Every tool is built from the ground up — a custom radix-2 FFT implementation, not a library call. This ensures we understand every step of the signal processing pipeline and can explain it to users.</p>
+            <p><strong>Browser-native.</strong> All processing runs locally using Web Audio API and Canvas 2D. No servers, no data collection, no cloud dependencies. The entire lab works offline once loaded.</p>
+            <p><strong>Transparent limitations.</strong> We document what our tools can and cannot do. dBFS is not dB SPL. Bin spacing is not frequency resolution. Visual translation is not hearing. Honesty about limitations is a research principle, not just a disclaimer.</p>
+            <p><strong>Reproducible experiments.</strong> Every experiment has explicit parameters, step-by-step instructions, and A/B comparison capture. Results can be verified by anyone with a browser and microphone.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">§ 03</span>
+        <span class="section-title">Open Questions</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="experiment">
+          <div class="exp-num">01</div>
+          <div class="exp-body">
+            <div class="exp-title">Can real-time harmonic analysis be made reliable enough for educational use?</div>
+            <div class="exp-desc">Current detection requires 5% relative amplitude and integer-multiple alignment. noisy signals produce false positives. Can we improve the reliability scoring without increasing latency?</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">02</div>
+          <div class="exp-body">
+            <div class="exp-title">What is the minimum feature set for useful sound classification?</div>
+            <div class="exp-desc">Spectral centroid, ZCR, and spectral flux capture timbral qualities but miss temporal structure. How many features are needed for reliable speech/music/noise discrimination?</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">03</div>
+          <div class="exp-body">
+            <div class="exp-title">Do Euclidean rhythms generalize across cultural traditions?</div>
+            <div class="exp-desc">E(3,8) produces tresillo (Cuban), E(2,3) produces habanera (Cuban/African). But does mathematical evenness always correlate with musical preference, or is it culturally conditioned?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand" data-i18n="footer.brand">MPC Sound Lab</div>
+        <p class="footer-brand-desc" data-i18n="footer.brandDesc">An independent digital research studio exploring the intersection of mathematics, physics, sound, music technology, and accessibility.</p>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.nav">Navigation</div>
+        <a href="index.html" class="footer-link" data-i18n="nav.home">Home</a>
+        <a href="experiments.html" class="footer-link" data-i18n="nav.experiments">Experiments</a>
+        <a href="field-notes.html" class="footer-link" data-i18n="nav.fieldNotes">Field Notes</a>
+        <a href="research.html" class="footer-link" data-i18n="nav.research">Research</a>
+        <a href="about.html" class="footer-link" data-i18n="nav.about">About</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.lab">Lab Modules</div>
+        <a href="visualizer.html" class="footer-link" data-i18n="nav.visualizer">Sound Visualizer</a>
+        <a href="generator.html" class="footer-link" data-i18n="nav.generator">Music Generator</a>
+        <a href="accessibility.html" class="footer-link" data-i18n="nav.accessibility">Accessibility</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.experiments">Experiments</div>
+        <a href="experiments.html" class="footer-link">EXP-01 Fourier</a>
+        <a href="experiments.html" class="footer-link">EXP-02 FFT Resolution</a>
+        <a href="experiments.html" class="footer-link">EXP-03 Leakage</a>
+        <a href="experiments.html" class="footer-link">EXP-04 Harmonics</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.knowledge">Knowledge</div>
+        <a href="field-notes.html" class="footer-link">Mathematics</a>
+        <a href="field-notes.html" class="footer-link">Physics</a>
+        <a href="field-notes.html" class="footer-link">Acoustics</a>
+        <a href="field-notes.html" class="footer-link">Signal Processing</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024&ndash;2025 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span data-i18n="footer.version">v2.0 &mdash; Editorial Redesign</span>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { App } from './src/js/core/app.js';
+    new App().init();
+  </script>
+</body>
+</html>

@@ -1,8 +1,9 @@
 /**
  * App initialization — runs on every page
- * Sets up i18n, language toggle, and scroll-triggered animations.
+ * Sets up navigation, i18n, language toggle, and scroll-triggered animations.
  */
 import { i18n } from './i18n.js';
+import { Nav } from './nav.js';
 
 export class App {
   init() {
@@ -21,11 +22,14 @@ export class App {
       });
     });
 
-    // Re-apply static translations when language changes (for elements
-    // that might have been overwritten by dynamic JS like VisualizerController)
+    // Re-apply static translations when language changes
     window.addEventListener('langchange', () => {
       i18n.applyTranslations();
     });
+
+    // Initialize navigation system
+    const nav = new Nav();
+    nav.init();
 
     // Set up scroll-triggered reveal animations
     this._setupScrollReveal();
@@ -33,7 +37,7 @@ export class App {
     // Set up collapsible theory sections
     this._setupCollapsibleSections();
 
-    // Mark body as loaded (for CSS transition staging)
+    // Mark body as loaded
     document.body.classList.add('app-ready');
   }
 
@@ -50,8 +54,8 @@ export class App {
       { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     );
 
-    // Observe all sections, panels, and cards
-    document.querySelectorAll('.section, .mod-card, .panel, .lab-hero').forEach((el) => {
+    // Observe sections, panels, cards, and editorial elements
+    document.querySelectorAll('.section, .panel, .reveal, .editorial-header, .home-section').forEach((el) => {
       el.classList.add('reveal');
       observer.observe(el);
     });
@@ -60,13 +64,13 @@ export class App {
   _setupCollapsibleSections() {
     // Find all sections marked with data-collapsible
     document.querySelectorAll('.section[data-collapsible]').forEach((section) => {
-      // Wrap all content after the section-label in a wrapper div
-      const label = section.querySelector('.section-label');
-      if (!label) return;
+      // Wrap all content after the section-header in a wrapper div
+      const header = section.querySelector('.section-header, .section-label');
+      if (!header) return;
 
-      // Get all siblings of section-label that come after it
+      // Get all siblings that come after the header
       const contentElements = [];
-      let sibling = label.nextElementSibling;
+      let sibling = header.nextElementSibling;
       while (sibling) {
         contentElements.push(sibling);
         sibling = sibling.nextElementSibling;
@@ -76,21 +80,20 @@ export class App {
       if (contentElements.length > 0 && !section.querySelector('.section-content-wrapper')) {
         const wrapper = document.createElement('div');
         wrapper.className = 'section-content-wrapper';
-        label.parentNode.insertBefore(wrapper, label.nextSibling);
+        header.parentNode.insertBefore(wrapper, header.nextSibling);
         contentElements.forEach((el) => wrapper.appendChild(el));
       }
 
-      // Add collapse icon to the section label
-      if (!label.querySelector('.collapse-icon')) {
+      // Add collapse icon to the section header
+      if (!header.querySelector('.collapse-icon')) {
         const icon = document.createElement('span');
         icon.className = 'collapse-icon';
-        icon.textContent = '\u25B6'; // right triangle
-        label.appendChild(icon);
+        icon.textContent = '\u25B6';
+        header.appendChild(icon);
       }
 
-      // Toggle on label click
-      label.addEventListener('click', (e) => {
-        // Don't toggle if clicking on the section number or divider (cosmetic)
+      // Toggle on header click
+      header.addEventListener('click', () => {
         section.classList.toggle('collapsed');
       });
     });

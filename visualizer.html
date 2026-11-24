@@ -4,48 +4,96 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sound Visualizer — MPC Sound Lab</title>
-  <link rel="stylesheet" href="src/css/main.css?v=7" />
-  <link rel="stylesheet" href="src/css/visualizer.css?v=7" />
+  <link rel="stylesheet" href="src/css/design-system.css?v=2" />
+  <link rel="stylesheet" href="src/css/nav.css?v=2" />
+  <link rel="stylesheet" href="src/css/visualizer.css?v=2" />
 </head>
 <body class="page-inner">
   <div class="ambient-grain"></div>
   <div class="ambient-vignette"></div>
-  <nav class="topbar">
-    <a href="index.html" class="topbar-brand">
-      <span class="topbar-brand-mark">M</span>
-      <span class="topbar-brand-text">MPC Sound Lab</span>
+
+  <!-- Navigation -->
+  <nav class="site-nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-mark">M</span>
+      <span class="nav-brand-text">MPC SOUND LAB</span>
     </a>
-    <nav class="topbar-nav">
-      <a href="index.html" class="topbar-link" data-i18n="nav.lab">Lab</a>
-      <a href="visualizer.html" class="topbar-link active" data-i18n="nav.visualizer">Sound Visualizer</a>
-      <a href="generator.html" class="topbar-link" data-i18n="nav.generator">Music Generator</a>
-      <a href="accessibility.html" class="topbar-link" data-i18n="nav.accessibility">Accessibility</a>
-    </nav>
-    <div class="topbar-status">
-      <span id="status-dot" class="dot"></span>
-      <span id="status-text" data-i18n="nav.status.idle">Idle</span>
-      <button class="lang-btn">中文</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger" data-i18n="nav.lab">Lab</a>
+        <div class="nav-dropdown-menu">
+          <a href="visualizer.html" class="nav-dropdown-link active">
+            <span class="nav-dropdown-link-title" data-i18n="nav.visualizer">Sound Visualizer</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.visualizer.desc">Real-time audio analysis</span>
+          </a>
+          <a href="generator.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.generator">Music Generator</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.generator.desc">Mathematical composition</span>
+          </a>
+          <a href="accessibility.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.accessibility">Accessibility</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.accessibility.desc">Sound-to-visual translation</span>
+          </a>
+        </div>
+      </div>
+      <a href="experiments.html" class="nav-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
     </div>
+    <div class="nav-right">
+      <span id="status-dot" class="dot"></span>
+      <span id="status-text" class="nav-status" data-i18n="nav.status.idle">Idle</span>
+      <button class="lang-btn" data-i18n="nav.lang">中文</button>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <!-- Mobile menu -->
+  <div class="nav-mobile-menu">
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Navigation</div>
+      <a href="index.html" class="nav-mobile-link" data-i18n="nav.home">Home</a>
+      <a href="experiments.html" class="nav-mobile-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-mobile-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-mobile-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-mobile-link" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title" data-i18n="nav.lab">Lab</div>
+      <a href="visualizer.html" class="nav-mobile-link nav-mobile-sub active" data-i18n="nav.visualizer">Sound Visualizer</a>
+      <a href="generator.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.generator">Music Generator</a>
+      <a href="accessibility.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.accessibility">Accessibility</a>
+    </div>
+  </div>
 
   <div class="page">
-    <div class="page-head">
-      <div class="page-head-row">
-        <h1 class="page-h1" data-i18n="viz.title">Sound Visualizer</h1>
-        <span class="page-tag tag-live">Live</span>
+    <!-- Editorial header -->
+    <div class="editorial-header">
+      <div class="editorial-eyebrow" data-i18n="nav.lab">Lab / Module 01</div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <h1 class="editorial-title" data-i18n="viz.title">Sound Visualizer</h1>
+        <span class="status-badge status-live">Live</span>
       </div>
-      <p class="page-desc" data-i18n="viz.desc">
+      <p class="editorial-subtitle" data-i18n="viz.desc">
         Real-time analysis of audio from your microphone or the built-in signal generator.
         Three complementary visualizations — waveform, FFT spectrum, and spectrogram — alongside
         pitch detection, beat detection, harmonic analysis, and a window function explorer.
         All processing happens locally in your browser.
       </p>
+      <div class="editorial-metadata">
+        <span data-label="MODULE">SV-01</span>
+        <span data-label="STATUS">Interactive</span>
+        <span data-label="PROCESSING">Local / Web Audio API</span>
+      </div>
     </div>
 
     <!-- ===== Section 1: Audio Setup ===== -->
     <div class="section">
-      <div class="section-label">
-        <span class="section-number">01</span>
+      <div class="section-header">
+        <span class="section-number">§ 01</span>
         <span class="section-title" data-i18n="viz.section.setup">Audio Setup</span>
         <span class="section-divider"></span>
       </div>
@@ -63,7 +111,6 @@
             </p>
 
             <div class="gate-config">
-              <!-- Source selector -->
               <div class="ctrl-row">
                 <span class="ctrl-label" data-i18n="viz.source">Source</span>
                 <select id="viz-source">
@@ -71,8 +118,6 @@
                   <option value="generator" data-i18n="viz.source.gen">Signal Generator</option>
                 </select>
               </div>
-
-              <!-- Signal generator panel (hidden by default) -->
               <div id="gen-panel" style="display: none;">
                 <div class="ctrl-row">
                   <span class="ctrl-label" data-i18n="viz.waveform">Waveform</span>
@@ -96,8 +141,6 @@
                   <span class="ctrl-value" id="gen-amp-val">0.30</span>
                 </div>
               </div>
-
-              <!-- FFT / Smoothing / Gain -->
               <div class="ctrl-row">
                 <span class="ctrl-label" data-i18n="viz.fftSize">FFT Size</span>
                 <select id="viz-fft">
@@ -121,8 +164,6 @@
                 <span class="ctrl-value" id="viz-gain-val">1.0x</span>
                 <button class="info-btn" data-explore="gain" aria-label="Explore gain">&#8505;</button>
               </div>
-
-              <!-- Window function explorer -->
               <div class="ctrl-row">
                 <span class="ctrl-label" data-i18n="viz.window">Window</span>
                 <select id="viz-window">
@@ -133,15 +174,13 @@
                 </select>
                 <button class="info-btn" data-explore="window-function" aria-label="Explore window functions">&#8505;</button>
               </div>
-
-              <!-- Harmonic analyzer toggle -->
               <div class="ctrl-row">
                 <span class="ctrl-label" data-i18n="viz.harmonics">Harmonics</span>
                 <label class="toggle">
                   <input type="checkbox" id="viz-harmonic-toggle" />
                   <span class="toggle-slider"></span>
                 </label>
-                <span style="font-size: 0.72rem; color: var(--text-3); font-family: var(--font-mono);" data-i18n="viz.harmonics.desc">Label harmonic peaks</span>
+                <span style="font-size: 0.7rem; color: var(--paper-faint); font-family: var(--font-mono);" data-i18n="viz.harmonics.desc">Label harmonic peaks</span>
                 <button class="info-btn" data-explore="harmonic-analyzer" aria-label="Explore harmonic analyzer">&#8505;</button>
               </div>
             </div>
@@ -156,12 +195,10 @@
 
       <!-- Live panel: shown after audio starts -->
       <div id="live-panel" style="display: none;">
-
-        <!-- Toolbar -->
         <div class="viz-toolbar mb-16">
           <div class="viz-toolbar-group">
             <span class="dot dot-rec"></span>
-            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-2);" id="live-label" data-i18n="viz.live">LIVE</span>
+            <span style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--paper-dim);" id="live-label" data-i18n="viz.live">LIVE</span>
           </div>
           <div class="viz-toolbar-sep"></div>
           <div class="viz-toolbar-group">
@@ -198,8 +235,8 @@
 
     <!-- ===== Section 2: Waveform ===== -->
     <div class="section" id="section-waveform">
-      <div class="section-label">
-        <span class="section-number">02</span>
+      <div class="section-header">
+        <span class="section-number">§ 02</span>
         <span class="section-title" data-i18n="viz.section.waveform">Waveform</span>
         <span class="section-divider"></span>
         <button class="btn btn-sm viz-explore-btn" data-learn="time-domain" data-i18n="viz.explore">Explore</button>
@@ -207,13 +244,12 @@
       <div class="viz-canvas-panel mb-16">
         <div class="viz-canvas-head">
           <span class="panel-title" data-i18n="viz.canvas.waveform">Waveform / Time Domain</span>
-          <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-3);">getByteTimeDomainData()</span>
+          <span style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--paper-faint);">getByteTimeDomainData()</span>
         </div>
         <div class="viz-canvas-area">
           <canvas id="canvas-waveform" style="height: 140px;"></canvas>
         </div>
       </div>
-      <!-- Inline waveform explanation -->
       <div class="viz-inline-explain" id="waveform-explain" style="display:none;">
         <div class="viz-inline-explain-head">
           <span data-i18n="viz.wf.explain.title">Understanding the Waveform</span>
@@ -221,7 +257,7 @@
         </div>
         <div class="viz-inline-explain-body">
           <p data-i18n-html="viz.wf.explain.body">The waveform shows how air pressure varies over time. The <strong>horizontal axis</strong> is time (milliseconds), and the <strong>vertical axis</strong> is amplitude (from -1 to +1, representing the digital signal range).</p>
-          <div class="eq">x(t) = A &middot; sin(2&pi;f t + &phi;)</div>
+          <div class="math-block">x(t) = A &middot; sin(2&pi;f t + &phi;)</div>
           <div class="viz-explain-vars">
             <div><span class="viz-var-sym">A</span><span data-i18n="viz.wf.var.A">Amplitude — how loud the sound is</span></div>
             <div><span class="viz-var-sym">f</span><span data-i18n="viz.wf.var.f">Frequency — how fast it oscillates (pitch)</span></div>
@@ -234,8 +270,8 @@
 
     <!-- ===== Section 3: Frequency Spectrum ===== -->
     <div class="section" id="section-spectrum">
-      <div class="section-label">
-        <span class="section-number">03</span>
+      <div class="section-header">
+        <span class="section-number">§ 03</span>
         <span class="section-title" data-i18n="viz.section.spectrum">Frequency Spectrum</span>
         <span class="section-divider"></span>
         <button class="btn btn-sm viz-explore-btn" data-learn="frequency-domain" data-i18n="viz.explore">Explore</button>
@@ -243,14 +279,13 @@
       <div class="viz-canvas-panel mb-16">
         <div class="viz-canvas-head">
           <span class="panel-title" data-i18n="viz.canvas.spectrum">Frequency Spectrum / FFT</span>
-          <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-3);">click peaks to inspect &middot; hover for frequency</span>
+          <span style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--paper-faint);">click peaks to inspect &middot; hover for frequency</span>
         </div>
         <div class="viz-canvas-area" id="spectrum-container">
           <canvas id="canvas-spectrum" style="height: 220px;"></canvas>
           <div class="spectrum-tooltip" id="spectrum-tooltip" style="display:none;"></div>
         </div>
       </div>
-      <!-- Peak inspector panel -->
       <div class="viz-peak-inspector" id="peak-inspector" style="display:none;">
         <div class="viz-peak-head">
           <span class="viz-peak-title" data-i18n="viz.peak.inspector">Peak Inspector</span>
@@ -262,8 +297,8 @@
 
     <!-- ===== Section 4: Spectrogram ===== -->
     <div class="section" id="section-spectrogram">
-      <div class="section-label">
-        <span class="section-number">04</span>
+      <div class="section-header">
+        <span class="section-number">§ 04</span>
         <span class="section-title" data-i18n="viz.section.spectrogram">Spectrogram</span>
         <span class="section-divider"></span>
         <button class="btn btn-sm viz-explore-btn" data-learn="spectrogram" data-i18n="viz.explore">Explore</button>
@@ -271,7 +306,7 @@
       <div class="viz-canvas-panel mb-16">
         <div class="viz-canvas-head">
           <span class="panel-title" data-i18n="viz.canvas.spectrogram">Spectrogram / Waterfall</span>
-          <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-3);">scrolling FFT</span>
+          <span style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--paper-faint);">scrolling FFT</span>
         </div>
         <div class="viz-canvas-area" id="spectrogram-container">
           <canvas id="canvas-spectrogram" style="height: 200px;"></canvas>
@@ -282,18 +317,17 @@
 
     <!-- ===== Section 5: Live Analysis Readouts ===== -->
     <div class="section" id="section-readouts">
-      <div class="section-label">
-        <span class="section-number">05</span>
+      <div class="section-header">
+        <span class="section-number">§ 05</span>
         <span class="section-title" data-i18n="viz.section.readouts">Live Analysis Readouts</span>
         <span class="section-divider"></span>
         <div id="beat-indicator-wrap">
           <div id="beat-dot" class="beat-dot"></div>
-          <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-3);" data-i18n="viz.beat">BEAT</span>
+          <span style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--paper-faint);" data-i18n="viz.beat">BEAT</span>
         </div>
       </div>
 
       <div class="readout-cards" id="readout-cards">
-        <!-- Pitch card -->
         <div class="readout-card readout-card-wide" id="card-pitch">
           <div class="readout-card-head">
             <span class="readout-card-icon">&#9835;</span>
@@ -308,15 +342,14 @@
           <div class="readout-card-interpret" id="pitch-interpret"></div>
           <div class="readout-card-bar"><div class="readout-card-bar-fill" id="pitch-bar"></div></div>
           <div class="readout-card-expand" id="pitch-expand" style="display:none;">
-            <div class="eq-label" data-i18n="viz.pitch.eqLabel">Autocorrelation</div>
-            <div class="eq">r[&tau;] = (1/N) &middot; &Sigma; x[n] &middot; x[n+&tau;] / r[0]</div>
-            <div class="eq">f&#8320; = f<sub>s</sub> / &tau;<sub>peak</sub></div>
+            <div class="math-label" data-i18n="viz.pitch.eqLabel">Autocorrelation</div>
+            <div class="math-block">r[&tau;] = (1/N) &middot; &Sigma; x[n] &middot; x[n+&tau;] / r[0]</div>
+            <div class="math-block">f&#8320; = f<sub>s</sub> / &tau;<sub>peak</sub></div>
             <p class="readout-card-note" data-i18n="viz.pitch.note">Pitch is detected via normalized autocorrelation. The first peak after zero-lag gives the fundamental period. The confidence bar shows detection reliability.</p>
           </div>
           <button class="readout-card-toggle" data-target="pitch-expand" data-i18n="viz.explain">Explain</button>
         </div>
 
-        <!-- BPM card -->
         <div class="readout-card" id="card-bpm">
           <div class="readout-card-head">
             <span class="readout-card-icon">&#9654;</span>
@@ -328,15 +361,14 @@
           </div>
           <div class="readout-card-interpret" id="bpm-interpret"></div>
           <div class="readout-card-expand" id="bpm-expand" style="display:none;">
-            <div class="eq-label" data-i18n="viz.bpm.eqLabel">Energy Flux Beat Detection</div>
-            <div class="eq">E(t) = (1/K) &middot; &Sigma; |X[k]|&sup2;</div>
-            <div class="eq">beat &harr; E(t) &gt; C &middot; E&#772;<sub>avg</sub></div>
+            <div class="math-label" data-i18n="viz.bpm.eqLabel">Energy Flux Beat Detection</div>
+            <div class="math-block">E(t) = (1/K) &middot; &Sigma; |X[k]|&sup2;</div>
+            <div class="math-block">beat &harr; E(t) &gt; C &middot; E&#772;<sub>avg</sub></div>
             <p class="readout-card-note" data-i18n="viz.bpm.note">Beats are detected when instantaneous spectral energy exceeds the rolling average by a factor of 1.4. BPM is derived from the median of recent inter-beat intervals.</p>
           </div>
           <button class="readout-card-toggle" data-target="bpm-expand" data-i18n="viz.explain">Explain</button>
         </div>
 
-        <!-- RMS card -->
         <div class="readout-card" id="card-rms">
           <div class="readout-card-head">
             <span class="readout-card-icon">&#9650;</span>
@@ -349,15 +381,14 @@
           <div class="readout-card-interpret" id="rms-interpret"></div>
           <div class="readout-card-bar"><div class="readout-card-bar-fill readout-bar-amber" id="rms-bar"></div></div>
           <div class="readout-card-expand" id="rms-expand" style="display:none;">
-            <div class="eq-label" data-i18n="viz.rms.eqLabel">RMS &amp; dBFS</div>
-            <div class="eq">RMS = &radic;((1/N) &middot; &Sigma; x[n]&sup2;)</div>
-            <div class="eq">dBFS = 20 &middot; log<sub>10</sub>(RMS)</div>
+            <div class="math-label" data-i18n="viz.rms.eqLabel">RMS &amp; dBFS</div>
+            <div class="math-block">RMS = &radic;((1/N) &middot; &Sigma; x[n]&sup2;)</div>
+            <div class="math-block">dBFS = 20 &middot; log<sub>10</sub>(RMS)</div>
             <p class="readout-card-note" data-i18n="viz.rms.note">dBFS measures digital amplitude relative to full scale (0 = maximum). It is NOT calibrated to sound pressure level (dB SPL). A 6 dB increase roughly doubles amplitude.</p>
           </div>
           <button class="readout-card-toggle" data-target="rms-expand" data-i18n="viz.explain">Explain</button>
         </div>
 
-        <!-- Peak Frequency card -->
         <div class="readout-card" id="card-peak">
           <div class="readout-card-head">
             <span class="readout-card-icon">&#9651;</span>
@@ -369,14 +400,13 @@
           </div>
           <div class="readout-card-interpret" id="peak-interpret"></div>
           <div class="readout-card-expand" id="peak-expand" style="display:none;">
-            <div class="eq-label" data-i18n="viz.peak.eqLabel">Peak Frequency</div>
-            <div class="eq">f<sub>peak</sub> = k<sub>peak</sub> &middot; f<sub>s</sub> / N</div>
+            <div class="math-label" data-i18n="viz.peak.eqLabel">Peak Frequency</div>
+            <div class="math-block">f<sub>peak</sub> = k<sub>peak</sub> &middot; f<sub>s</sub> / N</div>
             <p class="readout-card-note" data-i18n="viz.peak.note">The peak frequency is the FFT bin with the highest magnitude. It indicates the dominant frequency component. The value is quantized to bin spacing (f_s/N).</p>
           </div>
           <button class="readout-card-toggle" data-target="peak-expand" data-i18n="viz.explain">Explain</button>
         </div>
 
-        <!-- Spectral Centroid card -->
         <div class="readout-card" id="card-centroid">
           <div class="readout-card-head">
             <span class="readout-card-icon">&#968;</span>
@@ -389,14 +419,13 @@
           <div class="readout-card-interpret" id="centroid-interpret"></div>
           <div class="readout-card-bar"><div class="readout-card-bar-fill readout-bar-magenta" id="centroid-bar"></div></div>
           <div class="readout-card-expand" id="centroid-expand" style="display:none;">
-            <div class="eq-label" data-i18n="viz.centroid.eqLabel">Spectral Centroid</div>
-            <div class="eq">SC = &Sigma; f<sub>k</sub> &middot; |X[k]| / &Sigma; |X[k]|</div>
+            <div class="math-label" data-i18n="viz.centroid.eqLabel">Spectral Centroid</div>
+            <div class="math-block">SC = &Sigma; f<sub>k</sub> &middot; |X[k]| / &Sigma; |X[k]|</div>
             <p class="readout-card-note" data-i18n="viz.centroid.note">The spectral centroid is the weighted average frequency of the spectrum. It measures timbral "brightness" — high values indicate treble-heavy sound, low values indicate bass-heavy sound.</p>
           </div>
           <button class="readout-card-toggle" data-target="centroid-expand" data-i18n="viz.explain">Explain</button>
         </div>
 
-        <!-- Bin spacing + resolution info card -->
         <div class="readout-card readout-card-info">
           <div class="readout-card-head">
             <span class="readout-card-icon">&#9881;</span>
@@ -413,13 +442,12 @@
 
     <!-- ===== Section 6: Experiments ===== -->
     <div class="section" id="section-experiments">
-      <div class="section-label">
-        <span class="section-number">06</span>
+      <div class="section-header">
+        <span class="section-number">§ 06</span>
         <span class="section-title" data-i18n="section.experiments">Experiments</span>
         <span class="section-divider"></span>
       </div>
 
-      <!-- Experiment comparison panel -->
       <div class="panel mb-16">
         <div class="panel-head">
           <span class="panel-title" data-i18n="viz.comparison">Experiment Comparison</span>
@@ -434,7 +462,6 @@
         </div>
       </div>
 
-      <!-- Experiment cards -->
       <div class="exp-cards" id="exp-cards">
         <div class="exp-card" data-exp="fft-size">
           <div class="exp-card-head">
@@ -500,13 +527,12 @@
 
     <!-- ===== Section 7: Learn ===== -->
     <div class="section" id="section-learn">
-      <div class="section-label">
-        <span class="section-number">07</span>
+      <div class="section-header">
+        <span class="section-number">§ 07</span>
         <span class="section-title" data-i18n="section.learn">Learn</span>
         <span class="section-divider"></span>
       </div>
 
-      <!-- Topic navigation -->
       <div class="learn-topics" id="learn-topics">
         <button class="learn-topic-btn active" data-topic="sound-waves" data-i18n="viz.learn.sound">Sound Waves</button>
         <button class="learn-topic-btn" data-topic="time-domain" data-i18n="viz.learn.time">Time Domain</button>
@@ -520,9 +546,7 @@
         <button class="learn-topic-btn" data-topic="rms" data-i18n="viz.learn.rms">RMS &amp; dBFS</button>
       </div>
 
-      <!-- Topic content panels -->
       <div class="learn-content" id="learn-content">
-        <!-- Sound Waves -->
         <div class="learn-panel active" data-topic-panel="sound-waves">
           <div class="panel">
             <div class="panel-body">
@@ -530,13 +554,13 @@
                 <p data-i18n-html="viz.physics.sound"><strong>Sound</strong> is a mechanical wave &mdash; pressure variations propagating through air at approximately 343 m/s (at 20&deg;C). The human ear perceives pressure oscillations in the range of 20 Hz to 20,000 Hz.</p>
                 <div class="cols-2 mt-16">
                   <div>
-                    <div class="eq-label" data-i18n="viz.physics.waveLabel">Wave equation</div>
-                    <div class="eq">&part;&sup2;p/&part;t&sup2; = c&sup2; &middot; &nabla;&sup2;p</div>
+                    <div class="math-label" data-i18n="viz.physics.waveLabel">Wave equation</div>
+                    <div class="math-block">&part;&sup2;p/&part;t&sup2; = c&sup2; &middot; &nabla;&sup2;p</div>
                     <p style="margin-top: 8px;" data-i18n="viz.physics.waveDesc">where <em>p</em> is acoustic pressure and <em>c</em> is the speed of sound.</p>
                   </div>
                   <div>
-                    <div class="eq-label" data-i18n="viz.physics.digitalLabel">Digital sampling</div>
-                    <div class="eq">f<sub>Nyquist</sub> = f<sub>s</sub> / 2</div>
+                    <div class="math-label" data-i18n="viz.physics.digitalLabel">Digital sampling</div>
+                    <div class="math-block">f<sub>Nyquist</sub> = f<sub>s</sub> / 2</div>
                     <p style="margin-top: 8px;" data-i18n="viz.physics.digitalDesc">At 44.1 kHz sample rate, frequencies up to 22.05 kHz can be represented.</p>
                   </div>
                 </div>
@@ -546,14 +570,13 @@
           </div>
         </div>
 
-        <!-- Time Domain -->
         <div class="learn-panel" data-topic-panel="time-domain">
           <div class="panel">
             <div class="panel-body">
               <div class="content-block">
                 <p data-i18n-html="viz.learn.time.body">The <strong>time domain</strong> shows how a signal changes over time. The waveform visualization displays amplitude (vertical) against time (horizontal). Every sound can be represented this way — but it doesn't directly tell you what frequencies are present.</p>
-                <div class="eq-label" data-i18n="viz.wf.explain.title">Sine Wave</div>
-                <div class="eq">x(t) = A &middot; sin(2&pi;f t + &phi;)</div>
+                <div class="math-label" data-i18n="viz.wf.explain.title">Sine Wave</div>
+                <div class="math-block">x(t) = A &middot; sin(2&pi;f t + &phi;)</div>
                 <div class="viz-explain-vars">
                   <div><span class="viz-var-sym">A</span><span data-i18n="viz.wf.var.A">Amplitude — how loud the sound is</span></div>
                   <div><span class="viz-var-sym">f</span><span data-i18n="viz.wf.var.f">Frequency — how fast it oscillates (pitch)</span></div>
@@ -565,7 +588,6 @@
           </div>
         </div>
 
-        <!-- Frequency Domain -->
         <div class="learn-panel" data-topic-panel="frequency-domain">
           <div class="panel">
             <div class="panel-body">
@@ -578,16 +600,15 @@
           </div>
         </div>
 
-        <!-- Fourier Transform -->
         <div class="learn-panel" data-topic-panel="fourier">
           <div class="panel">
             <div class="panel-body">
               <div class="content-block">
                 <p data-i18n-html="viz.math.fourier.p1">The <strong>Discrete Fourier Transform (DFT)</strong> decomposes a time-domain signal into its frequency components:</p>
-                <div class="eq-label" data-i18n="viz.math.fourier.dftLabel">DFT Definition</div>
-                <div class="eq">X[k] = &Sigma;<sub>n=0</sub><sup>N-1</sup> x[n] &middot; e<sup>-2&pi;i&middot;k&middot;n/N</sup></div>
+                <div class="math-label" data-i18n="viz.math.fourier.dftLabel">DFT Definition</div>
+                <div class="math-block">X[k] = &Sigma;<sub>n=0</sub><sup>N-1</sup> x[n] &middot; e<sup>-2&pi;i&middot;k&middot;n/N</sup></div>
                 <p data-i18n-html="viz.math.fourier.p2">The <strong>FFT</strong> computes this in O(N log N). Bin <em>k</em> corresponds to frequency:</p>
-                <div class="eq">f<sub>k</sub> = k &middot; f<sub>s</sub> / N</div>
+                <div class="math-block">f<sub>k</sub> = k &middot; f<sub>s</sub> / N</div>
                 <p data-i18n-html="viz.math.fourier.p3"><strong>Important:</strong> bin spacing (f<sub>s</sub>/N) is the distance between adjacent FFT output bins. It is <em>not</em> the same as frequency resolution — the ability to distinguish two simultaneous tones depends on the window's main-lobe width (see Window Functions).</p>
                 <div class="learn-link" data-viz-link="spectrum">&#8594; <span data-i18n="viz.learn.gotoSpec">Go to Spectrum</span></div>
               </div>
@@ -595,13 +616,12 @@
           </div>
         </div>
 
-        <!-- Sampling & Nyquist -->
         <div class="learn-panel" data-topic-panel="sampling">
           <div class="panel">
             <div class="panel-body">
               <div class="content-block">
                 <p data-i18n-html="viz.learn.sampling.body">Digital audio samples a continuous sound wave at discrete time intervals. The <strong>sample rate</strong> f<sub>s</sub> determines the highest frequency that can be represented:</p>
-                <div class="eq">f<sub>Nyquist</sub> = f<sub>s</sub> / 2</div>
+                <div class="math-block">f<sub>Nyquist</sub> = f<sub>s</sub> / 2</div>
                 <p data-i18n-html="viz.learn.sampling.body2">At 44.1 kHz (CD quality), frequencies up to 22.05 kHz can be accurately represented. Frequencies above the Nyquist limit cause <em>aliasing</em> — they appear as false lower frequencies in the spectrum. An anti-aliasing filter removes frequencies above f<sub>s</sub>/2 before sampling.</p>
                 <div class="learn-link" data-viz-link="waveform">&#8594; <span data-i18n="viz.learn.gotoWf">Go to Waveform</span></div>
               </div>
@@ -609,7 +629,6 @@
           </div>
         </div>
 
-        <!-- Window Functions -->
         <div class="learn-panel" data-topic-panel="windows">
           <div class="panel">
             <div class="panel-body">
@@ -617,14 +636,14 @@
                 <p data-i18n-html="viz.physics.windows"><strong>Window functions</strong> taper the signal at the boundaries to reduce spectral leakage. There is a trade-off: lower sidelobes (less leakage) come at the cost of a wider main lobe (poorer frequency resolution). The AnalyserNode uses a Blackman window by default; the overlay feature lets you compare rectangular, Hann, and Hamming windows.</p>
                 <div class="cols-2 mt-16">
                   <div>
-                    <div class="eq-label" data-i18n="viz.learn.windows.rect">Rectangular</div>
-                    <div class="eq">w[n] = 1</div>
-                    <p style="margin-top: 4px; font-size: 0.8rem; color: var(--text-3);">Main lobe: 2 bins &middot; Sidelobes: -13 dB</p>
+                    <div class="math-label" data-i18n="viz.learn.windows.rect">Rectangular</div>
+                    <div class="math-block">w[n] = 1</div>
+                    <p style="margin-top: 4px; font-size: 0.78rem; color: var(--paper-faint);">Main lobe: 2 bins &middot; Sidelobes: -13 dB</p>
                   </div>
                   <div>
-                    <div class="eq-label">Hann</div>
-                    <div class="eq">w[n] = 0.5(1 - cos(2&pi;n/(N-1)))</div>
-                    <p style="margin-top: 4px; font-size: 0.8rem; color: var(--text-3);">Main lobe: 4 bins &middot; Sidelobes: -31 dB</p>
+                    <div class="math-label">Hann</div>
+                    <div class="math-block">w[n] = 0.5(1 - cos(2&pi;n/(N-1)))</div>
+                    <p style="margin-top: 4px; font-size: 0.78rem; color: var(--paper-faint);">Main lobe: 4 bins &middot; Sidelobes: -31 dB</p>
                   </div>
                 </div>
                 <div class="learn-link" data-viz-link="spectrum">&#8594; <span data-i18n="viz.learn.gotoSpec">Go to Spectrum</span></div>
@@ -633,13 +652,12 @@
           </div>
         </div>
 
-        <!-- Harmonics -->
         <div class="learn-panel" data-topic-panel="harmonics">
           <div class="panel">
             <div class="panel-body">
               <div class="content-block">
                 <p data-i18n-html="viz.math.autocorr.p5"><strong>Harmonic analysis</strong> searches for peaks at integer multiples of the fundamental (f<sub>h</sub> = h&middot;f<sub>0</sub>). Only peaks that align with the harmonic series and exceed 5% of the fundamental amplitude are labeled.</p>
-                <div class="eq">f<sub>h</sub> = h &middot; f<sub>0</sub>,  h = 1, 2, 3, &hellip;</div>
+                <div class="math-block">f<sub>h</sub> = h &middot; f<sub>0</sub>,  h = 1, 2, 3, &hellip;</div>
                 <p data-i18n-html="viz.learn.harmonics.body">A sawtooth wave contains all harmonics with amplitudes decreasing as 1/n. A square wave contains only odd harmonics. A triangle wave contains odd harmonics with 1/n&sup2; amplitudes. The pattern of harmonics determines timbre — what makes a violin sound different from a flute.</p>
                 <div class="learn-link" data-viz-link="spectrum">&#8594; <span data-i18n="viz.learn.gotoSpec">Go to Spectrum</span></div>
               </div>
@@ -647,28 +665,26 @@
           </div>
         </div>
 
-        <!-- Pitch Detection -->
         <div class="learn-panel" data-topic-panel="pitch">
           <div class="panel">
             <div class="panel-body">
               <div class="content-block">
                 <p data-i18n-html="viz.math.autocorr.p1"><strong>Pitch detection</strong> uses normalized autocorrelation:</p>
-                <div class="eq">r[&tau;] = (1/N) &middot; &Sigma; x[n] &middot; x[n+&tau;] / r[0]</div>
+                <div class="math-block">r[&tau;] = (1/N) &middot; &Sigma; x[n] &middot; x[n+&tau;] / r[0]</div>
                 <p data-i18n-html="viz.math.autocorr.p2">The first peak after zero-lag gives the fundamental period. Frequency = f<sub>s</sub> / &tau;.</p>
-                <div class="eq">MIDI = 69 + 12 &middot; log<sub>2</sub>(f / 440)</div>
+                <div class="math-block">MIDI = 69 + 12 &middot; log<sub>2</sub>(f / 440)</div>
                 <div class="learn-link" data-viz-link="readouts">&#8594; <span data-i18n="viz.learn.gotoRead">Go to Readouts</span></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Beat Detection -->
         <div class="learn-panel" data-topic-panel="beat">
           <div class="panel">
             <div class="panel-body">
               <div class="content-block">
                 <p data-i18n-html="viz.math.autocorr.p3"><strong>Beat detection</strong> computes instantaneous spectral energy:</p>
-                <div class="eq">E(t) = (1/K) &middot; &Sigma; |X[k]|&sup2;<br/><br/>beat &harr; E(t) &gt; C &middot; E&#772;<sub>avg</sub></div>
+                <div class="math-block">E(t) = (1/K) &middot; &Sigma; |X[k]|&sup2;<br/><br/>beat &harr; E(t) &gt; C &middot; E&#772;<sub>avg</sub></div>
                 <p data-i18n-html="viz.math.autocorr.p4">BPM is derived from the median of recent inter-beat intervals.</p>
                 <div class="learn-link" data-viz-link="readouts">&#8594; <span data-i18n="viz.learn.gotoRead">Go to Readouts</span></div>
               </div>
@@ -676,16 +692,15 @@
           </div>
         </div>
 
-        <!-- RMS & dBFS -->
         <div class="learn-panel" data-topic-panel="rms">
           <div class="panel">
             <div class="panel-body">
               <div class="content-block">
-                <div class="eq-label" data-i18n="viz.physics.rmsLabel">RMS &amp; dBFS</div>
-                <div class="eq">RMS = &radic;((1/N) &middot; &Sigma; x[n]&sup2;)<br/><br/>dBFS = 20 &middot; log<sub>10</sub>(RMS)</div>
+                <div class="math-label" data-i18n="viz.physics.rmsLabel">RMS &amp; dBFS</div>
+                <div class="math-block">RMS = &radic;((1/N) &middot; &Sigma; x[n]&sup2;)<br/><br/>dBFS = 20 &middot; log<sub>10</sub>(RMS)</div>
                 <p style="margin-top: 8px;" data-i18n-html="viz.physics.rmsDesc"><strong>dBFS</strong> is digital amplitude relative to full scale (0 = max). It is <em>not</em> calibrated to sound pressure level (dB SPL). Converting requires a calibrated reference microphone.</p>
-                <div class="eq-label" style="margin-top:16px;" data-i18n="viz.physics.centroidLabel">Spectral centroid</div>
-                <div class="eq">SC = &Sigma; f<sub>k</sub> &middot; |X[k]| / &Sigma; |X[k]|</div>
+                <div class="math-label" style="margin-top:16px;" data-i18n="viz.physics.centroidLabel">Spectral centroid</div>
+                <div class="math-block">SC = &Sigma; f<sub>k</sub> &middot; |X[k]| / &Sigma; |X[k]|</div>
                 <p style="margin-top: 8px;" data-i18n="viz.physics.centroidDesc">Weighted mean frequency &mdash; measures timbral "brightness".</p>
                 <div class="learn-link" data-viz-link="readouts">&#8594; <span data-i18n="viz.learn.gotoRead">Go to Readouts</span></div>
               </div>
@@ -695,6 +710,48 @@
       </div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand" data-i18n="footer.brand">MPC Sound Lab</div>
+        <p class="footer-brand-desc" data-i18n="footer.brandDesc">An independent digital research studio exploring the intersection of mathematics, physics, sound, music technology, and accessibility.</p>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.nav">Navigation</div>
+        <a href="index.html" class="footer-link" data-i18n="nav.home">Home</a>
+        <a href="experiments.html" class="footer-link" data-i18n="nav.experiments">Experiments</a>
+        <a href="field-notes.html" class="footer-link" data-i18n="nav.fieldNotes">Field Notes</a>
+        <a href="research.html" class="footer-link" data-i18n="nav.research">Research</a>
+        <a href="about.html" class="footer-link" data-i18n="nav.about">About</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.lab">Lab Modules</div>
+        <a href="visualizer.html" class="footer-link" data-i18n="nav.visualizer">Sound Visualizer</a>
+        <a href="generator.html" class="footer-link" data-i18n="nav.generator">Music Generator</a>
+        <a href="accessibility.html" class="footer-link" data-i18n="nav.accessibility">Accessibility</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.experiments">Experiments</div>
+        <a href="experiments.html" class="footer-link">EXP-01 Fourier</a>
+        <a href="experiments.html" class="footer-link">EXP-02 FFT Resolution</a>
+        <a href="experiments.html" class="footer-link">EXP-03 Leakage</a>
+        <a href="experiments.html" class="footer-link">EXP-04 Harmonics</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.knowledge">Knowledge</div>
+        <a href="field-notes.html" class="footer-link">Mathematics</a>
+        <a href="field-notes.html" class="footer-link">Physics</a>
+        <a href="field-notes.html" class="footer-link">Acoustics</a>
+        <a href="field-notes.html" class="footer-link">Signal Processing</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024–2025 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span data-i18n="footer.version">v2.0 — Editorial Redesign</span>
+    </div>
+  </footer>
 
   <script type="module">
     import { App } from './src/js/core/app.js';

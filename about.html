@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — MPC Sound Lab</title>
+  <link rel="stylesheet" href="src/css/design-system.css?v=2" />
+  <link rel="stylesheet" href="src/css/nav.css?v=2" />
+</head>
+<body class="page-inner">
+  <div class="ambient-grain"></div>
+  <div class="ambient-vignette"></div>
+
+  <nav class="site-nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-mark">M</span>
+      <span class="nav-brand-text">MPC SOUND LAB</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger" data-i18n="nav.lab">Lab</a>
+        <div class="nav-dropdown-menu">
+          <a href="visualizer.html" class="nav-dropdown-link"><span class="nav-dropdown-link-title" data-i18n="nav.visualizer">Sound Visualizer</span><span class="nav-dropdown-link-desc" data-i18n="nav.visualizer.desc">Real-time audio analysis</span></a>
+          <a href="generator.html" class="nav-dropdown-link"><span class="nav-dropdown-link-title" data-i18n="nav.generator">Music Generator</span><span class="nav-dropdown-link-desc" data-i18n="nav.generator.desc">Mathematical composition</span></a>
+          <a href="accessibility.html" class="nav-dropdown-link"><span class="nav-dropdown-link-title" data-i18n="nav.accessibility">Accessibility</span><span class="nav-dropdown-link-desc" data-i18n="nav.accessibility.desc">Sound-to-visual translation</span></a>
+        </div>
+      </div>
+      <a href="experiments.html" class="nav-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-link active" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-right">
+      <button class="lang-btn" data-i18n="nav.lang">中文</button>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mobile-menu">
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Navigation</div>
+      <a href="index.html" class="nav-mobile-link" data-i18n="nav.home">Home</a>
+      <a href="experiments.html" class="nav-mobile-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-mobile-link" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-mobile-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-mobile-link active" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Lab Modules</div>
+      <a href="visualizer.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.visualizer">Sound Visualizer</a>
+      <a href="generator.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.generator">Music Generator</a>
+      <a href="accessibility.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.accessibility">Accessibility</a>
+    </div>
+  </div>
+
+  <div class="page">
+    <header class="editorial-header">
+      <div class="editorial-eyebrow">Studio / About &amp; Archive</div>
+      <h1 class="editorial-title">About</h1>
+      <p class="editorial-subtitle">
+        MPC Sound Lab is an independent digital research studio exploring the intersection of
+        mathematics, physics, sound, music technology, and accessibility. Built with vanilla JavaScript,
+        Web Audio API, and Canvas 2D. No frameworks, no build step, no dependencies.
+      </p>
+      <div class="metadata-strip">
+        <span><span class="ms-label">Founded</span><span class="ms-value">2024</span></span>
+        <span><span class="ms-label">Version</span><span class="ms-value">2.0</span></span>
+        <span><span class="ms-label">License</span><span class="ms-value">MIT</span></span>
+      </div>
+    </header>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">§ 01</span>
+        <span class="section-title">The Studio</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="content-block">
+            <p>MPC Sound Lab began as a question: <strong>can a web browser serve as a complete scientific instrument for sound analysis?</strong> Not a simplified demo, not a toy — a real tool with custom FFT, real-time visualization, and honest measurements.</p>
+            <p>The answer turned out to be yes, with caveats. The Web Audio API provides sample-accurate access to microphone data. Canvas 2D can render three visualizations at 60fps. A custom radix-2 FFT implementation gives us control over windowing that the built-in AnalyserNode cannot provide.</p>
+            <p>The caveats are important: browser dBFS is not calibrated to dB SPL. Bin spacing is not the same as frequency resolution. Visual translation is not hearing. Documenting these limitations honestly is a core principle of this studio.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">§ 02</span>
+        <span class="section-title">Technology</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="cols-2">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Stack</span></div>
+          <div class="panel-body">
+            <div class="content-block">
+              <p><strong>Vanilla JavaScript</strong> — ES6 modules, zero frameworks, zero build step. The entire application loads directly from HTML files.</p>
+              <p><strong>Web Audio API</strong> — AudioContext, AnalyserNode, OscillatorNode, GainNode. All audio processing uses browser-native APIs.</p>
+              <p><strong>Canvas 2D</strong> — Waveform, FFT spectrum, spectrogram, and generative visuals all use the 2D canvas context. No WebGL.</p>
+              <p><strong>CSS Custom Properties</strong> — A token-based design system with no preprocessor.</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Custom Implementations</span></div>
+          <div class="panel-body">
+            <div class="content-block">
+              <p><strong>Radix-2 FFT</strong> — Because AnalyserNode uses a Blackman window internally and cannot be changed, a custom FFT implementation was needed for the window function explorer.</p>
+              <p><strong>Autocorrelation pitch detection</strong> — Normalized autocorrelation with confidence scoring, running at ~10 Hz.</p>
+              <p><strong>Energy-based beat detection</strong> — Spectral flux with adaptive threshold and median-based BPM estimation.</p>
+              <p><strong>Harmonic analyzer</strong> — Peak detection with integer-multiple validation and reliability scoring.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">§ 03</span>
+        <span class="section-title">Principles</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="content-block">
+            <p><strong>Local first.</strong> All processing happens in the browser. No audio is recorded, transmitted, or stored. The microphone input never leaves your device.</p>
+            <p><strong>Open and transparent.</strong> The code is open source. Every measurement is explained. Every limitation is documented.</p>
+            <p><strong>Accessible by design.</strong> Keyboard navigation, focus-visible outlines, prefers-reduced-motion support, and ARIA labels throughout. The Accessibility module extends this commitment to sound-to-visual translation.</p>
+            <p><strong>Educational, not just functional.</strong> Every tool includes mathematical foundations, physical explanations, and guided experiments. The goal is understanding, not just measurement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">§ 04</span>
+        <span class="section-title">Archive</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="experiment">
+          <div class="exp-num">v1</div>
+          <div class="exp-body">
+            <div class="exp-title">MPC Sound Lab v1.0</div>
+            <div class="exp-desc" style="color: var(--paper-faint);">Initial release. Basic four-page dark-themed website with waveform, spectrum, spectrogram, pitch and beat detection. Simple topbar navigation.</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">v1.5</div>
+          <div class="exp-body">
+            <div class="exp-title">MPC Sound Lab v1.5 — Visualizer UX Redesign</div>
+            <div class="exp-desc" style="color: var(--paper-faint);">7-section visualizer with interactive spectrum, readout cards with interpretation bars, experiment auto-config, learn section with 10 topics, 51 new i18n keys. Cinematic dark theme with ambient background.</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">v2</div>
+          <div class="exp-body">
+            <div class="exp-title">MPC Sound Lab v2.0 — Editorial Redesign</div>
+            <div class="exp-desc" style="color: var(--paper-faint);">Complete creative redesign. Editorial design system with asymmetric grids, § section numbering, warm off-white text on near-black. 8-destination navigation with dropdown. Sound sculpture generative canvas. Experiments archive, Field Notes library, Research, and About pages. Unified design across all pages.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand" data-i18n="footer.brand">MPC Sound Lab</div>
+        <p class="footer-brand-desc" data-i18n="footer.brandDesc">An independent digital research studio exploring the intersection of mathematics, physics, sound, music technology, and accessibility.</p>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.nav">Navigation</div>
+        <a href="index.html" class="footer-link" data-i18n="nav.home">Home</a>
+        <a href="experiments.html" class="footer-link" data-i18n="nav.experiments">Experiments</a>
+        <a href="field-notes.html" class="footer-link" data-i18n="nav.fieldNotes">Field Notes</a>
+        <a href="research.html" class="footer-link" data-i18n="nav.research">Research</a>
+        <a href="about.html" class="footer-link" data-i18n="nav.about">About</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.lab">Lab Modules</div>
+        <a href="visualizer.html" class="footer-link" data-i18n="nav.visualizer">Sound Visualizer</a>
+        <a href="generator.html" class="footer-link" data-i18n="nav.generator">Music Generator</a>
+        <a href="accessibility.html" class="footer-link" data-i18n="nav.accessibility">Accessibility</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.experiments">Experiments</div>
+        <a href="experiments.html" class="footer-link">EXP-01 Fourier</a>
+        <a href="experiments.html" class="footer-link">EXP-02 FFT Resolution</a>
+        <a href="experiments.html" class="footer-link">EXP-03 Leakage</a>
+        <a href="experiments.html" class="footer-link">EXP-04 Harmonics</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.knowledge">Knowledge</div>
+        <a href="field-notes.html" class="footer-link">Mathematics</a>
+        <a href="field-notes.html" class="footer-link">Physics</a>
+        <a href="field-notes.html" class="footer-link">Acoustics</a>
+        <a href="field-notes.html" class="footer-link">Signal Processing</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024&ndash;2025 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span data-i18n="footer.version">v2.0 &mdash; Editorial Redesign</span>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { App } from './src/js/core/app.js';
+    new App().init();
+  </script>
+</body>
+</html>

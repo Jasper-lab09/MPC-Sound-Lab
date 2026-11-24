@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Field Notes — MPC Sound Lab</title>
+  <link rel="stylesheet" href="src/css/design-system.css?v=2" />
+  <link rel="stylesheet" href="src/css/nav.css?v=2" />
+</head>
+<body class="page-inner">
+  <div class="ambient-grain"></div>
+  <div class="ambient-vignette"></div>
+
+  <!-- Navigation -->
+  <nav class="site-nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-mark">M</span>
+      <span class="nav-brand-text">MPC SOUND LAB</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-dropdown-trigger" data-i18n="nav.lab">Lab</a>
+        <div class="nav-dropdown-menu">
+          <a href="visualizer.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.visualizer">Sound Visualizer</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.visualizer.desc">Real-time audio analysis</span>
+          </a>
+          <a href="generator.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.generator">Music Generator</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.generator.desc">Mathematical composition</span>
+          </a>
+          <a href="accessibility.html" class="nav-dropdown-link">
+            <span class="nav-dropdown-link-title" data-i18n="nav.accessibility">Accessibility</span>
+            <span class="nav-dropdown-link-desc" data-i18n="nav.accessibility.desc">Sound-to-visual translation</span>
+          </a>
+        </div>
+      </div>
+      <a href="experiments.html" class="nav-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-link active" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-right">
+      <button class="lang-btn" data-i18n="nav.lang">中文</button>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <!-- Mobile menu -->
+  <div class="nav-mobile-menu">
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Navigation</div>
+      <a href="index.html" class="nav-mobile-link" data-i18n="nav.home">Home</a>
+      <a href="experiments.html" class="nav-mobile-link" data-i18n="nav.experiments">Experiments</a>
+      <a href="field-notes.html" class="nav-mobile-link active" data-i18n="nav.fieldNotes">Field Notes</a>
+      <a href="research.html" class="nav-mobile-link" data-i18n="nav.research">Research</a>
+      <a href="about.html" class="nav-mobile-link" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-section-title">Lab Modules</div>
+      <a href="visualizer.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.visualizer">Sound Visualizer</a>
+      <a href="generator.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.generator">Music Generator</a>
+      <a href="accessibility.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.accessibility">Accessibility</a>
+    </div>
+  </div>
+
+  <div class="page">
+    <!-- Editorial Header -->
+    <header class="editorial-header">
+      <div class="editorial-eyebrow">Library / 06 Categories</div>
+      <h1 class="editorial-title" data-i18n="fn.title">Field Notes</h1>
+      <p class="editorial-subtitle" data-i18n="fn.desc">
+        A knowledge library documenting the mathematics, physics, and engineering behind each experiment.
+        Organized by discipline, these notes provide the theoretical foundation for the tools in the Lab.
+      </p>
+      <div class="metadata-strip">
+        <span><span class="ms-label">Categories</span><span class="ms-value">6</span></span>
+        <span><span class="ms-label">Notes</span><span class="ms-value">54</span></span>
+        <span><span class="ms-label">Updated</span><span class="ms-value">2025-11</span></span>
+      </div>
+    </header>
+
+    <!-- Categories grid -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">§ 01</span>
+        <span class="section-title" data-i18n="fn.categories">Categories</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="cols-3">
+        <div class="panel">
+          <div class="panel-body">
+            <div style="font-size: 1.6rem; color: var(--cyan); margin-bottom: 8px; font-family: var(--font-mono);">&#8721;</div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--paper); margin-bottom: 6px; letter-spacing: -0.02em;" data-i18n="home.fn.math">Mathematics</div>
+            <div class="content-block" style="font-size: 0.82rem;" data-i18n="home.fn.math.desc">Fourier transforms, autocorrelation, harmonic series, Euclidean algorithms.</div>
+            <div class="metadata-strip" style="margin-top: 16px; border: none; padding: 0;">
+              <span><span class="ms-label">Notes</span><span class="ms-value">12</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-body">
+            <div style="font-size: 1.6rem; color: var(--violet); margin-bottom: 8px; font-family: var(--font-mono);">&#9758;</div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--paper); margin-bottom: 6px; letter-spacing: -0.02em;" data-i18n="home.fn.physics">Physics</div>
+            <div class="content-block" style="font-size: 0.82rem;" data-i18n="home.fn.physics.desc">Wave mechanics, cochlear mechanics, consonance, vocal tract acoustics.</div>
+            <div class="metadata-strip" style="margin-top: 16px; border: none; padding: 0;">
+              <span><span class="ms-label">Notes</span><span class="ms-value">8</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-body">
+            <div style="font-size: 1.6rem; color: var(--cyan); margin-bottom: 8px; font-family: var(--font-mono);">&#9836;</div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--paper); margin-bottom: 6px; letter-spacing: -0.02em;" data-i18n="home.fn.acoustics">Acoustics</div>
+            <div class="content-block" style="font-size: 0.82rem;" data-i18n="home.fn.acoustics.desc">Room acoustics, reverberation, standing waves, sound propagation.</div>
+            <div class="metadata-strip" style="margin-top: 16px; border: none; padding: 0;">
+              <span><span class="ms-label">Notes</span><span class="ms-value">6</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-body">
+            <div style="font-size: 1.6rem; color: var(--violet); margin-bottom: 8px; font-family: var(--font-mono);">&#9680;</div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--paper); margin-bottom: 6px; letter-spacing: -0.02em;" data-i18n="home.fn.signal">Signal Processing</div>
+            <div class="content-block" style="font-size: 0.82rem;" data-i18n="home.fn.signal.desc">FFT, window functions, spectral leakage, digital filtering, DSP fundamentals.</div>
+            <div class="metadata-strip" style="margin-top: 16px; border: none; padding: 0;">
+              <span><span class="ms-label">Notes</span><span class="ms-value">14</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-body">
+            <div style="font-size: 1.6rem; color: var(--cyan); margin-bottom: 8px; font-family: var(--font-mono);">&#9833;</div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--paper); margin-bottom: 6px; letter-spacing: -0.02em;" data-i18n="home.fn.music">Music Theory</div>
+            <div class="content-block" style="font-size: 0.82rem;" data-i18n="home.fn.music.desc">Just intonation, equal temperament, harmonic series, rhythm patterns.</div>
+            <div class="metadata-strip" style="margin-top: 16px; border: none; padding: 0;">
+              <span><span class="ms-label">Notes</span><span class="ms-value">9</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-body">
+            <div style="font-size: 1.6rem; color: var(--violet); margin-bottom: 8px; font-family: var(--font-mono);">&#9673;</div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--paper); margin-bottom: 6px; letter-spacing: -0.02em;" data-i18n="home.fn.access">Accessibility</div>
+            <div class="content-block" style="font-size: 0.82rem;" data-i18n="home.fn.access.desc">Cross-modal perception, visual translation, sound classification.</div>
+            <div class="metadata-strip" style="margin-top: 16px; border: none; padding: 0;">
+              <span><span class="ms-label">Notes</span><span class="ms-value">5</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent notes -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-number">§ 02</span>
+        <span class="section-title" data-i18n="fn.recent">Recent Notes</span>
+        <span class="section-divider"></span>
+      </div>
+      <div class="panel">
+        <div class="experiment">
+          <div class="exp-num">01</div>
+          <div class="exp-body">
+            <div class="exp-title">The Discrete Fourier Transform</div>
+            <div class="exp-desc" style="color: var(--paper-faint);">Signal Processing — How the DFT decomposes a time-domain signal into frequency components. O(N log N) via the FFT algorithm.</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">02</div>
+          <div class="exp-body">
+            <div class="exp-title">Window Functions and Spectral Leakage</div>
+            <div class="exp-desc" style="color: var(--paper-faint);">Signal Processing — Why finite observation windows cause energy to leak into neighboring frequency bins, and how tapering reduces it.</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">03</div>
+          <div class="exp-body">
+            <div class="exp-title">Autocorrelation for Pitch Detection</div>
+            <div class="exp-desc" style="color: var(--paper-faint);">Mathematics — Normalized autocorrelation finds the fundamental period of a quasi-periodic signal by measuring self-similarity at different lags.</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">04</div>
+          <div class="exp-body">
+            <div class="exp-title">Harmonic Series and Consonance</div>
+            <div class="exp-desc" style="color: var(--paper-faint);">Music Theory — Integer-multiple overtones create regular excitation patterns on the basilar membrane, perceived as consonant intervals.</div>
+          </div>
+        </div>
+        <div class="experiment">
+          <div class="exp-num">05</div>
+          <div class="exp-body">
+            <div class="exp-title">Euclidean Rhythms</div>
+            <div class="exp-desc" style="color: var(--paper-faint);">Mathematics — The Euclidean algorithm distributes hits evenly across steps, producing traditional world rhythms like tresillo and cinquillo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand" data-i18n="footer.brand">MPC Sound Lab</div>
+        <p class="footer-brand-desc" data-i18n="footer.brandDesc">An independent digital research studio exploring the intersection of mathematics, physics, sound, music technology, and accessibility.</p>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.nav">Navigation</div>
+        <a href="index.html" class="footer-link" data-i18n="nav.home">Home</a>
+        <a href="experiments.html" class="footer-link" data-i18n="nav.experiments">Experiments</a>
+        <a href="field-notes.html" class="footer-link" data-i18n="nav.fieldNotes">Field Notes</a>
+        <a href="research.html" class="footer-link" data-i18n="nav.research">Research</a>
+        <a href="about.html" class="footer-link" data-i18n="nav.about">About</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.lab">Lab Modules</div>
+        <a href="visualizer.html" class="footer-link" data-i18n="nav.visualizer">Sound Visualizer</a>
+        <a href="generator.html" class="footer-link" data-i18n="nav.generator">Music Generator</a>
+        <a href="accessibility.html" class="footer-link" data-i18n="nav.accessibility">Accessibility</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.experiments">Experiments</div>
+        <a href="experiments.html" class="footer-link">EXP-01 Fourier</a>
+        <a href="experiments.html" class="footer-link">EXP-02 FFT Resolution</a>
+        <a href="experiments.html" class="footer-link">EXP-03 Leakage</a>
+        <a href="experiments.html" class="footer-link">EXP-04 Harmonics</a>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.knowledge">Knowledge</div>
+        <a href="field-notes.html" class="footer-link">Mathematics</a>
+        <a href="field-notes.html" class="footer-link">Physics</a>
+        <a href="field-notes.html" class="footer-link">Acoustics</a>
+        <a href="field-notes.html" class="footer-link">Signal Processing</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024&ndash;2025 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span data-i18n="footer.version">v2.0 &mdash; Editorial Redesign</span>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { App } from './src/js/core/app.js';
+    new App().init();
+  </script>
+</body>
+</html>

@@ -1,18 +1,19 @@
 /* Accessibility module styles */
 
 .access-disclaimer {
-  background: rgba(255, 183, 77, 0.06);
-  border: 1px solid rgba(255, 183, 77, 0.15);
-  border-radius: var(--radius);
+  background: rgba(251, 191, 36, 0.06);
+  border: 1px solid rgba(251, 191, 36, 0.15);
+  border-left: 2px solid var(--signal-dev);
+  border-radius: 2px;
   padding: 14px 16px;
   font-size: 0.82rem;
-  color: var(--text-2);
+  color: var(--paper-dim);
   line-height: 1.7;
   margin-bottom: 20px;
 }
 
 .access-disclaimer strong {
-  color: var(--amber);
+  color: var(--signal-dev);
 }
 
 .access-placeholder {
@@ -22,21 +23,23 @@
 
 .access-placeholder-icon {
   font-size: 32px;
-  color: var(--text-3);
+  color: var(--paper-faint);
   margin-bottom: 12px;
   opacity: 0.4;
 }
 
 .access-placeholder-title {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 6px;
+  color: var(--paper);
+  letter-spacing: -0.02em;
 }
 
 .access-placeholder-desc {
-  color: var(--text-2);
+  color: var(--paper-dim);
   font-size: 0.83rem;
   max-width: 420px;
   margin: 0 auto 16px;
-  line-height: 1.65;
+  line-height: 1.7;
 }

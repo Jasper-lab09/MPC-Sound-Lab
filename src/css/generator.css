@@ -7,21 +7,23 @@
 
 .gen-placeholder-icon {
   font-size: 32px;
-  color: var(--text-3);
+  color: var(--paper-faint);
   margin-bottom: 12px;
   opacity: 0.4;
 }
 
 .gen-placeholder-title {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 6px;
+  color: var(--paper);
+  letter-spacing: -0.02em;
 }
 
 .gen-placeholder-desc {
-  color: var(--text-2);
+  color: var(--paper-dim);
   font-size: 0.83rem;
   max-width: 420px;
   margin: 0 auto 16px;
-  line-height: 1.65;
+  line-height: 1.7;
 }
