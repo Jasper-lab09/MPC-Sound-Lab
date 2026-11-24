@@ -72,38 +72,38 @@
     <div class="section">
       <div class="section-header">
         <span class="section-number">§ 01</span>
-        <span class="section-title">Research Directions</span>
+        <span class="section-title" data-i18n="rs.dir">Research Directions</span>
         <span class="section-divider"></span>
       </div>
       <div class="cols-2">
         <div class="panel">
-          <div class="panel-head"><span class="panel-title">Direction A — Signal Analysis</span></div>
+          <div class="panel-head"><span class="panel-title" data-i18n="rs.a.title">Direction A — Signal Analysis</span></div>
           <div class="panel-body">
             <div class="content-block">
-              <p>How can we make the invisible structure of sound visible and understandable? The Sound Visualizer module explores real-time frequency analysis, pitch detection, and harmonic decomposition using browser-native APIs.</p>
+              <p data-i18n="rs.a.p1">How can we make the invisible structure of sound visible and understandable? The Sound Visualizer module explores real-time frequency analysis, pitch detection, and harmonic decomposition using browser-native APIs.</p>
               <div class="math-block">X[k] = &Sigma;<sub>n=0</sub><sup>N-1</sup> x[n] &middot; e<sup>-2&pi;i&middot;k&middot;n/N</sup></div>
-              <p>Key questions: How does FFT size affect the trade-off between time and frequency resolution? How do window functions influence spectral leakage? Can we reliably detect harmonic structures in real-time?</p>
+              <p data-i18n="rs.a.p2">Key questions: How does FFT size affect the trade-off between time and frequency resolution? How do window functions influence spectral leakage? Can we reliably detect harmonic structures in real-time?</p>
             </div>
           </div>
         </div>
         <div class="panel">
-          <div class="panel-head"><span class="panel-title">Direction B — Mathematical Composition</span></div>
+          <div class="panel-head"><span class="panel-title" data-i18n="rs.b.title">Direction B — Mathematical Composition</span></div>
           <div class="panel-body">
             <div class="content-block">
-              <p>Can mathematical structures generate musically meaningful patterns? The Music Generator module investigates Fibonacci sequences, Euclidean rhythms, and harmonic series as compositional tools.</p>
+              <p data-i18n="rs.b.p1">Can mathematical structures generate musically meaningful patterns? The Music Generator module investigates Fibonacci sequences, Euclidean rhythms, and harmonic series as compositional tools.</p>
               <div class="math-block">E(n, m) distributes n hits across m steps maximally evenly</div>
-              <p>Key questions: What makes Euclidean rhythms sound "good"? How does the golden ratio relate to musical aesthetics? Can probability-based generation maintain stylistic coherence?</p>
+              <p data-i18n="rs.b.p2">Key questions: What makes Euclidean rhythms sound "good"? How does the golden ratio relate to musical aesthetics? Can probability-based generation maintain stylistic coherence?</p>
             </div>
           </div>
         </div>
       </div>
       <div class="panel mt-16">
-        <div class="panel-head"><span class="panel-title">Direction C — Sound-to-Visual Translation</span></div>
+        <div class="panel-head"><span class="panel-title" data-i18n="rs.c.title">Direction C — Sound-to-Visual Translation</span></div>
         <div class="panel-body">
           <div class="content-block">
-            <p>Can audio information be faithfully translated into visual patterns for Deaf and hard-of-hearing users? The Accessibility module explores cross-modal perception, sound classification, and customizable visual feedback.</p>
+            <p data-i18n="rs.c.p1">Can audio information be faithfully translated into visual patterns for Deaf and hard-of-hearing users? The Accessibility module explores cross-modal perception, sound classification, and customizable visual feedback.</p>
             <div class="math-block">V = M &middot; F + B<br/><span style="color: var(--paper-faint); font-size: 0.78rem;">F = feature vector, M = mapping matrix, B = user bias</span></div>
-            <p>Key questions: Which acoustic features best discriminate sound categories? How do visual patterns map to perceived sound qualities? What are the honest limitations of visual translation?</p>
+            <p data-i18n="rs.c.p2">Key questions: Which acoustic features best discriminate sound categories? How do visual patterns map to perceived sound qualities? What are the honest limitations of visual translation?</p>
           </div>
         </div>
       </div>
@@ -112,16 +112,16 @@
     <div class="section">
       <div class="section-header">
         <span class="section-number">§ 02</span>
-        <span class="section-title">Methodology</span>
+        <span class="section-title" data-i18n="rs.method">Methodology</span>
         <span class="section-divider"></span>
       </div>
       <div class="panel">
         <div class="panel-body">
           <div class="content-block">
-            <p><strong>First principles.</strong> Every tool is built from the ground up — a custom radix-2 FFT implementation, not a library call. This ensures we understand every step of the signal processing pipeline and can explain it to users.</p>
-            <p><strong>Browser-native.</strong> All processing runs locally using Web Audio API and Canvas 2D. No servers, no data collection, no cloud dependencies. The entire lab works offline once loaded.</p>
-            <p><strong>Transparent limitations.</strong> We document what our tools can and cannot do. dBFS is not dB SPL. Bin spacing is not frequency resolution. Visual translation is not hearing. Honesty about limitations is a research principle, not just a disclaimer.</p>
-            <p><strong>Reproducible experiments.</strong> Every experiment has explicit parameters, step-by-step instructions, and A/B comparison capture. Results can be verified by anyone with a browser and microphone.</p>
+            <p data-i18n-html="rs.m1"><strong>First principles.</strong> Every tool is built from the ground up — a custom radix-2 FFT implementation, not a library call. This ensures we understand every step of the signal processing pipeline and can explain it to users.</p>
+            <p data-i18n-html="rs.m2"><strong>Browser-native.</strong> All processing runs locally using Web Audio API and Canvas 2D. No servers, no data collection, no cloud dependencies. The entire lab works offline once loaded.</p>
+            <p data-i18n-html="rs.m3"><strong>Transparent limitations.</strong> We document what our tools can and cannot do. dBFS is not dB SPL. Bin spacing is not frequency resolution. Visual translation is not hearing. Honesty about limitations is a research principle, not just a disclaimer.</p>
+            <p data-i18n-html="rs.m4"><strong>Reproducible experiments.</strong> Every experiment has explicit parameters, step-by-step instructions, and A/B comparison capture. Results can be verified by anyone with a browser and microphone.</p>
           </div>
         </div>
       </div>
@@ -130,29 +130,29 @@
     <div class="section">
       <div class="section-header">
         <span class="section-number">§ 03</span>
-        <span class="section-title">Open Questions</span>
+        <span class="section-title" data-i18n="rs.questions">Open Questions</span>
         <span class="section-divider"></span>
       </div>
       <div class="panel">
         <div class="experiment">
           <div class="exp-num">01</div>
           <div class="exp-body">
-            <div class="exp-title">Can real-time harmonic analysis be made reliable enough for educational use?</div>
-            <div class="exp-desc">Current detection requires 5% relative amplitude and integer-multiple alignment. noisy signals produce false positives. Can we improve the reliability scoring without increasing latency?</div>
+            <div class="exp-title" data-i18n="rs.q1">Can real-time harmonic analysis be made reliable enough for educational use?</div>
+            <div class="exp-desc" data-i18n="rs.q1.desc">Current detection requires 5% relative amplitude and integer-multiple alignment. noisy signals produce false positives. Can we improve the reliability scoring without increasing latency?</div>
           </div>
         </div>
         <div class="experiment">
           <div class="exp-num">02</div>
           <div class="exp-body">
-            <div class="exp-title">What is the minimum feature set for useful sound classification?</div>
-            <div class="exp-desc">Spectral centroid, ZCR, and spectral flux capture timbral qualities but miss temporal structure. How many features are needed for reliable speech/music/noise discrimination?</div>
+            <div class="exp-title" data-i18n="rs.q2">What is the minimum feature set for useful sound classification?</div>
+            <div class="exp-desc" data-i18n="rs.q2.desc">Spectral centroid, ZCR, and spectral flux capture timbral qualities but miss temporal structure. How many features are needed for reliable speech/music/noise discrimination?</div>
           </div>
         </div>
         <div class="experiment">
           <div class="exp-num">03</div>
           <div class="exp-body">
-            <div class="exp-title">Do Euclidean rhythms generalize across cultural traditions?</div>
-            <div class="exp-desc">E(3,8) produces tresillo (Cuban), E(2,3) produces habanera (Cuban/African). But does mathematical evenness always correlate with musical preference, or is it culturally conditioned?</div>
+            <div class="exp-title" data-i18n="rs.q3">Do Euclidean rhythms generalize across cultural traditions?</div>
+            <div class="exp-desc" data-i18n="rs.q3.desc">E(3,8) produces tresillo (Cuban), E(2,3) produces habanera (Cuban/African). But does mathematical evenness always correlate with musical preference, or is it culturally conditioned?</div>
           </div>
         </div>
       </div>

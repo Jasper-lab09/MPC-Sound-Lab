@@ -74,15 +74,15 @@
     <div class="section">
       <div class="section-header">
         <span class="section-number">§ 01</span>
-        <span class="section-title">The Studio</span>
+        <span class="section-title" data-i18n="ab.studio">The Studio</span>
         <span class="section-divider"></span>
       </div>
       <div class="panel">
         <div class="panel-body">
           <div class="content-block">
-            <p>MPC Sound Lab began as a question: <strong>can a web browser serve as a complete scientific instrument for sound analysis?</strong> Not a simplified demo, not a toy — a real tool with custom FFT, real-time visualization, and honest measurements.</p>
-            <p>The answer turned out to be yes, with caveats. The Web Audio API provides sample-accurate access to microphone data. Canvas 2D can render three visualizations at 60fps. A custom radix-2 FFT implementation gives us control over windowing that the built-in AnalyserNode cannot provide.</p>
-            <p>The caveats are important: browser dBFS is not calibrated to dB SPL. Bin spacing is not the same as frequency resolution. Visual translation is not hearing. Documenting these limitations honestly is a core principle of this studio.</p>
+            <p data-i18n-html="ab.s1">MPC Sound Lab began as a question: <strong>can a web browser serve as a complete scientific instrument for sound analysis?</strong> Not a simplified demo, not a toy — a real tool with custom FFT, real-time visualization, and honest measurements.</p>
+            <p data-i18n="ab.s2">The answer turned out to be yes, with caveats. The Web Audio API provides sample-accurate access to microphone data. Canvas 2D can render three visualizations at 60fps. A custom radix-2 FFT implementation gives us control over windowing that the built-in AnalyserNode cannot provide.</p>
+            <p data-i18n="ab.s3">The caveats are important: browser dBFS is not calibrated to dB SPL. Bin spacing is not the same as frequency resolution. Visual translation is not hearing. Documenting these limitations honestly is a core principle of this studio.</p>
           </div>
         </div>
       </div>
@@ -91,29 +91,29 @@
     <div class="section">
       <div class="section-header">
         <span class="section-number">§ 02</span>
-        <span class="section-title">Technology</span>
+        <span class="section-title" data-i18n="ab.tech">Technology</span>
         <span class="section-divider"></span>
       </div>
       <div class="cols-2">
         <div class="panel">
-          <div class="panel-head"><span class="panel-title">Stack</span></div>
+          <div class="panel-head"><span class="panel-title" data-i18n="ab.stack">Stack</span></div>
           <div class="panel-body">
             <div class="content-block">
-              <p><strong>Vanilla JavaScript</strong> — ES6 modules, zero frameworks, zero build step. The entire application loads directly from HTML files.</p>
-              <p><strong>Web Audio API</strong> — AudioContext, AnalyserNode, OscillatorNode, GainNode. All audio processing uses browser-native APIs.</p>
-              <p><strong>Canvas 2D</strong> — Waveform, FFT spectrum, spectrogram, and generative visuals all use the 2D canvas context. No WebGL.</p>
-              <p><strong>CSS Custom Properties</strong> — A token-based design system with no preprocessor.</p>
+              <p data-i18n-html="ab.t1"><strong>Vanilla JavaScript</strong> — ES6 modules, zero frameworks, zero build step. The entire application loads directly from HTML files.</p>
+              <p data-i18n-html="ab.t2"><strong>Web Audio API</strong> — AudioContext, AnalyserNode, OscillatorNode, GainNode. All audio processing uses browser-native APIs.</p>
+              <p data-i18n-html="ab.t3"><strong>Canvas 2D</strong> — Waveform, FFT spectrum, spectrogram, and generative visuals all use the 2D canvas context. No WebGL.</p>
+              <p data-i18n-html="ab.t4"><strong>CSS Custom Properties</strong> — A token-based design system with no preprocessor.</p>
             </div>
           </div>
         </div>
         <div class="panel">
-          <div class="panel-head"><span class="panel-title">Custom Implementations</span></div>
+          <div class="panel-head"><span class="panel-title" data-i18n="ab.custom">Custom Implementations</span></div>
           <div class="panel-body">
             <div class="content-block">
-              <p><strong>Radix-2 FFT</strong> — Because AnalyserNode uses a Blackman window internally and cannot be changed, a custom FFT implementation was needed for the window function explorer.</p>
-              <p><strong>Autocorrelation pitch detection</strong> — Normalized autocorrelation with confidence scoring, running at ~10 Hz.</p>
-              <p><strong>Energy-based beat detection</strong> — Spectral flux with adaptive threshold and median-based BPM estimation.</p>
-              <p><strong>Harmonic analyzer</strong> — Peak detection with integer-multiple validation and reliability scoring.</p>
+              <p data-i18n-html="ab.c1"><strong>Radix-2 FFT</strong> — Because AnalyserNode uses a Blackman window internally and cannot be changed, a custom FFT implementation was needed for the window function explorer.</p>
+              <p data-i18n-html="ab.c2"><strong>Autocorrelation pitch detection</strong> — Normalized autocorrelation with confidence scoring, running at ~10 Hz.</p>
+              <p data-i18n-html="ab.c3"><strong>Energy-based beat detection</strong> — Spectral flux with adaptive threshold and median-based BPM estimation.</p>
+              <p data-i18n-html="ab.c4"><strong>Harmonic analyzer</strong> — Peak detection with integer-multiple validation and reliability scoring.</p>
             </div>
           </div>
         </div>
@@ -123,16 +123,16 @@
     <div class="section">
       <div class="section-header">
         <span class="section-number">§ 03</span>
-        <span class="section-title">Principles</span>
+        <span class="section-title" data-i18n="ab.principles">Principles</span>
         <span class="section-divider"></span>
       </div>
       <div class="panel">
         <div class="panel-body">
           <div class="content-block">
-            <p><strong>Local first.</strong> All processing happens in the browser. No audio is recorded, transmitted, or stored. The microphone input never leaves your device.</p>
-            <p><strong>Open and transparent.</strong> The code is open source. Every measurement is explained. Every limitation is documented.</p>
-            <p><strong>Accessible by design.</strong> Keyboard navigation, focus-visible outlines, prefers-reduced-motion support, and ARIA labels throughout. The Accessibility module extends this commitment to sound-to-visual translation.</p>
-            <p><strong>Educational, not just functional.</strong> Every tool includes mathematical foundations, physical explanations, and guided experiments. The goal is understanding, not just measurement.</p>
+            <p data-i18n-html="ab.p1"><strong>Local first.</strong> All processing happens in the browser. No audio is recorded, transmitted, or stored. The microphone input never leaves your device.</p>
+            <p data-i18n-html="ab.p2"><strong>Open and transparent.</strong> The code is open source. Every measurement is explained. Every limitation is documented.</p>
+            <p data-i18n-html="ab.p3"><strong>Accessible by design.</strong> Keyboard navigation, focus-visible outlines, prefers-reduced-motion support, and ARIA labels throughout. The Accessibility module extends this commitment to sound-to-visual translation.</p>
+            <p data-i18n-html="ab.p4"><strong>Educational, not just functional.</strong> Every tool includes mathematical foundations, physical explanations, and guided experiments. The goal is understanding, not just measurement.</p>
           </div>
         </div>
       </div>
@@ -141,7 +141,7 @@
     <div class="section">
       <div class="section-header">
         <span class="section-number">§ 04</span>
-        <span class="section-title">Archive</span>
+        <span class="section-title" data-i18n="ab.archive">Archive</span>
         <span class="section-divider"></span>
       </div>
       <div class="panel">
@@ -149,21 +149,21 @@
           <div class="exp-num">v1</div>
           <div class="exp-body">
             <div class="exp-title">MPC Sound Lab v1.0</div>
-            <div class="exp-desc" style="color: var(--paper-faint);">Initial release. Basic four-page dark-themed website with waveform, spectrum, spectrogram, pitch and beat detection. Simple topbar navigation.</div>
+            <div class="exp-desc" style="color: var(--paper-faint);" data-i18n="ab.a1">Initial release. Basic four-page dark-themed website with waveform, spectrum, spectrogram, pitch and beat detection. Simple topbar navigation.</div>
           </div>
         </div>
         <div class="experiment">
           <div class="exp-num">v1.5</div>
           <div class="exp-body">
             <div class="exp-title">MPC Sound Lab v1.5 — Visualizer UX Redesign</div>
-            <div class="exp-desc" style="color: var(--paper-faint);">7-section visualizer with interactive spectrum, readout cards with interpretation bars, experiment auto-config, learn section with 10 topics, 51 new i18n keys. Cinematic dark theme with ambient background.</div>
+            <div class="exp-desc" style="color: var(--paper-faint);" data-i18n="ab.a2">7-section visualizer with interactive spectrum, readout cards with interpretation bars, experiment auto-config, learn section with 10 topics, 51 new i18n keys. Cinematic dark theme with ambient background.</div>
           </div>
         </div>
         <div class="experiment">
           <div class="exp-num">v2</div>
           <div class="exp-body">
             <div class="exp-title">MPC Sound Lab v2.0 — Editorial Redesign</div>
-            <div class="exp-desc" style="color: var(--paper-faint);">Complete creative redesign. Editorial design system with asymmetric grids, § section numbering, warm off-white text on near-black. 8-destination navigation with dropdown. Sound sculpture generative canvas. Experiments archive, Field Notes library, Research, and About pages. Unified design across all pages.</div>
+            <div class="exp-desc" style="color: var(--paper-faint);" data-i18n="ab.a3">Complete creative redesign. Editorial design system with asymmetric grids, § section numbering, warm off-white text on near-black. 8-destination navigation with dropdown. Sound sculpture generative canvas. Experiments archive, Field Notes library, Research, and About pages. Unified design across all pages.</div>
           </div>
         </div>
       </div>
