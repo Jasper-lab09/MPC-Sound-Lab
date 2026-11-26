@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — MPC Sound Lab</title>
-  <link rel="stylesheet" href="src/css/design-system.css?v=2" />
-  <link rel="stylesheet" href="src/css/nav.css?v=2" />
+  <link rel="stylesheet" href="src/css/design-system.css?v=3" />
+  <link rel="stylesheet" href="src/css/nav.css?v=3" />
 </head>
 <body class="page-inner">
   <div class="ambient-grain"></div>
@@ -13,8 +13,8 @@
 
   <nav class="site-nav">
     <a href="index.html" class="nav-brand">
-      <span class="nav-brand-mark">M</span>
-      <span class="nav-brand-text">MPC SOUND LAB</span>
+      <span class="nav-brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="nav-brand-text">MPC Sound Lab</span>
     </a>
     <div class="nav-links">
       <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
@@ -66,7 +66,7 @@
       </p>
       <div class="metadata-strip">
         <span><span class="ms-label">Founded</span><span class="ms-value">2024</span></span>
-        <span><span class="ms-label">Version</span><span class="ms-value">2.0</span></span>
+        <span><span class="ms-label">Version</span><span class="ms-value">3.0</span></span>
         <span><span class="ms-label">License</span><span class="ms-value">MIT</span></span>
       </div>
     </header>
@@ -77,7 +77,7 @@
         <span class="section-title" data-i18n="ab.studio">The Studio</span>
         <span class="section-divider"></span>
       </div>
-      <div class="panel">
+      <div class="panel panel-fill">
         <div class="panel-body">
           <div class="content-block">
             <p data-i18n-html="ab.s1">MPC Sound Lab began as a question: <strong>can a web browser serve as a complete scientific instrument for sound analysis?</strong> Not a simplified demo, not a toy — a real tool with custom FFT, real-time visualization, and honest measurements.</p>
@@ -95,7 +95,7 @@
         <span class="section-divider"></span>
       </div>
       <div class="cols-2">
-        <div class="panel">
+        <div class="panel panel-fill">
           <div class="panel-head"><span class="panel-title" data-i18n="ab.stack">Stack</span></div>
           <div class="panel-body">
             <div class="content-block">
@@ -106,7 +106,7 @@
             </div>
           </div>
         </div>
-        <div class="panel">
+        <div class="panel panel-fill">
           <div class="panel-head"><span class="panel-title" data-i18n="ab.custom">Custom Implementations</span></div>
           <div class="panel-body">
             <div class="content-block">
@@ -126,7 +126,7 @@
         <span class="section-title" data-i18n="ab.principles">Principles</span>
         <span class="section-divider"></span>
       </div>
-      <div class="panel">
+      <div class="panel panel-fill">
         <div class="panel-body">
           <div class="content-block">
             <p data-i18n-html="ab.p1"><strong>Local first.</strong> All processing happens in the browser. No audio is recorded, transmitted, or stored. The microphone input never leaves your device.</p>
@@ -144,7 +144,7 @@
         <span class="section-title" data-i18n="ab.archive">Archive</span>
         <span class="section-divider"></span>
       </div>
-      <div class="panel">
+      <div class="panel panel-fill">
         <div class="experiment">
           <div class="exp-num">v1</div>
           <div class="exp-body">
@@ -162,7 +162,7 @@
         <div class="experiment">
           <div class="exp-num">v2</div>
           <div class="exp-body">
-            <div class="exp-title">MPC Sound Lab v2.0 — Editorial Redesign</div>
+            <div class="exp-title">MPC Sound Lab v3.0 — Editorial Lab</div>
             <div class="exp-desc" style="color: var(--paper-faint);" data-i18n="ab.a3">Complete creative redesign. Editorial design system with asymmetric grids, § section numbering, warm off-white text on near-black. 8-destination navigation with dropdown. Sound sculpture generative canvas. Experiments archive, Field Notes library, Research, and About pages. Unified design across all pages.</div>
           </div>
         </div>
@@ -175,6 +175,12 @@
       <div class="footer-brand-col">
         <div class="footer-brand" data-i18n="footer.brand">MPC Sound Lab</div>
         <p class="footer-brand-desc" data-i18n="footer.brandDesc">An independent digital research studio exploring the intersection of mathematics, physics, sound, music technology, and accessibility.</p>
+        <div class="footer-status">
+          <div class="footer-status-row"><span data-i18n="footer.status.version">Version</span> <strong>v3.0</strong></div>
+          <div class="footer-status-row"><span data-i18n="footer.status.license">License</span> <strong>MIT</strong></div>
+          <div class="footer-status-row"><span data-i18n="footer.status.hosting">Hosting</span> <strong>GitHub Pages</strong></div>
+          <a href="https://github.com/jasper-lab09/MPC-Sound-Lab" class="footer-repo" target="_blank" rel="noopener" data-i18n="footer.repo">View repository on GitHub &rarr;</a>
+        </div>
       </div>
       <div>
         <div class="footer-col-title" data-i18n="footer.nav">Navigation</div>
@@ -206,8 +212,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2024&ndash;2025 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
-      <span data-i18n="footer.version">v2.0 &mdash; Editorial Redesign</span>
+      <span>&copy; 2024&ndash;2026 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span data-i18n="footer.version">v3.0 — Editorial Lab</span>
     </div>
   </footer>
 

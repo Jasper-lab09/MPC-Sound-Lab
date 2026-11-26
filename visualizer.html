@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sound Visualizer — MPC Sound Lab</title>
-  <link rel="stylesheet" href="src/css/design-system.css?v=2" />
-  <link rel="stylesheet" href="src/css/nav.css?v=2" />
+  <link rel="stylesheet" href="src/css/design-system.css?v=3" />
+  <link rel="stylesheet" href="src/css/nav.css?v=3" />
   <link rel="stylesheet" href="src/css/visualizer.css?v=2" />
 </head>
-<body class="page-inner">
+<body class="page-inner on-dark">
   <div class="ambient-grain"></div>
   <div class="ambient-vignette"></div>
 
   <!-- Navigation -->
   <nav class="site-nav">
     <a href="index.html" class="nav-brand">
-      <span class="nav-brand-mark">M</span>
-      <span class="nav-brand-text">MPC SOUND LAB</span>
+      <span class="nav-brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="nav-brand-text">MPC Sound Lab</span>
     </a>
     <div class="nav-links">
       <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
@@ -717,6 +717,12 @@
       <div class="footer-brand-col">
         <div class="footer-brand" data-i18n="footer.brand">MPC Sound Lab</div>
         <p class="footer-brand-desc" data-i18n="footer.brandDesc">An independent digital research studio exploring the intersection of mathematics, physics, sound, music technology, and accessibility.</p>
+        <div class="footer-status">
+          <div class="footer-status-row"><span data-i18n="footer.status.version">Version</span> <strong>v3.0</strong></div>
+          <div class="footer-status-row"><span data-i18n="footer.status.license">License</span> <strong>MIT</strong></div>
+          <div class="footer-status-row"><span data-i18n="footer.status.hosting">Hosting</span> <strong>GitHub Pages</strong></div>
+          <a href="https://github.com/jasper-lab09/MPC-Sound-Lab" class="footer-repo" target="_blank" rel="noopener" data-i18n="footer.repo">View repository on GitHub &rarr;</a>
+        </div>
       </div>
       <div>
         <div class="footer-col-title" data-i18n="footer.nav">Navigation</div>
@@ -749,7 +755,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2024–2025 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
-      <span data-i18n="footer.version">v2.0 — Editorial Redesign</span>
+      <span data-i18n="footer.version">v3.0 — Editorial Lab</span>
     </div>
   </footer>
 

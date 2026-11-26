@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Accessible Sound Experience — MPC Sound Lab</title>
-  <link rel="stylesheet" href="src/css/design-system.css?v=2" />
-  <link rel="stylesheet" href="src/css/nav.css?v=2" />
+  <link rel="stylesheet" href="src/css/design-system.css?v=3" />
+  <link rel="stylesheet" href="src/css/nav.css?v=3" />
   <link rel="stylesheet" href="src/css/accessibility.css?v=2" />
 </head>
 <body class="page-inner">
@@ -15,8 +15,8 @@
   <!-- Navigation -->
   <nav class="site-nav">
     <a href="index.html" class="nav-brand">
-      <span class="nav-brand-mark">M</span>
-      <span class="nav-brand-text">MPC SOUND LAB</span>
+      <span class="nav-brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="nav-brand-text">MPC Sound Lab</span>
     </a>
     <div class="nav-links">
       <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
@@ -102,7 +102,7 @@
         <span class="section-title" data-i18n="section.interactive">Interactive Tool</span>
         <span class="section-divider"></span>
       </div>
-      <div class="panel">
+      <div class="panel panel-fill">
         <div class="panel-body">
           <div class="access-placeholder">
             <div class="access-placeholder-icon">&#9673;</div>
@@ -127,7 +127,7 @@
       </div>
       <div class="section-content-wrapper">
         <div class="cols-2">
-          <div class="panel">
+          <div class="panel panel-fill">
             <div class="panel-head"><span class="panel-title" data-i18n="acc.math.classification.title">Sound Classification Features</span></div>
             <div class="panel-body">
               <div class="content-block">
@@ -142,7 +142,7 @@
               </div>
             </div>
           </div>
-          <div class="panel">
+          <div class="panel panel-fill">
             <div class="panel-head"><span class="panel-title" data-i18n="acc.math.mapping.title">Pattern Mapping</span></div>
             <div class="panel-body">
               <div class="content-block">
@@ -170,7 +170,7 @@
         <span class="section-divider"></span>
       </div>
       <div class="section-content-wrapper">
-        <div class="panel">
+        <div class="panel panel-fill">
           <div class="panel-body">
             <div class="content-block">
               <p data-i18n-html="acc.physics.cross"><strong>Cross-modal perception.</strong> The human brain processes sensory information in specialized cortical areas, but cross-modal connections exist. The visual cortex can learn to interpret patterns that correspond to auditory events &mdash; this is the principle behind visual alerts, closed captioning, and visual music.</p>
@@ -190,7 +190,7 @@
         <span class="section-divider"></span>
       </div>
       <div class="section-content-wrapper">
-        <div class="panel">
+        <div class="panel panel-fill">
           <div class="experiment">
             <div class="exp-num">01</div>
             <div class="exp-body">
@@ -234,6 +234,12 @@
       <div class="footer-brand-col">
         <div class="footer-brand" data-i18n="footer.brand">MPC Sound Lab</div>
         <p class="footer-brand-desc" data-i18n="footer.brandDesc">An independent digital research studio exploring the intersection of mathematics, physics, sound, music technology, and accessibility.</p>
+        <div class="footer-status">
+          <div class="footer-status-row"><span data-i18n="footer.status.version">Version</span> <strong>v3.0</strong></div>
+          <div class="footer-status-row"><span data-i18n="footer.status.license">License</span> <strong>MIT</strong></div>
+          <div class="footer-status-row"><span data-i18n="footer.status.hosting">Hosting</span> <strong>GitHub Pages</strong></div>
+          <a href="https://github.com/jasper-lab09/MPC-Sound-Lab" class="footer-repo" target="_blank" rel="noopener" data-i18n="footer.repo">View repository on GitHub &rarr;</a>
+        </div>
       </div>
       <div>
         <div class="footer-col-title" data-i18n="footer.nav">Navigation</div>
@@ -265,8 +271,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2024&ndash;2025 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
-      <span data-i18n="footer.version">v2.0 &mdash; Editorial Redesign</span>
+      <span>&copy; 2024&ndash;2026 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span data-i18n="footer.version">v3.0 — Editorial Lab</span>
     </div>
   </footer>
 

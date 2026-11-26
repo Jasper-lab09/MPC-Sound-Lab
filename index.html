@@ -3,24 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MPC Sound Lab — Independent Digital Research Studio</title>
-  <link rel="stylesheet" href="src/css/design-system.css?v=2" />
-  <link rel="stylesheet" href="src/css/nav.css?v=2" />
-  <link rel="stylesheet" href="src/css/home.css?v=2" />
+  <title>MPC Sound Lab — The Science of Sound, The Mathematics of Music</title>
+  <link rel="stylesheet" href="src/css/design-system.css?v=3" />
+  <link rel="stylesheet" href="src/css/nav.css?v=3" />
+  <link rel="stylesheet" href="src/css/home.css?v=3" />
 </head>
 <body class="page-home">
-  <div class="ambient-grain"></div>
-  <div class="ambient-vignette"></div>
-
-  <!-- Sound Sculpture Canvas -->
-  <canvas id="sculpture-canvas" class="sculpture-canvas"></canvas>
-  <div class="home-hero-overlay"></div>
+  <a href="#main" class="skip-link" data-i18n="skip.link">Skip to content</a>
 
   <!-- Navigation -->
-  <nav class="site-nav">
+  <nav class="site-nav" aria-label="Primary">
     <a href="index.html" class="nav-brand">
-      <span class="nav-brand-mark">M</span>
-      <span class="nav-brand-text">MPC SOUND LAB</span>
+      <span class="nav-brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="nav-brand-text">MPC Sound Lab</span>
     </a>
     <div class="nav-links">
       <a href="index.html" class="nav-link active" data-i18n="nav.home">Home</a>
@@ -47,17 +42,17 @@
       <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
     </div>
     <div class="nav-right">
-      <button class="ambient-btn" id="ambient-toggle" aria-label="Toggle ambient animation"><span class="ambient-dot"></span>FX</button>
       <button class="lang-btn" data-i18n="nav.lang">中文</button>
     </div>
     <button class="nav-mobile-toggle" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </nav>
+
   <!-- Mobile menu -->
-  <div class="nav-mobile-menu">
+  <div class="nav-mobile-menu" aria-hidden="true">
     <div class="nav-mobile-section">
-      <div class="nav-mobile-section-title">Navigation</div>
+      <div class="nav-mobile-section-title" data-i18n="footer.nav">Navigation</div>
       <a href="index.html" class="nav-mobile-link active" data-i18n="nav.home">Home</a>
       <a href="experiments.html" class="nav-mobile-link" data-i18n="nav.experiments">Experiments</a>
       <a href="field-notes.html" class="nav-mobile-link" data-i18n="nav.fieldNotes">Field Notes</a>
@@ -65,226 +60,263 @@
       <a href="about.html" class="nav-mobile-link" data-i18n="nav.about">About</a>
     </div>
     <div class="nav-mobile-section">
-      <div class="nav-mobile-section-title">Lab Modules</div>
+      <div class="nav-mobile-section-title" data-i18n="footer.lab">Lab Modules</div>
       <a href="visualizer.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.visualizer">Sound Visualizer</a>
       <a href="generator.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.generator">Music Generator</a>
       <a href="accessibility.html" class="nav-mobile-link nav-mobile-sub" data-i18n="nav.accessibility">Accessibility</a>
     </div>
   </div>
 
-  <!-- ===== Section 1: Hero ===== -->
-  <section class="home-hero home-section">
-    <div class="hero-eyebrow" data-i18n="home.eyebrow">Independent Digital Research Studio</div>
-    <h1 class="hero-title" data-i18n-html="home.title">Where sound becomes data,<br>data becomes music,<br>and music becomes accessible.</h1>
-    <p class="hero-subtitle" data-i18n="home.desc">
-      MPC Sound Lab is a browser-based platform for exploring the intersection of physics, mathematics,
-      and audio engineering. Analyze live sound, generate music from mathematical structures,
-      and experience audio through visual translation.
-    </p>
-    <div class="hero-domains">
-      <span class="hero-domain" data-i18n="home.domain.math">Mathematics</span>
-      <span class="hero-domain" data-i18n="home.domain.physics">Physics</span>
-      <span class="hero-domain" data-i18n="home.domain.music">Music Technology</span>
-      <span class="hero-domain" data-i18n="home.domain.audio">Audio Engineering</span>
-      <span class="hero-domain" data-i18n="home.domain.access">Accessibility</span>
-    </div>
-    <div class="hero-scroll-hint" data-i18n="home.scroll">Scroll to explore</div>
-  </section>
-
-  <!-- ===== Section 2: Concept ===== -->
-  <section class="home-section">
-    <div class="home-section-header">
-      <span class="home-section-number">§ 01</span>
-      <span class="home-section-title" data-i18n="home.concept">Concept</span>
-      <span class="home-section-divider"></span>
-    </div>
-    <div class="concept-grid">
-      <div>
-        <div class="concept-label" data-i18n="home.concept.label">Premise</div>
-      </div>
-      <div class="concept-body" data-i18n-html="home.concept.body">
-        Sound is <strong>physical</strong> — pressure waves propagating through air at 343 m/s.
-        It is also <strong>mathematical</strong> — decomposable into pure frequencies via the Fourier transform.
-        And it is <em>accessible</em> — translatable into visual patterns that convey the same information through a different sense.
-        <br/><br/>
-        This studio explores all three dimensions simultaneously. Every tool is built from first principles:
-        a custom FFT implementation, real-time Web Audio processing, and Canvas-based generative visualization —
-        all running locally in your browser, no servers, no data collection.
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Section 3: Research Directions (Lab Modules) ===== -->
-  <section class="home-section">
-    <div class="home-section-header">
-      <span class="home-section-number">§ 02</span>
-      <span class="home-section-title" data-i18n="home.directions">Research Directions</span>
-      <span class="home-section-divider"></span>
-    </div>
-    <div class="directions-grid">
-      <a href="visualizer.html" class="direction-card">
-        <div class="direction-num">DIRECTION 01</div>
-        <div class="direction-title" data-i18n="home.mod.viz.name">Sound Visualizer</div>
-        <div class="direction-desc" data-i18n="home.mod.viz.desc">Real-time audio analysis from your microphone: waveform, FFT spectrum, spectrogram waterfall, pitch and beat detection.</div>
-        <div class="direction-status">
-          <span class="status-badge status-live" data-i18n="home.status.live">Live</span>
-          <span class="direction-link" data-i18n="home.mod.viz.open">Enter &rarr;</span>
+  <main id="main">
+    <!-- ===== Section A: Hero ===== -->
+    <section class="hero" aria-label="Introduction">
+      <canvas id="hero-canvas" class="hero-canvas"></canvas>
+      <div class="hero-canvas-hint" data-i18n="home.hero.hint">Move to disturb the wavefield</div>
+      <div class="hero-content">
+        <div class="hero-meta">
+          <span data-i18n="home.hero.id">Lab 001</span>
+          <span data-i18n="home.hero.tag">Sound Research</span>
+          <span data-i18n="home.hero.est">Est. 2026</span>
         </div>
-      </a>
-      <a href="generator.html" class="direction-card">
-        <div class="direction-num">DIRECTION 02</div>
-        <div class="direction-title" data-i18n="home.mod.gen.name">Mathematical Music Generator</div>
-        <div class="direction-desc" data-i18n="home.mod.gen.desc">Generate musical patterns from mathematical rules: Fibonacci sequences, Euclidean rhythms, harmonic series, and probability.</div>
-        <div class="direction-status">
-          <span class="status-badge status-dev" data-i18n="home.status.dev">Phase 3</span>
-          <span class="direction-link" data-i18n="home.mod.gen.open">Enter &rarr;</span>
+        <h1 class="hero-title display-xl" data-i18n-html="home.hero.title">
+          <span class="line">The science of sound.</span>
+          <span class="line">The <em class="accent">mathematics</em> of music.</span>
+        </h1>
+        <p class="hero-statement" data-i18n="home.hero.statement">
+          An experimental laboratory exploring how mathematical structures and physical principles shape sound, music and accessibility.
+        </p>
+        <div class="hero-bottom">
+          <a href="visualizer.html" class="hero-cta" data-i18n="home.hero.cta">
+            <span>Enter the lab</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <div class="hero-equation" aria-hidden="true">x(t) = A · sin(2πft + φ)</div>
         </div>
-      </a>
-      <a href="accessibility.html" class="direction-card">
-        <div class="direction-num">DIRECTION 03</div>
-        <div class="direction-title" data-i18n="home.mod.acc.name">Accessible Sound Experience</div>
-        <div class="direction-desc" data-i18n="home.mod.acc.desc">Translating audio into visual patterns for Deaf and hard-of-hearing users. Distinct visual feedback for different sound categories.</div>
-        <div class="direction-status">
-          <span class="status-badge status-planned" data-i18n="home.status.planned">Phase 4</span>
-          <span class="direction-link" data-i18n="home.mod.acc.open">Enter &rarr;</span>
+      </div>
+    </section>
+
+    <!-- ===== Section B: Research Statement ===== -->
+    <section class="home-section" aria-labelledby="sec-research-statement">
+      <div class="home-section-open">
+        <span class="sec-num" aria-hidden="true">§ 01</span>
+        <h2 class="sec-title" id="sec-research-statement" data-i18n="home.statement.title">Research Question</h2>
+      </div>
+      <div class="research-statement reveal">
+        <p class="big-question" data-i18n="home.statement.question">Can we understand, generate and reinterpret sound through mathematics?</p>
+        <div class="research-direction">
+          <span class="rd-num" data-i18n="home.statement.a.num">Direction A</span>
+          <h3 class="rd-name" data-i18n="home.statement.a.title">Analyze sound</h3>
+          <p class="rd-desc" data-i18n="home.statement.a.desc">Decompose live audio into waveforms, spectra and harmonic structures using custom FFT and real-time signal processing.</p>
         </div>
-      </a>
-    </div>
-  </section>
+        <div class="research-direction">
+          <span class="rd-num" data-i18n="home.statement.b.num">Direction B</span>
+          <h3 class="rd-name" data-i18n="home.statement.b.title">Generate music</h3>
+          <p class="rd-desc" data-i18n="home.statement.b.desc">Translate mathematical sequences and geometric rhythms into audible patterns — from Fibonacci to Euclidean algorithms.</p>
+        </div>
+        <div class="research-direction">
+          <span class="rd-num" data-i18n="home.statement.c.num">Direction C</span>
+          <h3 class="rd-name" data-i18n="home.statement.c.title">Understand physical phenomena</h3>
+          <p class="rd-desc" data-i18n="home.statement.c.desc">Connect pressure waves, cochlear mechanics and room acoustics back to the equations that describe them.</p>
+        </div>
+        <div class="research-direction">
+          <span class="rd-num" data-i18n="home.statement.d.num">Direction D</span>
+          <h3 class="rd-name" data-i18n="home.statement.d.title">Make sound accessible</h3>
+          <p class="rd-desc" data-i18n="home.statement.d.desc">Build cross-modal translations so sound information can be experienced visually and understood without hearing.</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- ===== Section 4: Experiment Archive ===== -->
-  <section class="home-section">
-    <div class="home-section-header">
-      <span class="home-section-number">§ 03</span>
-      <span class="home-section-title" data-i18n="home.expArchive">Experiment Archive</span>
-      <span class="home-section-divider"></span>
-    </div>
-    <div class="experiments-grid">
-      <a href="experiments.html" class="experiment-card">
-        <div class="exp-card-num">EXP-01</div>
-        <div class="exp-card-title" data-i18n="home.exp1">Fourier Series Visualization</div>
-        <div class="exp-card-status" data-i18n="home.status.live">Live</div>
-      </a>
-      <a href="experiments.html" class="experiment-card">
-        <div class="exp-card-num">EXP-02</div>
-        <div class="exp-card-title" data-i18n="home.exp2">FFT Resolution Trade-off</div>
-        <div class="exp-card-status" data-i18n="home.status.live">Live</div>
-      </a>
-      <a href="experiments.html" class="experiment-card">
-        <div class="exp-card-num">EXP-03</div>
-        <div class="exp-card-title" data-i18n="home.exp3">Spectral Leakage & Windows</div>
-        <div class="exp-card-status" data-i18n="home.status.live">Live</div>
-      </a>
-      <a href="experiments.html" class="experiment-card">
-        <div class="exp-card-num">EXP-04</div>
-        <div class="exp-card-title" data-i18n="home.exp4">Harmonic Structures</div>
-        <div class="exp-card-status" data-i18n="home.status.live">Live</div>
-      </a>
-      <a href="experiments.html" class="experiment-card">
-        <div class="exp-card-num">EXP-05</div>
-        <div class="exp-card-title" data-i18n="home.exp5">Wave Superposition</div>
-        <div class="exp-card-status" data-i18n="home.status.planned">Planned</div>
-      </a>
-      <a href="experiments.html" class="experiment-card">
-        <div class="exp-card-num">EXP-06</div>
-        <div class="exp-card-title" data-i18n="home.exp6">Euclidean Rhythms</div>
-        <div class="exp-card-status" data-i18n="home.status.planned">Planned</div>
-      </a>
-      <a href="experiments.html" class="experiment-card">
-        <div class="exp-card-num">EXP-07</div>
-        <div class="exp-card-title" data-i18n="home.exp7">Mathematical Music</div>
-        <div class="exp-card-status" data-i18n="home.status.planned">Planned</div>
-      </a>
-      <a href="experiments.html" class="experiment-card">
-        <div class="exp-card-num">EXP-08</div>
-        <div class="exp-card-title" data-i18n="home.exp8">Sound-to-Visual Translation</div>
-        <div class="exp-card-status" data-i18n="home.status.planned">Planned</div>
-      </a>
-    </div>
-  </section>
+    <!-- ===== Section C: Enter the Lab ===== -->
+    <section class="home-section" aria-labelledby="sec-enter-lab">
+      <div class="home-section-open">
+        <span class="sec-num" aria-hidden="true">§ 02</span>
+        <h2 class="sec-title" id="sec-enter-lab" data-i18n="home.lab.title">Enter the Lab</h2>
+      </div>
+      <div class="lab-entry reveal">
+        <a href="visualizer.html" class="lab-entry-module featured">
+          <div>
+            <div class="lem-status">
+              <span class="dot dot-on" aria-hidden="true"></span>
+              <span data-i18n="home.status.live">Live</span>
+            </div>
+            <div class="lem-preview" aria-hidden="true">
+              <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                <path d="M0,30 Q25,10 50,30 T100,30 T150,30 T200,30" fill="none" stroke="#6B8BFF" stroke-width="1.5"/>
+                <path d="M0,30 Q20,50 40,30 T80,30 T120,30 T160,30 T200,30" fill="none" stroke="#E5F92C" stroke-width="1" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="lem-name" data-i18n="home.mod.viz.name">Sound Visualizer</div>
+            <p class="lem-desc" data-i18n="home.mod.viz.desc">Real-time audio analysis from your microphone: waveform, FFT spectrum, spectrogram waterfall, pitch and beat detection.</p>
+          </div>
+          <span class="lem-link" data-i18n="home.mod.viz.open">Open module <span class="arrow" aria-hidden="true">→</span></span>
+        </a>
+        <a href="generator.html" class="lab-entry-module">
+          <div class="lem-status">
+            <span class="status-badge status-dev" data-i18n="home.status.dev">Phase 3</span>
+          </div>
+          <div class="lem-num" data-i18n="home.lab.b.num">Module 02</div>
+          <div class="lem-name" data-i18n="home.mod.gen.name">Mathematical Music Generator</div>
+          <p class="lem-desc" data-i18n="home.mod.gen.desc">Generate musical patterns from mathematical rules: Fibonacci sequences, Euclidean rhythms, harmonic series, and probability.</p>
+          <span class="lem-link" data-i18n="home.mod.gen.open">Open module <span class="arrow" aria-hidden="true">→</span></span>
+        </a>
+        <a href="accessibility.html" class="lab-entry-module">
+          <div class="lem-status">
+            <span class="status-badge status-planned" data-i18n="home.status.planned">Phase 4</span>
+          </div>
+          <div class="lem-num" data-i18n="home.lab.c.num">Module 03</div>
+          <div class="lem-name" data-i18n="home.mod.acc.name">Accessible Sound Experience</div>
+          <p class="lem-desc" data-i18n="home.mod.acc.desc">Translating audio into visual patterns for Deaf and hard-of-hearing users. Distinct visual feedback for different sound categories.</p>
+          <span class="lem-link" data-i18n="home.mod.acc.open">Open module <span class="arrow" aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
 
-  <!-- ===== Section 5: Field Notes ===== -->
-  <section class="home-section">
-    <div class="home-section-header">
-      <span class="home-section-number">§ 04</span>
-      <span class="home-section-title" data-i18n="home.fieldNotes">Field Notes</span>
-      <span class="home-section-divider"></span>
-    </div>
-    <div class="fn-grid">
-      <a href="field-notes.html" class="fn-card">
-        <div class="fn-card-icon">&#8721;</div>
-        <div class="fn-card-title" data-i18n="home.fn.math">Mathematics</div>
-        <div class="fn-card-desc" data-i18n="home.fn.math.desc">Fourier transforms, autocorrelation, harmonic series, Euclidean algorithms.</div>
-        <div class="fn-card-count">12 notes</div>
-      </a>
-      <a href="field-notes.html" class="fn-card">
-        <div class="fn-card-icon">&#9758;</div>
-        <div class="fn-card-title" data-i18n="home.fn.physics">Physics</div>
-        <div class="fn-card-desc" data-i18n="home.fn.physics.desc">Wave mechanics, cochlear mechanics, consonance, vocal tract acoustics.</div>
-        <div class="fn-card-count">8 notes</div>
-      </a>
-      <a href="field-notes.html" class="fn-card">
-        <div class="fn-card-icon">&#9836;</div>
-        <div class="fn-card-title" data-i18n="home.fn.acoustics">Acoustics</div>
-        <div class="fn-card-desc" data-i18n="home.fn.acoustics.desc">Room acoustics, reverberation, standing waves, sound propagation.</div>
-        <div class="fn-card-count">6 notes</div>
-      </a>
-      <a href="field-notes.html" class="fn-card">
-        <div class="fn-card-icon">&#9680;</div>
-        <div class="fn-card-title" data-i18n="home.fn.signal">Signal Processing</div>
-        <div class="fn-card-desc" data-i18n="home.fn.signal.desc">FFT, window functions, spectral leakage, digital filtering, DSP fundamentals.</div>
-        <div class="fn-card-count">14 notes</div>
-      </a>
-      <a href="field-notes.html" class="fn-card">
-        <div class="fn-card-icon">&#9833;</div>
-        <div class="fn-card-title" data-i18n="home.fn.music">Music Theory</div>
-        <div class="fn-card-desc" data-i18n="home.fn.music.desc">Just intonation, equal temperament, harmonic series, rhythm patterns.</div>
-        <div class="fn-card-count">9 notes</div>
-      </a>
-      <a href="field-notes.html" class="fn-card">
-        <div class="fn-card-icon">&#9673;</div>
-        <div class="fn-card-title" data-i18n="home.fn.access">Accessibility</div>
-        <div class="fn-card-desc" data-i18n="home.fn.access.desc">Cross-modal perception, visual translation, sound classification.</div>
-        <div class="fn-card-count">5 notes</div>
-      </a>
-    </div>
-  </section>
+    <!-- ===== Section D: Research Index ===== -->
+    <section class="home-section" aria-labelledby="sec-research-index">
+      <div class="home-section-open">
+        <span class="sec-num" aria-hidden="true">§ 03</span>
+        <h2 class="sec-title" id="sec-research-index" data-i18n="home.index.title">Research Index</h2>
+      </div>
+      <div class="research-index reveal">
+        <a href="field-notes.html" class="ri-item" data-idx="01">
+          <div class="ri-name" data-i18n="home.ri.wave">Wave Mechanics</div>
+          <div class="ri-desc" data-i18n="home.ri.wave.desc">Pressure, propagation, interference and the wave equation.</div>
+          <div class="ri-count" data-i18n="home.ri.wave.count">8 notes</div>
+        </a>
+        <a href="field-notes.html" class="ri-item" data-idx="02">
+          <div class="ri-name" data-i18n="home.ri.fourier">Fourier Analysis</div>
+          <div class="ri-desc" data-i18n="home.ri.fourier.desc">Decomposing signals into sine waves and back again.</div>
+          <div class="ri-count" data-i18n="home.ri.fourier.count">12 notes</div>
+        </a>
+        <a href="field-notes.html" class="ri-item" data-idx="03">
+          <div class="ri-name" data-i18n="home.ri.harmonic">Harmonic Structures</div>
+          <div class="ri-desc" data-i18n="home.ri.harmonic.desc">Series, timbre, consonance and the harmonic overtone series.</div>
+          <div class="ri-count" data-i18n="home.ri.harmonic.count">9 notes</div>
+        </a>
+        <a href="field-notes.html" class="ri-item" data-idx="04">
+          <div class="ri-name" data-i18n="home.ri.rhythm">Rhythm &amp; Number Theory</div>
+          <div class="ri-desc" data-i18n="home.ri.rhythm.desc">Euclidean rhythms, meter and the mathematics of pulse.</div>
+          <div class="ri-count" data-i18n="home.ri.rhythm.count">7 notes</div>
+        </a>
+        <a href="field-notes.html" class="ri-item" data-idx="05">
+          <div class="ri-name" data-i18n="home.ri.dsp">Digital Signal Processing</div>
+          <div class="ri-desc" data-i18n="home.ri.dsp.desc">FFT, windows, spectral leakage and discrete-time systems.</div>
+          <div class="ri-count" data-i18n="home.ri.dsp.count">14 notes</div>
+        </a>
+        <a href="field-notes.html" class="ri-item" data-idx="06">
+          <div class="ri-name" data-i18n="home.ri.accessible">Accessible Audio</div>
+          <div class="ri-desc" data-i18n="home.ri.accessible.desc">Cross-modal perception, classification and visual translation.</div>
+          <div class="ri-count" data-i18n="home.ri.accessible.count">5 notes</div>
+        </a>
+      </div>
+    </section>
 
-  <!-- ===== Section 6: Project Development ===== -->
-  <section class="home-section">
-    <div class="home-section-header">
-      <span class="home-section-number">§ 05</span>
-      <span class="home-section-title" data-i18n="home.roadmap">Project Development</span>
-      <span class="home-section-divider"></span>
-    </div>
-    <div class="roadmap-bar">
-      <div class="rm-phase rm-done">
-        <div class="rm-phase-id">P1</div>
-        <div class="rm-phase-name" data-i18n="home.rm.p1">Foundation</div>
-        <div class="rm-phase-status" data-i18n="home.rm.p1.status">Complete</div>
+    <!-- ===== Section E: Experiment Archive ===== -->
+    <section class="home-section" aria-labelledby="sec-experiments">
+      <div class="home-section-open">
+        <span class="sec-num" aria-hidden="true">§ 04</span>
+        <h2 class="sec-title" id="sec-experiments" data-i18n="home.expArchive">Experiment Archive</h2>
       </div>
-      <div class="rm-phase rm-done">
-        <div class="rm-phase-id">P2</div>
-        <div class="rm-phase-name" data-i18n="home.rm.p2">Visualizer</div>
-        <div class="rm-phase-status" data-i18n="home.rm.p2.status">Complete</div>
+      <div class="home-exp-list reveal">
+        <a href="experiments.html" class="experiment">
+          <div class="exp-num">EXP-01</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp1">Fourier Series Visualization</div>
+            <div class="exp-desc" data-i18n="exp1.short">How does changing FFT size affect frequency resolution?</div>
+          </div>
+          <div class="exp-status-cell"><span class="status-badge status-live" data-i18n="home.status.live">Live</span></div>
+        </a>
+        <a href="experiments.html" class="experiment">
+          <div class="exp-num">EXP-02</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp2">FFT Resolution Trade-off</div>
+            <div class="exp-desc" data-i18n="exp2.short">How can a complex waveform be reconstructed from sine waves?</div>
+          </div>
+          <div class="exp-status-cell"><span class="status-badge status-live" data-i18n="home.status.live">Live</span></div>
+        </a>
+        <a href="experiments.html" class="experiment">
+          <div class="exp-num">EXP-03</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp3">Spectral Leakage &amp; Windows</div>
+            <div class="exp-desc" data-i18n="exp3.short">How do different window functions affect spectral leakage?</div>
+          </div>
+          <div class="exp-status-cell"><span class="status-badge status-live" data-i18n="home.status.live">Live</span></div>
+        </a>
+        <a href="experiments.html" class="experiment">
+          <div class="exp-num">EXP-04</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp4">Harmonic Structures</div>
+            <div class="exp-desc" data-i18n="exp4.short">Which harmonics appear in square, sawtooth and triangle waves?</div>
+          </div>
+          <div class="exp-status-cell"><span class="status-badge status-live" data-i18n="home.status.live">Live</span></div>
+        </a>
+        <a href="experiments.html" class="experiment">
+          <div class="exp-num">EXP-06</div>
+          <div class="exp-body">
+            <div class="exp-title" data-i18n="home.exp6">Euclidean Rhythms</div>
+            <div class="exp-desc" data-i18n="exp6.short">Can Euclidean rhythms generate interesting musical patterns?</div>
+          </div>
+          <div class="exp-status-cell"><span class="status-badge status-planned" data-i18n="home.status.planned">Planned</span></div>
+        </a>
       </div>
-      <div class="rm-phase rm-current">
-        <div class="rm-phase-id">P3</div>
-        <div class="rm-phase-name" data-i18n="home.rm.p3">Generator</div>
-        <div class="rm-phase-status" data-i18n="home.rm.p3.status">In Progress</div>
+    </section>
+
+    <!-- ===== Section F: Field Notes Teaser ===== -->
+    <section class="home-section" aria-labelledby="sec-field-notes">
+      <div class="home-section-open">
+        <span class="sec-num" aria-hidden="true">§ 05</span>
+        <h2 class="sec-title" id="sec-field-notes" data-i18n="home.fieldNotes">Field Notes</h2>
       </div>
-      <div class="rm-phase rm-planned">
-        <div class="rm-phase-id">P4</div>
-        <div class="rm-phase-name" data-i18n="home.rm.p4">Accessibility</div>
-        <div class="rm-phase-status" data-i18n="home.rm.p4.status">Planned</div>
+      <div class="fn-teaser reveal">
+        <a href="field-notes.html" class="fn-teaser-item">
+          <div class="fn-teaser-icon" aria-hidden="true">∑</div>
+          <div class="fn-teaser-name" data-i18n="home.fn.math">Mathematics</div>
+          <div class="fn-teaser-count" data-i18n="home.fn.math.count">12 notes</div>
+        </a>
+        <a href="field-notes.html" class="fn-teaser-item">
+          <div class="fn-teaser-icon" aria-hidden="true">☞</div>
+          <div class="fn-teaser-name" data-i18n="home.fn.physics">Physics</div>
+          <div class="fn-teaser-count" data-i18n="home.fn.physics.count">8 notes</div>
+        </a>
+        <a href="field-notes.html" class="fn-teaser-item">
+          <div class="fn-teaser-icon" aria-hidden="true">♪</div>
+          <div class="fn-teaser-name" data-i18n="home.fn.acoustics">Acoustics</div>
+          <div class="fn-teaser-count" data-i18n="home.fn.acoustics.count">6 notes</div>
+        </a>
+        <a href="field-notes.html" class="fn-teaser-item">
+          <div class="fn-teaser-icon" aria-hidden="true">◐</div>
+          <div class="fn-teaser-name" data-i18n="home.fn.signal">Signal Processing</div>
+          <div class="fn-teaser-count" data-i18n="home.fn.signal.count">14 notes</div>
+        </a>
+        <a href="field-notes.html" class="fn-teaser-item">
+          <div class="fn-teaser-icon" aria-hidden="true">♫</div>
+          <div class="fn-teaser-name" data-i18n="home.fn.music">Music Theory</div>
+          <div class="fn-teaser-count" data-i18n="home.fn.music.count">9 notes</div>
+        </a>
+        <a href="field-notes.html" class="fn-teaser-item">
+          <div class="fn-teaser-icon" aria-hidden="true">●</div>
+          <div class="fn-teaser-name" data-i18n="home.fn.access">Accessibility</div>
+          <div class="fn-teaser-count" data-i18n="home.fn.access.count">5 notes</div>
+        </a>
       </div>
-      <div class="rm-phase rm-planned">
-        <div class="rm-phase-id">P5</div>
-        <div class="rm-phase-name" data-i18n="home.rm.p5">Polish</div>
-        <div class="rm-phase-status" data-i18n="home.rm.p5.status">Planned</div>
+    </section>
+
+    <!-- ===== Section G: Philosophy ===== -->
+    <section class="philosophy-band" aria-labelledby="sec-philosophy">
+      <div class="bleed">
+        <div class="rule-label" data-i18n="home.philosophy.label">Project Philosophy</div>
+        <p class="philosophy-statement" data-i18n="home.philosophy.statement">
+          Mathematics, physics, music and accessibility are not separate disciplines here. They are <em>lenses on the same phenomenon</em>: vibration becoming information.
+        </p>
+        <div class="philosophy-body">
+          <p data-i18n="home.philosophy.p1"><strong>Built from first principles.</strong> Every tool starts with the equations — the Fourier transform, the wave equation, the harmonic series — and turns them into interactive instruments.</p>
+          <p data-i18n="home.philosophy.p2"><strong>Honest about limitations.</strong> dBFS is not dB SPL. Bin spacing is not frequency resolution. Visual translation is not hearing. We say so clearly.</p>
+          <p data-i18n="home.philosophy.p3"><strong>Local and private.</strong> All processing happens in the browser. No audio leaves your device. No accounts, no tracking, no cloud dependencies.</p>
+          <p data-i18n="home.philosophy.p4"><strong>Open by default.</strong> The code is open source. The experiments are reproducible. The findings are documented, even when they are unremarkable.</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="site-footer">
@@ -292,6 +324,12 @@
       <div class="footer-brand-col">
         <div class="footer-brand" data-i18n="footer.brand">MPC Sound Lab</div>
         <p class="footer-brand-desc" data-i18n="footer.brandDesc">An independent digital research studio exploring the intersection of mathematics, physics, sound, music technology, and accessibility.</p>
+        <div class="footer-status">
+          <div class="footer-status-row"><span data-i18n="footer.status.version">Version</span> <strong>v3.0</strong></div>
+          <div class="footer-status-row"><span data-i18n="footer.status.license">License</span> <strong>MIT</strong></div>
+          <div class="footer-status-row"><span data-i18n="footer.status.hosting">Hosting</span> <strong>GitHub Pages</strong></div>
+          <a href="https://github.com/jasper-lab09/MPC-Sound-Lab" class="footer-repo" target="_blank" rel="noopener" data-i18n="footer.repo">View repository on GitHub →</a>
+        </div>
       </div>
       <div>
         <div class="footer-col-title" data-i18n="footer.nav">Navigation</div>
@@ -314,42 +352,29 @@
         <a href="experiments.html" class="footer-link">EXP-03 Leakage</a>
         <a href="experiments.html" class="footer-link">EXP-04 Harmonics</a>
       </div>
-      <div>
-        <div class="footer-col-title" data-i18n="footer.knowledge">Knowledge</div>
-        <a href="field-notes.html" class="footer-link">Mathematics</a>
-        <a href="field-notes.html" class="footer-link">Physics</a>
-        <a href="field-notes.html" class="footer-link">Acoustics</a>
-        <a href="field-notes.html" class="footer-link">Signal Processing</a>
-      </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2024&ndash;2025 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
-      <span data-i18n="footer.version">v2.0 &mdash; Editorial Redesign</span>
+      <span>&copy; 2024&ndash;2026 MPC Sound Lab. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span data-i18n="footer.version">v3.0 — Editorial Lab</span>
     </div>
   </footer>
 
   <script type="module">
     import { App } from './src/js/core/app.js';
     new App().init();
-    import { SoundSculpture } from './src/js/visual/sound-sculpture.js';
-    const sculptureCanvas = document.getElementById('sculpture-canvas');
-    let sculpture = null;
-    if (sculptureCanvas) {
-      sculpture = new SoundSculpture(sculptureCanvas);
-      sculpture.start();
-    }
-    // Ambient toggle
-    const ambientBtn = document.getElementById('ambient-toggle');
-    if (ambientBtn) {
-      ambientBtn.addEventListener('click', () => {
-        document.body.classList.toggle('ambient-off');
-        if (document.body.classList.contains('ambient-off')) {
-          if (sculpture) sculpture.stop();
-        } else {
-          if (sculpture) sculpture.start();
-        }
-      });
-    }
+
+    import { HeroWave } from './src/js/visual/hero-wave.js';
+    const heroCanvas = document.getElementById('hero-canvas');
+    const heroWave = heroCanvas ? new HeroWave(heroCanvas) : null;
+    if (heroWave) heroWave.start();
+
+    // Pause hero animation when off-screen or hidden
+    document.addEventListener('visibilitychange', () => {
+      if (!heroWave) return;
+      if (document.hidden) heroWave.stop();
+      else heroWave.start();
+    });
+
   </script>
 </body>
 </html>
